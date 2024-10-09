@@ -1,0 +1,22 @@
+#sidebarMenu {
+    background-color: #000; /* Latar belakang hitam */
+}
+
+#sidebarMenu .nav-link {
+    color: #fff; /* Teks putih */
+}
+
+#sidebarMenu .nav-link:hover,
+#sidebarMenu .nav-link.active {
+    background-color: #fff; /* Latar belakang putih saat dihover atau aktif */
+    color: #000; /* Teks hitam saat dihover atau aktif */
+}
+
+#sidebarMenu .nav-link span {
+    color: #fff; /* Warna ikon putih */
+}
+
+#sidebarMenu .nav-link:hover span,
+#sidebarMenu .nav-link.active span {
+    color: #000; /* Warna ikon hitam saat dihover atau aktif */
+}
