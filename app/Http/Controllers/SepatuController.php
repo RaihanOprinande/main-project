@@ -16,5 +16,10 @@ class SepatuController extends Controller
         $sepatu = Sepatu::find($id);
         return view('sepatu.detail', compact('sepatu'));
     }
+    public function aboutus()
+    {
+        $aboutus = Sepatu::all(); // Ambil semua data sepatu
+        return view('sepatu.aboutus', compact('aboutus'));
+    }
 
 }

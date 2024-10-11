@@ -8,38 +8,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Sepatu</title>
     <style>
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
         }
-        .product img {
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Image Section */
+        .image-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-section img {
             width: 100%;
-            max-width: 400px;
-            height: auto;
+            max-width: 450px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Details Section */
+        .details-section {
+            flex: 1;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-section h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .details-section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .price {
+            font-size: 22px;
+            color: #333;
             margin-bottom: 20px;
         }
-        .product h1 {
-            font-size: 2em;
+
+        .size-selection, .color-selection {
+            margin-bottom: 30px;
+        }
+
+        .size-selection h4, .color-selection h4 {
+            font-size: 18px;
             margin-bottom: 10px;
         }
-        .product p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
+
+        .size-selection input, .color-selection input {
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #333;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="product">
-            <h1>{{ $sepatu->nama }}</h1>
+        <!-- Image Section -->
+        <div class="image-section">
             <img src="{{ asset('images/' . $sepatu->gambar) }}" alt="{{ $sepatu->nama }}">
-
-            <p>Kategori: {{ $sepatu->kategori }}</p>
-            <p>Harga: Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
-
         </div>
-        <a href="{{ route('sepatu.home') }}">Kembali ke Daftar Sepatu</a> <!-- Tombol kembali ke halaman utama -->
+
+        <!-- Details Section -->
+        <div class="details-section">
+            <h1>{{ $sepatu->nama }}</h1>
+            <p>Kategori: {{ $sepatu->kategori }}</p>
+            <p class="price">Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
+
+            <!-- Size Selection -->
+            <div class="size-selection">
+                <h4>Select Size:</h4>
+                @foreach([6, 6.5, 7, 7.5, 8, 8.5, 9] as $size)
+                    <label>
+                        <input type="radio" name="size" value="{{ $size }}"> {{ $size }}
+                    </label>
+                @endforeach
+            </div>
+
+            <!-- Color Selection -->
+            <div class="color-selection">
+                <h4>Available Colors:</h4>
+                <label><input type="radio" name="color" value="White"> White</label>
+                <label><input type="radio" name="color" value="Black"> Black</label>
+                <label><input type="radio" name="color" value="Red"> Red</label>
+            </div>
+
+            <!-- Add to Bag Button -->
+            <a href="#" class="btn">Add to Bag</a>
+
+            <!-- Back to List Button -->
+            <a href="{{ route('sepatu.home') }}" class="back-link">Kembali ke Daftar Sepatu</a>
+        </div>
     </div>
 </body>
 </html>
