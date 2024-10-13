@@ -14,77 +14,76 @@
             padding: 0; /* Menghilangkan padding untuk mencapai tepi */
         }
 
-        /* Menambahkan gaya untuk judul */
+        /* Gaya untuk judul */
         h1 {
             margin-top: 100px;
-            text-align: left; /* Menjajarkan judul ke kiri */
-            margin-bottom: 20px; /* Menambahkan jarak bawah untuk judul */
+            text-align: left;
+            margin-bottom: 20px;
         }
 
-        /* Gaya untuk banner */
+        /* Banner */
         .banner {
-            width: 100%; /* Lebar banner 100% dari kontainer */
-            height: 100vh; /* Tinggi banner 100% dari tinggi viewport */
-            object-fit: cover; /* Memastikan gambar terpotong dengan proporsional */
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
         }
 
         /* Kontainer scrollable horizontal */
         .scrollable-container {
-            overflow-x: auto; /* Menambahkan scroll horizontal */
-            white-space: nowrap; /* Mencegah card berpindah baris */
-            padding: 10px 0; /* Padding vertikal untuk ruang lebih */
-            display: flex; /* Menggunakan flexbox */
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 0;
+            display: flex;
         }
 
         /* Produk */
         .product-card {
-            flex: 1; /* Menjadikan semua card memiliki ukuran yang sama */
-            min-width: 18rem; /* Lebar minimum card */
-            margin: 0 10px; /* Jarak antar card */
-            border: 2px solid #ccc; /* Menambahkan border */
-            border-radius: 8px; /* Mengatur sudut border */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan efek bayangan */
-            transition: transform 0.2s; /* Animasi transformasi */
-            display: flex; /* Menggunakan flexbox untuk card */
-            flex-direction: column; /* Mengatur card secara kolom */
+            flex: 1;
+            min-width: 18rem;
+            margin: 0 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            max-height: 440px;
         }
 
-        /* Efek hover pada card */
-        .product-card:hover {
-            transform: scale(1.05); /* Efek pembesaran saat hover */
-        }
-
-        /* Mengubah warna teks dalam card */
+        /* Konten dalam card */
         .card-body {
-            color: black; /* Mengatur warna teks dalam card menjadi hitam */
-            flex-grow: 1; /* Membiarkan card body tumbuh mengisi ruang */
+            color: black;
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        /* Mengubah warna link di dalam card */
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
         .card a {
-            color: black; /* Menghilangkan warna biru pada link */
-            text-decoration: none; /* Menghilangkan garis bawah pada link */
+            color: black;
+            text-decoration: none;
         }
 
-        /* Efek hover pada link */
         .card a:hover {
-            text-decoration: none; /* Garis bawah saat hover */
-            color: gray; /* Warna saat hover */
+            color: gray;
         }
     </style>
 </head>
 <body>
-
-
     <div class="container">
         <!-- Carousel Banner Gambar -->
-        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000"> <!-- Atur interval di sini -->
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('images/baner.jpg') }}" alt="Banner 1" class="banner"> <!-- Ganti dengan gambar banner 1 -->
+                    <img src="{{ asset('images/baner.jpg') }}" alt="Banner 1" class="banner">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('images/baner2.jpg') }}" alt="Banner 2" class="banner"> <!-- Ganti dengan gambar banner 2 -->
+                    <img src="{{ asset('images/baner2.jpg') }}" alt="Banner 2" class="banner">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -97,23 +96,13 @@
             </a>
         </div>
 
-        {{-- // resources/views/card.blade.php --}}
-
-{{-- <div class="card" style="width: 18rem;">
-    <img src="{{ asset('images/baner.jpg') }}" class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">{{ $title }}</h5>
-        <p class="card-text">{{ $description }}</p>
-        <a href="#" class="btn btn-primary">Shop Now</a>
-    </div>
-</div> --}}
-
         <h1>All New, Perfect For You</h1>
 
+        <!-- Scrollable Horizontal Container -->
         <div class="scrollable-container">
             @foreach($sepatus as $sepatu)
-                <div class="product-card"> <!-- Menggunakan grid Bootstrap -->
-                    <div class="card flex-fill"> <!-- Menggunakan flex-fill untuk mengisi ruang -->
+                <div class="product-card">
+                    <div class="card flex-fill">
                         <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}">
                             <img src="{{ asset('images/' . $sepatu->gambar) }}" class="card-img-top" alt="{{ $sepatu->nama }}">
                             <div class="card-body">
@@ -126,6 +115,33 @@
                 </div>
             @endforeach
         </div>
+        <br>
+        <h1 class="d-inline">See, What's New</h1>
+        <a href="{{ url('/list') }}" class="btn btn-link float-right text-dark font-weight-bold">Show All</a>
+
+
+
+
+
+        <!-- Baris Card Vertikal Tambahan -->
+        <div class="row mt-5">
+            @foreach($sepatus->take(4) as $sepatu) <!-- Mengambil 4 item pertama -->
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}">
+                            <img src="{{ asset('images/' . $sepatu->gambar) }}" class="card-img-top" alt="{{ $sepatu->nama }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $sepatu->nama }}</h5>
+                                <p class="card-text">{{ $sepatu->kategori }}</p>
+                                <p>Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

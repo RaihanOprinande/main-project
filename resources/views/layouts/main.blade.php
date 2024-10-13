@@ -17,6 +17,33 @@
             margin: 0 auto; /* Menjajarkan kontainer ke tengah */
             padding: 20px; /* Menambahkan padding untuk ruang lebih */
         }
+
+        .nav-link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%; /* Awal dari tengah */
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.3s, left 0.3s; /* Animasikan 'left' juga */
+  transform: translateX(-50%); /* Agar posisi awal benar-benar di tengah */
+}
+
+.nav-link:hover::after {
+  width: 100%; /* Melebar ke seluruh lebar link */
+  left: 0; /* Geser kiri saat animasi berlangsung */
+  transform: translateX(0); /* Reset transformasi saat hover */
+}
+
+
     </style>
 </head>
 

@@ -9,7 +9,8 @@ class SepatuController extends Controller
 {
     public function index()
     {
-        $sepatus = Sepatu::all(); // Ambil semua data sepatu
+        $sepatus = Sepatu::all();
+         // Ambil semua data sepatu
         return view('sepatu.home', compact('sepatus'));
     }
     public function show($id) {
