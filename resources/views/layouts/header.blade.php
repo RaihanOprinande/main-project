@@ -10,10 +10,10 @@
             <a class="nav-link active" aria-current="page" href="/index">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index">Men</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('sepatu.kategori', ['kategori' => 'pria']) }}">Men</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index">Women</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('sepatu.kategori', ['kategori' => 'wanita']) }}">Women</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/aboutus">About Us</a>
@@ -22,7 +22,7 @@
 
 
         </ul>
-        <form class="d-flex" role="search" action="{{ url('/list') }}" method="GET">
+        <form class="d-flex" role="search" action="{{ url('/list-search') }}" method="GET">
             <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>

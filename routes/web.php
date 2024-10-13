@@ -22,4 +22,10 @@ Route::get('/aboutus', [SepatuController::class, 'aboutus']);
 
 Route::get('list',[ListController::class,'index'])->name('sepatu.list');
 Route::resource('/list',ListController::class);
+Route::get('/merek/{id}/sepatu', [ListController::class, 'sepatuByMerek'])->name('sepatu.byMerek');
+Route::get('/sepatu/kategori/{kategori}', [SepatuController::class, 'filterByKategori'])->name('sepatu.kategori');
+
+Route::get('list-search',[ListController::class,'search']);
+
+
 

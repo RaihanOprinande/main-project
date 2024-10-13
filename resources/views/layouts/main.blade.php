@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
+
         /* Menambahkan gaya untuk kontainer */
         .container-custom {
             width: 100%; /* Mengubah lebar kontainer menjadi 90% dari lebar layar */
@@ -33,7 +34,7 @@
   width: 0;
   height: 2px;
   background-color: black;
-  transition: width 0.3s, left 0.3s; /* Animasikan 'left' juga */
+  transition: width 0.3s; /* Animasikan 'left' juga */
   transform: translateX(-50%); /* Agar posisi awal benar-benar di tengah */
 }
 
@@ -42,6 +43,16 @@
   left: 0; /* Geser kiri saat animasi berlangsung */
   transform: translateX(0); /* Reset transformasi saat hover */
 }
+
+.btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
 
 
     </style>
@@ -54,6 +65,7 @@
     {{--
 
     @include('dashboard.layouts.sidebar') --}}
+    
 
     <!-- Begin page content -->
     <main class="flex-shrink-0 content">

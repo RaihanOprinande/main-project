@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Sepatu extends Model
 {
     protected $table = 'shoes'; // Nama tabel
-    protected $fillable = ['nama', 'harga', 'kategori' ,'gambar']; // Kolom yang bisa diisi
+    protected $fillable = ['nama', 'harga', 'kategori' ,'gambar','id_merek']; // Kolom yang bisa diisi
     use HasFactory;
+
+    public function merek(){
+        return $this->belongsTo(Merek::class);
+    }
 }

@@ -135,7 +135,7 @@
             <a href="#" class="btn">Add to Bag</a>
 
             <!-- Back to List Button -->
-            <a href="{{ route('sepatu.home') }}" class="back-link">Kembali ke Daftar Sepatu</a>
+            <a href="{{ route('sepatu.home') }}" class="btn">Kembali ke Daftar Sepatu</a>
         </div>
     </div>
 </body>

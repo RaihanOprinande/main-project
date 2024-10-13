@@ -34,9 +34,11 @@
 
         .card-body {
             color: black;
+            flex-grow: 1;
+            display: flex; /* Membuat card-body menjadi flex container */
+            flex-direction: column; /* Susunan vertikal */
+            justify-content: space-between; /* Memberikan jarak antar elemen */
             overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
         .card a {
@@ -47,15 +49,19 @@
         .card a:hover {
             color: gray;
         }
+        .card-title {
+            margin-bottom: 0; /* Menghilangkan margin bawah */
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>All New, Perfect For You</h1>
+
 
         <!-- Row Bootstrap untuk grid card -->
         <div class="row">
-            @foreach($sepatus as $sepatu)
+            @forelse($sepatus as $sepatu)
                 <div class="col-md-3 col-sm-6"> <!-- Setiap card 1/4 lebar pada md, 1/2 pada sm -->
                     <div class="product-card card">
                         <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}">
@@ -68,7 +74,15 @@
                         </a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <!-- Pesan jika data tidak ditemukan -->
+                <div class="col-12 text-center">
+                    <div class="alert">
+                        <h4>Data tidak ditemukan</h4>
+                        <p>Sepatu dengan kategori atau nama yang dicari tidak tersedia.</p>
+                    </div>
+                </div>
+            @endforelse
         </div>
     </div>
 
