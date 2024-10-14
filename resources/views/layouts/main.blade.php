@@ -16,7 +16,7 @@
             width: 100%; /* Mengubah lebar kontainer menjadi 90% dari lebar layar */
             max-width: 1200px; /* Mengatur lebar maksimum kontainer */
             margin: 0 auto; /* Menjajarkan kontainer ke tengah */
-            padding: 20px; /* Menambahkan padding untuk ruang lebih */
+            padding: 0px;
         }
 
         .nav-link {
@@ -65,7 +65,7 @@
     {{--
 
     @include('dashboard.layouts.sidebar') --}}
-    
+
 
     <!-- Begin page content -->
     <main class="flex-shrink-0 content">
