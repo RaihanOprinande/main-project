@@ -68,7 +68,7 @@
 
 
     <!-- Begin page content -->
-    <main class="flex-shrink-0 content">
+    <main class="flex-shrink-0 content mt-5">
         <div class="container-custom"> <!-- Menambahkan kontainer khusus -->
             @yield('content')
         </div>
