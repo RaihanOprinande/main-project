@@ -141,10 +141,10 @@
                 <div class="footer-section">
                     <h4>Navigation</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">About us</a></li>
+                        <li><a href="/index">Home</a></li>
+                        <li><a href="{{ route('sepatu.kategori', ['kategori' => 'pria']) }}">Men</a></li>
+                        <li><a href="{{ route('sepatu.kategori', ['kategori' => 'wanita']) }}">Women</a></li>
+                        <li><a href="/aboutus">About us</a></li>
                     </ul>
                 </div>
 
