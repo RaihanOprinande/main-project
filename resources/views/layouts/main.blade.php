@@ -17,6 +17,7 @@
             max-width: 1200px; /* Mengatur lebar maksimum kontainer */
             margin: 0 auto; /* Menjajarkan kontainer ke tengah */
             padding: 0px;
+            margin-bottom: 30px;
         }
 
         .nav-link {
@@ -68,7 +69,7 @@
 
 
     <!-- Begin page content -->
-    <main class="flex-shrink-0 content mt-5">
+    <main class="flex-shrink-0 content mt-5 mb-5">
         <div class="container-custom"> <!-- Menambahkan kontainer khusus -->
             @yield('content')
         </div>
