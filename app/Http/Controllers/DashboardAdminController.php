@@ -8,6 +8,6 @@ class DashboardAdminController extends Controller
 {
     public function Dashboard()
     {
-        return view('login');
+        return view('dashboard.Welcome');
     }
 }
