@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Payakumbuh Kota Randang</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Login</title>
     <style>
         * {
             margin: 0;
@@ -80,10 +82,16 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-bottom: 10px;
+            border: #ffffff;
+            border: 1px solid black;
+
         }
 
         .btn:hover {
-            background-color: #333333; /* Darker shade on hover */
+            background-color: #ffffff; /* Darker shade on hover */
+            color: #000000;
+            border: 1px solid black;
         }
 
         .forgot-password {
@@ -110,6 +118,10 @@
             font-size: 16px;
             color: #7f8c8d;
         }
+
+        a{
+            font-weight: 550;
+        }
     </style>
 </head>
 <body>
@@ -118,18 +130,17 @@
     <!-- Left panel (login form) -->
     <div class="left-panel">
         <div class="title">
-            <h2>LOGIN</h2>
+            <h2>Admin Login</h2>
         </div>
         <div class="subtitle">
-            <p>Toko Sepatu</p>
+            <p>hey, Enter your credencial to get sign in to your account</p>
         </div>
         <form action="/login" method="POST">
             @csrf
             <div class="input-field">
                 <input type="email" class="form-control @error('email') is-invalid @enderror"
-                       name="email" id="floatingInput" placeholder="name@example.com"
+                       name="email" id="floatingInput" placeholder="Email"
                        value="{{ old('email') }}">
-                <label for="floatingInput">Email address</label>
                 @error('email')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -139,7 +150,7 @@
             <div class="input-field">
                 <input type="password" class="form-control"
                        id="floatingPassword" name="password" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+                       {{-- <a href="#" class="forgot-password">Forgot Password?</a> --}}
             </div>
 
             <!-- Pesan error login -->
@@ -150,10 +161,11 @@
             @endif
 
             <button type="submit" class="btn">Login</button>
-            <a href="#" class="forgot-password">Forgot Password?</a>
             <br>
-                  <hr>
-                  <div class="text-center">Dont Have an account? <a href="/register">Sign Up</a></div>
+
+                  <div class="register">
+                      <div class="text-center ">Dont Have an account? <a class="link-offset-2 link-underline link-underline-opacity-0 text-black" href="/register">Sign Up</a></div>
+                  </div>
         </form>
 
     </div>
@@ -165,4 +177,6 @@
 </div>
 
 </body>
+<script src="/js/bootstrap.bundle.min.js">
+    </script>
 </html>

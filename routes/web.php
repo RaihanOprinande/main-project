@@ -7,9 +7,9 @@ use App\Http\Controllers\ListController;
 
 Route::get('/', function () {
     return view('home');
-})->middleware('auth');
+});
 
-Route::get('/', [SepatuController::class, 'index'])->name('sepatu.home')->middleware('auth');
+Route::get('/', [SepatuController::class, 'index'])->name('sepatu.home');
 
 
 Route::get('/sepatu/{id}', [SepatuController::class, 'show'])->name('sepatu.detail');
@@ -17,6 +17,7 @@ Route::get('/sepatu/{id}', [SepatuController::class, 'show'])->name('sepatu.deta
 
 
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\LoginController;
 
 // Route::get('/card', [CardController::class, 'index']);
@@ -32,5 +33,6 @@ Route::get('list-search',[ListController::class,'search']);
 Route::post('/login',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
 
+Route::get('/dashboard',[DashboardAdminController::class,'Dashboard'])->middleware('auth');
 
 

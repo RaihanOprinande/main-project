@@ -55,15 +55,16 @@
 
         <hr class="my-3">
 
-        <ul class="nav flex-column mb-auto">
+        <ul class="navbar-nav">
+            <li class="nav-item px-3 ">
+             <form action="/logout" method="POST">
+                 @csrf
+                 <button class="nav-link text-black" type="submit">Log Out</button>
 
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-              <i class="bi bi-power"></i>
-              Sign out
-            </a>
-          </li>
-        </ul>
+             </form>
+
+            </li>
+           </ul>
       </div>
     </div>
   </div>

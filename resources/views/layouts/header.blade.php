@@ -23,12 +23,9 @@
 
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item px-3 ">
-             <form action="/logout" method="POST">
-                 @csrf
-                 <button class="nav-link text-black" type="submit">Log Out</button>
 
-             </form>
+            <li class="nav-item px-3 ">
+                <a class="nav-link" href="/login">Login</a>
 
             </li>
            </ul>
