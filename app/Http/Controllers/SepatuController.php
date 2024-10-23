@@ -13,7 +13,7 @@ class SepatuController extends Controller
         $mereks = Merek::all(); // Mengambil semua data merek
     $sepatus = Sepatu::all(); // Mengambil semua data sepatu
 
-    return view('sepatu.home', compact('mereks', 'sepatus'));
+    return view('home', compact('mereks', 'sepatus'));
     }
     public function show($id) {
         $sepatu = Sepatu::find($id);
@@ -25,7 +25,7 @@ class SepatuController extends Controller
         return view('sepatu.aboutus', compact('aboutus'));
     }
 
-    
+
 
 public function filterByKategori($kategori)
 {

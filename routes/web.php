@@ -6,10 +6,10 @@ use App\Http\Controllers\ListController;
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->middleware('auth');
 
-Route::get('/index', [SepatuController::class, 'index'])->name('sepatu.home');;
+Route::get('/', [SepatuController::class, 'index'])->name('sepatu.home')->middleware('auth');
 
 
 Route::get('/sepatu/{id}', [SepatuController::class, 'show'])->name('sepatu.detail');
@@ -21,7 +21,7 @@ use App\Http\Controllers\LoginController;
 
 // Route::get('/card', [CardController::class, 'index']);
 Route::get('/aboutus', [SepatuController::class, 'aboutus']);
-Route::get('/login', [LoginController::class, 'Login']);
+Route::get('/login', [LoginController::class, 'login'])->name('login');
 
 Route::get('list',[ListController::class,'index'])->name('sepatu.list');
 Route::resource('/list',ListController::class);
@@ -29,6 +29,8 @@ Route::get('/merek/{id}/sepatu', [ListController::class, 'sepatuByMerek'])->name
 Route::get('/sepatu/kategori/{kategori}', [SepatuController::class, 'filterByKategori'])->name('sepatu.kategori');
 
 Route::get('list-search',[ListController::class,'search']);
+Route::post('/login',[LoginController::class,'authenticate']);
+Route::post('/logout',[LoginController::class,'logout']);
 
 
 

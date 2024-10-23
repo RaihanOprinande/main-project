@@ -123,18 +123,39 @@
         <div class="subtitle">
             <p>Toko Sepatu</p>
         </div>
-        <form action="#" method="POST">
+        <form action="/login" method="POST">
+            @csrf
             <div class="input-field">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                       name="email" id="floatingInput" placeholder="name@example.com"
+                       value="{{ old('email') }}">
+                <label for="floatingInput">Email address</label>
+                @error('email')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="input-field">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" class="form-control"
+                       id="floatingPassword" name="password" placeholder="Password">
+                <label for="floatingPassword">Password</label>
             </div>
+
+            <!-- Pesan error login -->
+            @if ($errors->has('login'))
+                <div style="color: red; margin-bottom: 10px;">
+                    {{ $errors->first('login') }}
+                </div>
+            @endif
+
             <button type="submit" class="btn">Login</button>
             <a href="#" class="forgot-password">Forgot Password?</a>
+            <br>
+                  <hr>
+                  <div class="text-center">Dont Have an account? <a href="/register">Sign Up</a></div>
         </form>
+
     </div>
 
     <!-- Right panel (image) -->
