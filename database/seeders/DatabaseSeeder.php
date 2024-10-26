@@ -19,12 +19,12 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(10)->create();
 
-        // Kategori::created([
-        //     'nama'=> 'Wanita'
-        // ]);
-        // Kategori::create([
-        //     'nama'=> 'Pria'
-        // ]);
+        Kategori::create([
+            'nama'=> 'Wanita'
+        ]);
+        Kategori::create([
+            'nama'=> 'Pria'
+        ]);
 
         Merek::create([
             'nama_merek'=> 'adidas',
