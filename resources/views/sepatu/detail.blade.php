@@ -40,10 +40,10 @@
         /* Details Section */
         .details-section {
             flex: 1;
-            background-color: #fff;
+            /* background-color: #fff; */
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
         }
 
         .details-section h1 {
@@ -126,9 +126,9 @@
             <!-- Color Selection -->
             <div class="color-selection">
                 <h4>Available Colors:</h4>
-                <label><input type="radio" name="color" value="White"> White</label>
-                <label><input type="radio" name="color" value="Black"> Black</label>
-                <label><input type="radio" name="color" value="Red"> Red</label>
+                <label><input type="radio" name="color" value="White">White</label>
+                <label><input type="radio" name="color" value="Black">Black</label>
+                <label><input type="radio" name="color" value="Red">Red</label>
             </div>
 
             <!-- Add to Bag Button -->
