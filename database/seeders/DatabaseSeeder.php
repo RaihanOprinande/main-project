@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Kategori;
 use App\Models\Merek;
+use App\Models\ShoeImages;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -61,6 +62,31 @@ class DatabaseSeeder extends Seeder
             'name'=> 'Fauzan',
             'email'=> 'fauzan@gmail.com',
             'password'=> 'password'
+        ]);
+
+        ShoeImages::create([
+            'gambar' => 'sepatu1'
+        ]);
+        ShoeImages::create([
+            'gambar' => 'sepatu2'
+        ]);
+        ShoeImages::create([
+            'gambar' => 'sepatu3'
+        ]);
+        ShoeImages::create([
+            'gambar' => 'sepatu4'
+        ]);
+        ShoeImages::create([
+            'gambar' => 'sepatu5'
+        ]);
+        ShoeImages::create([
+            'gambar' => 'sepatu6'
+        ]);
+        ShoeImages::create([
+            'gambar' => 'sepatu7'
+        ]);
+        ShoeImages::create([
+            'gambar' => 'sepatu8'
         ]);
 
 
