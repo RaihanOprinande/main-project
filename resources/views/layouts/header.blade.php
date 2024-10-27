@@ -10,10 +10,10 @@
             <a class="nav-link active" aria-current="page" href="{{ route('sepatu.home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('sepatu.kategori', ['kategori' => 'pria']) }}">Men</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('sepatu.kategori', ['kategori' => '2']) }}">Men</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('sepatu.kategori', ['kategori' => 'wanita']) }}">Women</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('sepatu.kategori', ['kategori' => '1']) }}">Women</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/aboutus">About Us</a>

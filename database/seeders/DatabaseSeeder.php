@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Color;
 use App\Models\Kategori;
 use App\Models\Merek;
-use App\Models\ShoeImages;
+use App\Models\sepatui;
+use App\Models\Size;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,10 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // User::factory(10)->create();
-
         Kategori::create([
             'nama'=> 'Wanita'
         ]);
@@ -44,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'gambar'=> 'vans.png'
         ]);
         Merek::create([
-            'nama_merek'=> 'newb alance',
+            'nama_merek'=> 'new balance',
             'gambar'=> 'newbalance.png'
         ]);
 
@@ -64,29 +62,73 @@ class DatabaseSeeder extends Seeder
             'password'=> 'password'
         ]);
 
-        ShoeImages::create([
-            'gambar' => 'sepatu1'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu1.jpeg'
         ]);
-        ShoeImages::create([
-            'gambar' => 'sepatu2'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu2.jpeg'
         ]);
-        ShoeImages::create([
-            'gambar' => 'sepatu3'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu3.jpeg'
         ]);
-        ShoeImages::create([
-            'gambar' => 'sepatu4'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu4.jpeg'
         ]);
-        ShoeImages::create([
-            'gambar' => 'sepatu5'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu5.jpeg'
         ]);
-        ShoeImages::create([
-            'gambar' => 'sepatu6'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu6.jpeg'
         ]);
-        ShoeImages::create([
-            'gambar' => 'sepatu7'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu7.jpeg'
         ]);
-        ShoeImages::create([
-            'gambar' => 'sepatu8'
+        sepatui::create([
+            'gambar_sepatu' => 'sepatu8.jpeg'
+        ]);
+
+        //hilangkan semua command jika database memang kosong semua/tidak ada isi
+
+        Color::create([
+            'color' => 'adidas.png'
+        ]);
+
+        Color::create([
+            'color' => 'nike.png'
+        ]);
+
+        Size::create([
+            'size' => '36'
+        ]);
+        Size::create([
+            'size' => '37'
+        ]);
+        Size::create([
+            'size' => '38'
+        ]);
+        Size::create([
+            'size' => '39'
+        ]);
+        Size::create([
+            'size' => '40'
+        ]);
+        Size::create([
+            'size' => '41'
+        ]);
+        Size::create([
+            'size' => '42'
+        ]);
+        Size::create([
+            'size' => '43'
+        ]);
+        Size::create([
+            'size' => '44'
+        ]);
+        Size::create([
+            'size' => '45'
+        ]);
+        Size::create([
+            'size' => '46'
         ]);
 
 

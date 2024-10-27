@@ -40,14 +40,14 @@ class ListController extends Controller
 public function sepatuByMerek($id)
 {
     $mereks = Merek::all(); // Jika ingin tetap menampilkan merek di halaman
-    $sepatus = Sepatu::where('id_merek', $id)->get(); // Mengambil sepatu berdasarkan merek
+    $sepatus = Sepatu::where('merek_id', $id)->get(); // Mengambil sepatu berdasarkan merek
 
     return view('sepatu.list', compact('mereks', 'sepatus'));
 }
 public function index()
 {
     $mereks = Merek::all(); // Mengambil semua data merek
-$sepatus = Sepatu::all(); // Mengambil semua data sepatu
+    $sepatus = Sepatu::all(); // Mengambil semua data sepatu
 
 return view('sepatu.list', compact('mereks', 'sepatus'));
 }

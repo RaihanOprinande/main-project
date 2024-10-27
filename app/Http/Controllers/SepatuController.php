@@ -11,7 +11,7 @@ class SepatuController extends Controller
     public function index()
     {
         $mereks = Merek::all(); // Mengambil semua data merek
-    $sepatus = Sepatu::all(); // Mengambil semua data sepatu
+        $sepatus = Sepatu::all(); // Mengambil semua data sepatu
 
     return view('home', compact('mereks', 'sepatus'));
     }
@@ -30,7 +30,7 @@ class SepatuController extends Controller
 public function filterByKategori($kategori)
 {
     // Ambil data sepatu berdasarkan kategori yang dipilih
-    $sepatus = Sepatu::where('kategori', $kategori)->get();
+    $sepatus = Sepatu::where('kategori_id', $kategori)->get();
 
     return view('sepatu.list', compact('sepatus'));
 }

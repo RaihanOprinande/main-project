@@ -104,13 +104,13 @@
     <div class="container">
         <!-- Image Section -->
         <div class="image-section">
-            <img src="{{ asset('images/' . $sepatu->gambar) }}" alt="{{ $sepatu->nama }}">
+            <img src="{{ asset('images/' . $sepatu->gambar->gambar_sepatu) }}" alt="{{ $sepatu->nama }}">
         </div>
 
         <!-- Details Section -->
         <div class="details-section">
             <h1>{{ $sepatu->nama }}</h1>
-            <p>Kategori: {{ $sepatu->kategori }}</p>
+            <p>Kategori: {{ $sepatu->kategori->nama }}</p>
             <p class="price">Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
 
             <!-- Size Selection -->
@@ -118,6 +118,7 @@
                 <h4>Select Size:</h4>
                 @foreach([6, 6.5, 7, 7.5, 8, 8.5, 9] as $size)
                     <label>
+
                         <input type="radio" name="size" value="{{ $size }}"> {{ $size }}
                     </label>
                 @endforeach

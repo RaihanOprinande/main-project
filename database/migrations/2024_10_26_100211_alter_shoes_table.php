@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('shoes', function (Blueprint $table) {
-            // $table-> foreignId('gambar_id')->default(false)->after('kategori_id');
+            $table-> string('qty')->default(false)->after('size_id');
+
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('shoes', function (Blueprint $table) {
-            //
+            $table->dropColumn('qty');
         });
     }
 };
