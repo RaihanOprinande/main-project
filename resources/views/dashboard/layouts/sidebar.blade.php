@@ -14,41 +14,23 @@
           </li>
 
           <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-mahasiswa">
+              <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-sepatu">
                 <i class="bi bi-people"></i>
-                Mahasiswa
+                Sepatu
               </a>
             </li>
 
 
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-dosen">
-              <i class="bi bi-person-circle"></i>
-              Dosen
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-prodi">
-              <i class="bi bi-pentagon-half"></i>
-              Prodi
-            </a>
-          </li>
+          
 
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-matakuliah">
-              <i class="bi bi-pentagon-half"></i>
-              Mata Kuliah
-            </a>
-          </li>
 
-          @can('admin')
               <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-user">
                 <i class="bi bi-person-fill"></i>
                 User
               </a>
             </li>
-          @endcan
+
 
 
         </ul>

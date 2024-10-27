@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SepatuController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\DashboardSepatuController;
 
 
 Route::get('/', function () {
@@ -34,5 +35,8 @@ Route::post('/login',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
 
 Route::get('/dashboard',[DashboardAdminController::class,'Dashboard'])->middleware('auth');
-
+Route::resource('/dashboard-sepatu',DashboardSepatuController::class)->middleware(['auth']);
+Route::get('dshbrd-spt',[DashboardSepatuController::class,'index'])->middleware(['auth']);
+Route::resource('/dashboard-user',DashboardAdminController::class)->middleware(['auth']);
+Route::get('dshbrd-usr',[DashboardAdminController::class,'index'])->middleware(['auth']);
 
