@@ -32,7 +32,7 @@
             </tr>
             <tr>
               <th scope="row">Gambar</th>
-              <td><img src="{{ $sepatu->gambar->gambar ?? asset('images/default-image.jpg') }}"
+              <td><img src="{{ $sepatu->gambar_sepatu->gambar_sepatu ?? asset('images/default-image.jpg') }}"
                 alt="Gambar Sepatu" width="100"></td>
             </tr>
 

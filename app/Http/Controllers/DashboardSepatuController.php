@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Merek;
 use App\Models\Sepatu;
+use App\Models\sepatui;
 use App\Models\ShoeImages;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class DashboardSepatuController extends Controller
     }
     public function create(){
         $kategoris = Kategori::all();
-        $gambars = ShoeImages::all();
+        $gambars = sepatui::all();
         $mereks = Merek::all();
 
         return view('dashboard.sepatu.create',compact('kategoris','gambars','mereks'));
@@ -48,7 +49,7 @@ class DashboardSepatuController extends Controller
      public function edit(string $id)
      {
         $kategoris = Kategori::all();
-        $gambars = ShoeImages::all();
+        $gambars = sepatui::all();
         $mereks = Merek::all();
         $sepatus = Sepatu::find($id);
         return view('dashboard.sepatu.edit', compact('kategoris','gambars','mereks','sepatus'));
