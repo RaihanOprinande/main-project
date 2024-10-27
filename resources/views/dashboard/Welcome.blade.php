@@ -1,4 +1,4 @@
-@extends('dashboard.main')
+@extends('dashboard.layouts.main')
 @section('content')
 
 <h1>Welkam</h1>
