@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Input Data Sepatu</h1>
+    <h1 class="h2">Edit Data Sepatu</h1>
   </div>
 
   <div class="row">
@@ -78,9 +78,41 @@
             <option value="">Pilih Gambar</option>
             @foreach ($gambars as $gambar)
             @if (old('gambar_id',$sepatus->gambar_id) == $gambar->id)
-            <option value="{{ $gambar->id}}" selected>{{ $gambar->gambar}}</option>
+            <option value="{{ $gambar->id}}" selected>{{ $gambar->gambar_sepatu}}</option>
             @else
-            <option value="{{ $gambar->id}}">{{ $gambar->gambar}}</option>
+            <option value="{{ $gambar->id}}">{{ $gambar->gambar_sepatu}}</option>
+            @endif
+
+            @endforeach
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Warna</label>
+        <select name="color_id" class="form-select @error('size_id') is-invalid
+
+        @enderror" >
+            <option value="">Pilih Warna</option>
+            @foreach ($colors as $color)
+            @if (old('color_id',$sepatus->color_id) == $color->id)
+            <option value="{{ $color->id}}" selected>{{ $color->color}}</option>
+            @else
+            <option value="{{ $color->id}}">{{ $color->color}}</option>
+            @endif
+
+            @endforeach
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Ukuran</label>
+        <select name="size_id" class="form-select @error('size_id') is-invalid
+
+        @enderror" >
+            <option value="">Pilih Ukuran</option>
+            @foreach ($sizes as $size)
+            @if (old('size_id',$sepatus->color_id) == $size->id)
+            <option value="{{ $size->id}}" selected>{{ $size->size}}</option>
+            @else
+            <option value="{{ $size->id}}">{{ $size->size}}</option>
             @endif
 
             @endforeach

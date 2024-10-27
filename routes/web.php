@@ -39,4 +39,3 @@ Route::resource('/dashboard-sepatu',DashboardSepatuController::class)->middlewar
 Route::get('dshbrd-spt',[DashboardSepatuController::class,'index'])->middleware(['auth']);
 Route::resource('/dashboard-user',DashboardAdminController::class)->middleware(['auth']);
 Route::get('dshbrd-usr',[DashboardAdminController::class,'index'])->middleware(['auth']);
-

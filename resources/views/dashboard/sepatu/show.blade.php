@@ -32,8 +32,12 @@
             </tr>
             <tr>
               <th scope="row">Gambar</th>
-              <td><img src="{{ $sepatu->gambar_sepatu->gambar_sepatu ?? asset('images/default-image.jpg') }}"
-                alt="Gambar Sepatu" width="100"></td>
+              <td>
+                <img src="{{ asset('images/' . $sepatus->gambar->gambar_sepatu) }}"
+                     class="card-img-top"
+                     alt="{{ $sepatus->gambar->gambar_sepatu }}"
+                     style="width: 300px; height: auto; object-fit: cover;">
+              </td>
             </tr>
 
           </tbody>

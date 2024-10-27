@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Merek;
 use App\Models\Sepatu;
+use App\Models\Color;
+use App\Models\Size;
 use App\Models\sepatui;
-use App\Models\ShoeImages;
 use Illuminate\Http\Request;
 
 class DashboardSepatuController extends Controller
@@ -25,8 +26,11 @@ class DashboardSepatuController extends Controller
         $kategoris = Kategori::all();
         $gambars = sepatui::all();
         $mereks = Merek::all();
+        $colors = Color::all();
+        $sizes = Size::all();
 
-        return view('dashboard.sepatu.create',compact('kategoris','gambars','mereks'));
+
+        return view('dashboard.sepatu.create',compact('kategoris','gambars','mereks','colors','sizes'));
      }
 
      public function store(Request $request){
@@ -37,7 +41,8 @@ class DashboardSepatuController extends Controller
          'kategori_id' => 'required',
          'gambar_id' => 'required',
          'merek_id' => 'required',
-
+         'color_id' => 'required',
+         'size_id' => 'required',
         ]);
 
         //dd($validated);
@@ -51,8 +56,10 @@ class DashboardSepatuController extends Controller
         $kategoris = Kategori::all();
         $gambars = sepatui::all();
         $mereks = Merek::all();
+        $colors = Color::all();
+        $sizes = Size::all();
         $sepatus = Sepatu::find($id);
-        return view('dashboard.sepatu.edit', compact('kategoris','gambars','mereks','sepatus'));
+        return view('dashboard.sepatu.edit', compact('kategoris','gambars','mereks','sepatus','colors','sizes'));
      }
 
      public function update(Request $request,string $id){
@@ -62,10 +69,9 @@ class DashboardSepatuController extends Controller
          'kategori_id' => 'required',
          'gambar_id' => 'required',
          'merek_id' => 'required',
-
-
-
-           ]);
+         'color_id' => 'required',
+         'size_id' => 'required',
+        ]);
 
            Sepatu::where('id', $id)->update($validated);
            return redirect('dashboard-sepatu')->with('pesan','Data berhasil diubah');

@@ -62,7 +62,25 @@
         <select name="gambar_id" class="form-select">
             <option value="">Pilih Gambar</option>
             @foreach ($gambars as $gambar)
-            <option value="{{ $gambar->id}}">{{ $gambar->gambar}}</option>
+            <option value="{{ $gambar->id}}">{{ $gambar->gambar_sepatu}}</option>
+            @endforeach
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Warna</label>
+        <select name="color_id" class="form-select">
+            <option value="">Pilih Warna</option>
+            @foreach ($colors as $color)
+            <option value="{{ $color->id}}">{{ $color->color}}</option>
+            @endforeach
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Size</label>
+        <select name="size_id" class="form-select">
+            <option value="">Pilih Ukuran</option>
+            @foreach ($sizes as $size)
+            <option value="{{ $size->id}}">{{ $size->size}}</option>
             @endforeach
         </select>
       </div>

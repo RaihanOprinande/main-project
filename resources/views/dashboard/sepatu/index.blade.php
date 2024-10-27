@@ -43,8 +43,7 @@
 
         <td>{{ $sepatu->merek->nama_merek }}</td>
         <td>
-            <img src="{{ $sepatu->gambar->gambar ?? asset('images/default-image.jpg') }}"
-                 alt="Gambar Sepatu" width="100">
+            {{$sepatu->gambar->gambar_sepatu }}
         </td>
 
         <td class="text-nowrap">
