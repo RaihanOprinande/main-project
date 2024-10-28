@@ -177,8 +177,8 @@
                 @foreach ($sizes as $size)
                     @php
                         // Cek apakah ukuran ini ada dalam stok
-                        $isAvailable = $stocks->contains(function ($stock) use ($size) {
-                            return $stock->size_id == $size->id && $stock->stock > 0;
+                        $isAvailable = $stocks->contains(function ($stock) use ($size, $kode_sepatu) {
+                            return $stock->size_id == $size->id && $stock->shoe_code == $kode_sepatu;
                         });
                     @endphp
                     <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->id }}" {{ $isAvailable ? '' : 'disabled' }}>
