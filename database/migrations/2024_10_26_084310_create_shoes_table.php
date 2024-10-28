@@ -17,8 +17,8 @@ return new class extends Migration
             $table->char('harga');
             $table->foreignId('kategori_id');
             $table->foreignId('gambar_id');
-            $table->integer('merek_id');
-            $table->integer('color_id');
+            $table->foreignId('merek_id');
+            $table->foreignId('color_id');
             $table->integer('36');
             $table->integer('37');
             $table->integer('38');
