@@ -14,7 +14,7 @@
 
     <div class="mb-3">
         <label for="nama" class="form-label">Nama</label>
-        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama') }}">
+        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="0">
         @error('nama')
            <div class="invalid-feedback">
             {{ $message }}
