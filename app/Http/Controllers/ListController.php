@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sepatu;
 use App\Models\Merek;
+use App\Models\Size;
 
 class ListController extends Controller
 {
@@ -48,8 +49,9 @@ public function index()
 {
     $mereks = Merek::all(); // Mengambil semua data merek
     $sepatus = Sepatu::all(); // Mengambil semua data sepatu
+    $sizes = Size::all();
 
-return view('sepatu.list', compact('mereks', 'sepatus'));
+return view('sepatu.list', compact('mereks', 'sepatus', 'sizes'));
 }
 
 

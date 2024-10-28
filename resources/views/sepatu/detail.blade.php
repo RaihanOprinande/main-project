@@ -75,6 +75,56 @@
 
         .size-selection input, .color-selection input {
             margin-right: 10px;
+
+        }
+
+        .size-selection {
+            /* display: flex; */
+            flex-wrap: wrap;
+        }
+
+        .size-selection {
+            margin-bottom: 30px;
+        }
+
+        .size-selection h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .size-selection label {
+            display: inline-block;
+            padding: 10px 20px;
+            /* background-color: #f0f0f0; */
+            border: 1px solid transparent;
+            border-color: #c5c5c5;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s, border-color 0.3s;
+            width: 20%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .size-selection input[type="radio"] {
+            display: none;
+        }
+
+        .size-selection input[type="radio"]:checked + label {
+            background-color: #000000;
+            color: #ffffff;
+            border-color: #f8f8f8;
+        }
+
+        .size-selection label:hover {
+            /* background-color: #e0e0e0; */
+            border-color: #000000;
+        }
+        .size-tersedia {
+            display: flex;
+            flex-wrap: wrap;
+            /* margin-right: 40px; */
         }
 
         .btn {
@@ -101,6 +151,7 @@
     </style>
 </head>
 <body>
+    {{-- @foreach ($stocks as $shoe ) --}}
     <div class="container">
         <!-- Image Section -->
         <div class="image-section">
@@ -114,13 +165,24 @@
             <p class="price">Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
 
             <!-- Size Selection -->
+
             <div class="size-selection">
                 <h4>Select Size:</h4>
-                @foreach([6, 6.5, 7, 7.5, 8, 8.5, 9] as $size)
-                    <label>
-
-                        <input type="radio" name="size" value="{{ $size }}"> {{ $size }}
-                    </label>
+                <p>Size yang tersedia:</p>
+                <div class="size-tersedia">
+                    @foreach ($stocks as $ent)
+                        <p>{{ $ent->size->size }}</p>
+                    @endforeach
+                </div>
+                @foreach ($sizes as $size)
+                    @php
+                        // Cek apakah ukuran ini ada dalam stok
+                        $isAvailable = $stocks->contains(function ($stock) use ($size) {
+                            return $stock->size_id == $size->id && $stock->stock > 0;
+                        });
+                    @endphp
+                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->id }}" {{ $isAvailable ? '' : 'disabled' }}>
+                    <label for="size{{ $size->id }}" style="{{ $isAvailable ? '' : 'color: gray;' }}">{{ $size->size }}</label>
                 @endforeach
             </div>
 
@@ -139,6 +201,7 @@
             <a href="{{ route('sepatu.home') }}" class="btn">Kembali ke Daftar Sepatu</a>
         </div>
     </div>
+    {{-- @endforeach --}}
 </body>
 </html>
 @endsection

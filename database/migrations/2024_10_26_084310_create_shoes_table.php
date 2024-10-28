@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('merek_id');
             $table->foreignId('color_id');
             $table->foreignId('size_id');
+            $table->char('stock');
             $table->timestamps();
         });
     }

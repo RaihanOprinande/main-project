@@ -34,7 +34,7 @@ Route::get('list-search',[ListController::class,'search']);
 Route::post('/login',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
 
-Route::get('/dashboard',[DashboardAdminController::class,'Dashboard'])->middleware('auth');
+Route::get('/dashboard',[DashboardAdminController::class, 'Dashboard'])->middleware('auth');
 Route::resource('/dashboard-sepatu',DashboardSepatuController::class)->middleware(['auth']);
 Route::get('dshbrd-spt',[DashboardSepatuController::class,'index'])->middleware(['auth']);
 Route::resource('/dashboard-user',DashboardAdminController::class)->middleware(['auth']);

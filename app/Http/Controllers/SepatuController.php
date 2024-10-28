@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sepatu;
 use App\Models\Merek;
+use App\Models\Size;
 
 class SepatuController extends Controller
 {
@@ -12,12 +13,16 @@ class SepatuController extends Controller
     {
         $mereks = Merek::all(); // Mengambil semua data merek
         $sepatus = Sepatu::all(); // Mengambil semua data sepatu
+        $sizes = Size::all();
 
-    return view('home', compact('mereks', 'sepatus'));
+    return view('home', compact('mereks', 'sepatus', 'sizes'));
     }
     public function show($id) {
         $sepatu = Sepatu::find($id);
-        return view('sepatu.detail', compact('sepatu'));
+        $sizes = Size::all();
+        $stocks = Sepatu::with(['gambar', 'kategori', 'color', 'merek'])->get();
+        // $sepatus = Sepatu::with(['size'])->find('$id');
+        return view('sepatu.detail', compact('sepatu','stocks','sizes'));
     }
     public function aboutus()
     {
