@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardSepatuController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBrandController;
+use App\Http\Controllers\DashboardSizesController;
 use App\Http\Controllers\LoginController;
 
 
@@ -35,3 +36,4 @@ Route::resource('/list',ListController::class);
 Route::resource('/dashboard-sepatu',DashboardSepatuController::class)->middleware(['auth']);
 Route::resource('/dashboard-user',DashboardAdminController::class)->middleware(['auth']);
 Route::resource('/dashboard-brand',DashboardBrandController::class)->middleware(['auth']);
+Route::resource('/dashboard-sizes',DashboardSizesController::class)->middleware(['auth']);
