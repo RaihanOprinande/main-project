@@ -33,6 +33,7 @@ class DashboardSepatuController extends Controller
      public function store(Request $request){
         $validated = $request->validate([
 
+         'kode_sepatu' => 'required',
          'nama' => 'required',
          'harga' => 'required',
          'kategori_id' => 'required',
@@ -40,6 +41,7 @@ class DashboardSepatuController extends Controller
          'merek_id' => 'required',
          'color_id' => 'required',
          'size_id' => 'required',
+         'stock' => 'required',
         ]);
 
         //dd($validated);
@@ -61,6 +63,7 @@ class DashboardSepatuController extends Controller
 
      public function update(Request $request,string $id){
         $validated = $request->validate([
+         'kode_sepatu' => 'required',
          'nama' => 'required',
          'harga' => 'required',
          'kategori_id' => 'required',
@@ -68,6 +71,7 @@ class DashboardSepatuController extends Controller
          'merek_id' => 'required',
          'color_id' => 'required',
          'size_id' => 'required',
+         'stock' => 'required',
         ]);
 
            Sepatu::where('id', $id)->update($validated);
