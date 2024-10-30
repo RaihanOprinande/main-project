@@ -171,20 +171,30 @@
                 <p>Size yang tersedia:</p>
                 <div class="size-tersedia">
                     @foreach ($stocks as $ent)
-                        <p>{{ $ent->size->size }}</p>
+                        @if ($ent->kode_sepatu === $sepatu->kode_sepatu)
+                            <p>{{ $ent->size->size }}</p>
+                        @endif
                     @endforeach
                 </div>
+
                 @foreach ($sizes as $size)
                     @php
-                        // Cek apakah ukuran ini ada dalam stok
-                        $isAvailable = $stocks->contains(function ($stock) use ($size, $kode_sepatu) {
-                            return $stock->size_id == $size->id && $stock->shoe_code == $kode_sepatu;
+                        // Cek apakah size ini tersedia untuk kode sepatu yang ditampilkan
+                        $isAvailable = $stocks->contains(function ($stock) use ($size, $sepatu) {
+                            return $stock->size_id == $size->id && $stock->kode_sepatu == $sepatu->kode_sepatu;
                         });
                     @endphp
-                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->id }}" {{ $isAvailable ? '' : 'disabled' }}>
-                    <label for="size{{ $size->id }}" style="{{ $isAvailable ? '' : 'color: gray;' }}">{{ $size->size }}</label>
+
+                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->id }}"
+                           {{ $isAvailable ? '' : 'disabled' }}>
+                    <label for="size{{ $size->id }}"
+                           style="{{ $isAvailable ? '' : 'color: gray;' }}">
+                        {{ $size->size }}
+                    </label>
                 @endforeach
             </div>
+
+
 
             <!-- Color Selection -->
             <div class="color-selection">
