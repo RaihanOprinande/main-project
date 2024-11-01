@@ -9,55 +9,84 @@ class DashboardBrandController extends Controller
 {
     public function index()
     {
-        $brands=Merek::latest();
-
-        return view('dashboard.brands.index',['brands'=>$brands->paginate(10)]);
+        $brands = Merek::paginate(10); // Adjust the number as needed
+        return view('dashboard.brands.index', compact('brands'));
     }
-    public function create(){
-        $brands=Merek::latest();
 
-        return view('dashboard.brands.create',compact('brands'));
-     }
+    public function create()
+    {
+        return view('dashboard.brands.create');
+    }
 
-     public function store(Request $request){
-        $validated = $request->validate([
+    public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'nama_merek' => 'required|string|max:255',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-         'nama_merek' => 'required',
-         'gambar' => 'required',
-        ]);
+    $brand = new Merek();
+    $brand->nama_merek = $validatedData['nama_merek'];
 
-        //dd($validated);
+    if ($request->hasFile('gambar')) {
+        $originalImageName = $request->file('gambar')->getClientOriginalName();
+        $request->file('gambar')->storeAs('public/images/brands', $originalImageName);
+        $brand->gambar = $originalImageName;
+    }
 
-        Merek::create($validated);
-        return redirect('dashboard-brand')->with('pesan','Data berhasil disimpan');
-     }
+    $brand->save();
 
-     public function edit(string $id)
-     {
-        $brands = Merek::all();
-        return view('dashboard.brands.edit', compact('brands'));
-     }
+    return redirect()->route('dashboard-brand.index')->with('pesan', 'Brand berhasil ditambahkan!');
+}
+    public function show($id)
+    {
+        $brand = Merek::findOrFail($id);
+        return view('dashboard.brands.show', compact('brand'));
+    }
 
-     public function update(Request $request,string $id){
-        $validated = $request->validate([
-         'nama_merek' => 'required',
-         'gambar' => 'required',
-        ]);
+    public function edit($id)
+    {
+        $brand = Merek::findOrFail($id);
+        return view('dashboard.brands.edit', compact('brand'));
+    }
 
-           Merek::where('id', $id)->update($validated);
-           return redirect('dashboard-brand')->with('pesan','Data berhasil diubah');
-     }
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'nama_merek' => 'required|string|max:255',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $brand = Merek::findOrFail($id);
+    $brand->nama_merek = $request->nama_merek;
+
+    if ($request->hasFile('gambar')) {
+        // Hapus gambar lama jika ada
+        $oldImagePath = public_path('images/brands/' . $brand->gambar);
+        if ($brand->gambar && file_exists($oldImagePath)) {
+            unlink($oldImagePath);
+        }
+
+        // Simpan gambar baru dengan nama asli
+        $originalImageName = $request->file('gambar')->getClientOriginalName();
+        $request->file('gambar')->move(public_path('images/brands'), $originalImageName);
+
+        // Simpan hanya nama file asli ke database
+        $brand->gambar = $originalImageName;
+    }
+
+    $brand->save();
+
+    return redirect()->route('dashboard-brand.index')->with('pesan', 'Brand berhasil diupdate!');
+}
 
 
-     public function destroy(string $id)
-     {
-        Merek::destroy($id);
-        return redirect('dashboard-sepatu')->with('pesan','Data berhasil dihapus');
-     }
 
-     public function show(string $id)
-     {
-        $brands = Merek::findOrFail($id);
-        return view('dashboard.brands.show',compact('brands'));
-     }
+    public function destroy($id)
+    {
+        $brand = Merek::findOrFail($id);
+        $brand->delete();
+
+        return redirect()->route('dashboard-brand.index')->with('pesan', 'Brand berhasil dihapus!');
+    }
 }
