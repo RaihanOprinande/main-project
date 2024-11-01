@@ -62,42 +62,24 @@
             margin-bottom: 20px;
         }
 
-        .selection, .color-selection {
+        .size-selection, .color-selection {
             margin-bottom: 30px;
         }
 
-        .selection h4, .color-selection h4 {
+        .size-selection h4, .color-selection h4 {
             font-size: 18px;
             margin-bottom: 10px;
         }
 
-        .selection input, .color-selection input {
+        .size-selection input, .color-selection input {
             margin-right: 10px;
         }
 
-<<<<<<< HEAD
         .size-selection {
             flex-wrap: wrap;
         }
 
         .size-selection label {
-=======
-        .selection {
-            /* display: flex; */
-            flex-wrap: wrap;
-        }
-
-        .selection {
-            margin-bottom: 30px;
-        }
-
-        .selection h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .selection label {
->>>>>>> 5f89ed4c73b6ed4659f2fca3036a7660e66f6fc7
             display: inline-block;
             padding: 10px 20px;
             border: 1px solid #c5c5c5;
@@ -110,22 +92,17 @@
             margin-bottom: 10px;
         }
 
-        .selection input[type="radio"] {
+        .size-selection input[type="radio"] {
             display: none;
         }
 
-        .selection input[type="radio"]:checked + label {
+        .size-selection input[type="radio"]:checked + label {
             background-color: #000000;
             color: #ffffff;
             border-color: #f8f8f8;
         }
 
-<<<<<<< HEAD
         .size-selection label:hover {
-=======
-        .selection label:hover {
-            /* background-color: #e0e0e0; */
->>>>>>> 5f89ed4c73b6ed4659f2fca3036a7660e66f6fc7
             border-color: #000000;
         }
 
@@ -190,21 +167,27 @@
             <p class="price">Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
 
             <!-- Size Selection -->
-
-            <div class="selection">
+            <div class="size-selection">
                 <h4>Select Size:</h4>
+                <p>Size yang tersedia:</p>
+                <div class="size-tersedia">
+                    @foreach ($stocks as $ent)
+                        @if ($ent->kode_sepatu === $sepatu->kode_sepatu)
+                            <p>{{ $ent->size->size }}</p>
+                        @endif
+                    @endforeach
+                </div>
 
                 @foreach ($sizes as $size)
-    @php
-        $isAvailable = $stocks->contains(function ($stock) use ($size, $sepatu) {
-            return $stock->size_id == $size->id && $stock->kode_sepatu == $sepatu->kode_sepatu;
-        });
-    @endphp
+                    @php
+                        $isAvailable = $stocks->contains(function ($stock) use ($size, $sepatu) {
+                            return $stock->size_id == $size->id && $stock->kode_sepatu == $sepatu->kode_sepatu;
+                        });
+                    @endphp
 
-    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->size }}" {{ $isAvailable ? '' : 'disabled' }}>
-    <label for="size{{ $size->id }}" style="{{ $isAvailable ? '' : 'color: gray;' }}">{{ $size->size }}</label>
-@endforeach
-
+                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->size }}" {{ $isAvailable ? '' : 'disabled' }}>
+                    <label for="size{{ $size->id }}" style="{{ $isAvailable ? '' : 'color: gray;' }}">{{ $size->size }}</label>
+                @endforeach
             </div>
 
             <!-- Color Selection -->
@@ -236,7 +219,6 @@
 
                 <button type="submit" class="btn" id="orderButton" disabled>Order Now</button>
             </form>
-
 
 
 
@@ -274,12 +256,9 @@ document.querySelectorAll('input[name="color"]').forEach((radio) => {
 
 document.querySelectorAll('input[name="size"]').forEach((radio) => {
     radio.addEventListener('change', function () {
-        document.getElementById('form_size').value = this.value; // Mengambil ID size
-        validateForm(); // Cek validitas saat ukuran dipilih
+        document.getElementById('form_size').value = this.value;
     });
 });
-
-
 
 function disableOrderButton() {
     document.getElementById('orderButton').disabled = true; // Nonaktifkan tombol
@@ -310,11 +289,10 @@ document.querySelectorAll('input[name="color"]').forEach((radio) => {
 
 document.querySelectorAll('input[name="size"]').forEach((radio) => {
     radio.addEventListener('change', function () {
-        document.getElementById('form_size').value = this.value; // Mengambil ID size
+        document.getElementById('form_size').value = this.value;
         validateForm(); // Cek validitas saat ukuran dipilih
     });
 });
-
 
 // Nonaktifkan tombol "Order Now" saat halaman dimuat
 document.addEventListener('DOMContentLoaded', function () {
