@@ -13,6 +13,15 @@
     @method('PUT')
     @csrf
     <div class="mb-3">
+        <label for="kode_sepatu" class="form-label">Kode Sepatu</label>
+        <input type="text" class="form-control @error('kode_sepatu') is-invalid @enderror" name="kode_sepatu" id="kode_sepatu" value="{{ old('kode_sepatu',$sepatus->kode_sepatu) }}">
+        @error('kode_sepatu')
+           <div class="invalid-feedback">
+            {{ $message }}
+           </div>
+         @enderror
+      </div>
+    <div class="mb-3">
         <label for="nama" class="form-label">Nama Sepatu</label>
         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama',$sepatus->nama) }}">
         @error('nama')
@@ -117,6 +126,17 @@
 
             @endforeach
         </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="stock" class="form-label">Stock</label>
+        <input type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock" value="{{ old('stock',$sepatus->stock) }}">
+        @error('stock')
+           <div class="invalid-feedback">
+            {{ $message }}
+           </div>
+         @enderror
+
       </div>
 
 
