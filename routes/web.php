@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBrandController;
 use App\Http\Controllers\DashboardColorsController;
 use App\Http\Controllers\DashboardSizesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LoginController;
 
 
@@ -39,3 +40,8 @@ Route::resource('/dashboard-user',DashboardAdminController::class)->middleware([
 Route::resource('/dashboard-brand',DashboardBrandController::class)->middleware(['auth']);
 Route::resource('/dashboard-sizes',DashboardSizesController::class)->middleware(['auth']);
 Route::resource('/dashboard-color',DashboardColorsController::class)->middleware(['auth']);
+Route::post('/pemesanan', [SepatuController::class, 'pemesanan'])->name('pemesanan');
+Route::post('/upload-bukti', [SepatuController::class, 'uploadBukti'])->name('upload.bukti');
+Route::get('/bayar', [PaymentController::class, 'show'])->name('bayar');
+Route::post('/proses-bayar', [PaymentController::class, 'prosesBayar'])->name('proses.bayar');
+
