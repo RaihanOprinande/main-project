@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardSepatuController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBrandController;
+use App\Http\Controllers\DashboardColorsController;
 use App\Http\Controllers\DashboardSizesController;
 use App\Http\Controllers\LoginController;
 
@@ -37,3 +38,4 @@ Route::resource('/dashboard-sepatu',DashboardSepatuController::class)->middlewar
 Route::resource('/dashboard-user',DashboardAdminController::class)->middleware(['auth']);
 Route::resource('/dashboard-brand',DashboardBrandController::class)->middleware(['auth']);
 Route::resource('/dashboard-sizes',DashboardSizesController::class)->middleware(['auth']);
+Route::resource('/dashboard-color',DashboardColorsController::class)->middleware(['auth']);
