@@ -26,6 +26,7 @@
         <th>Harga</th>
         <th>Kategori</th>
         <th>Merek</th>
+        <th>Sizes</th>
         <th>Gambar</th>
 
 
@@ -42,6 +43,8 @@
 
 
         <td>{{ $sepatu->merek->nama_merek }}</td>
+        <td>{{ $sepatu->size->size }}</td>
+
         <td>
             {{$sepatu->gambar->gambar_sepatu }}
         </td>
