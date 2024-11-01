@@ -126,10 +126,10 @@
         <!-- Baris Card Vertikal Tambahan -->
         <div class="row mt-5">
             @foreach($sepatus->take(4) as $sepatu) <!-- Mengambil 4 item pertama -->
-                <div class="col-md-3 col-sm-6 mb-4" {{ $sepatu->stock > 0 ? '' : 'disabled-card' }}>
+                {{-- <div class="col-md-3 col-sm-6 mb-4" {{ $sepatu->stock > 0 ? '' : 'disabled-card' }}>
                     <div class="card h-100" >
                         <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}">
-                            <img src="{{ asset('images/' . $sepatu-> gambar->gambar_sepatu) }}" class="card-img-top" alt="{{ $sepatu-> gambar->gambar_sepatu }}">
+                            <img src="{{ asset('images/' . $sepatu-> sepatu_gambar->sepatu_gambar) }}" class="card-img-top" alt="{{ $sepatu-> sepatu_gambar->sepatu_gambar }}">
                             <div class="card-body" >
                                 <h5 class="card-title">{{ $sepatu->nama }}</h5>
                                 <p class="card-text">{{ $sepatu-> kategori->nama }}
@@ -138,7 +138,14 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> --}}
+            @endforeach
+        </div>
+        <div class="tes">
+            @foreach ($sepatus as $sepatu)
+            <div class="tas">
+                <p>{{ $sepatu->harga }}</p>
+            </div>
             @endforeach
         </div>
 

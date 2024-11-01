@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use Illuminate\Http\Request;
 use App\Models\Sepatu;
 use App\Models\Merek;
+use App\Models\Sepatu_gambar;
 use App\Models\Size;
 
 class ListController extends Controller
@@ -40,16 +42,17 @@ class ListController extends Controller
 
 public function sepatuByMerek($id)
 {
-    $mereks = Merek::all(); // Jika ingin tetap menampilkan merek di halaman
+    $mereks = Brands::all(); // Jika ingin tetap menampilkan merek di halaman
     $sepatus = Sepatu::where('merek_id', $id)->get(); // Mengambil sepatu berdasarkan merek
 
     return view('sepatu.list', compact('mereks', 'sepatus'));
 }
 public function index()
 {
-    $mereks = Merek::all(); // Mengambil semua data merek
-    $sepatus = Sepatu::all(); // Mengambil semua data sepatu
+    $mereks = Brands::all();
+    $sepatus = Sepatu::with('sepatu_gambar');
     $sizes = Size::all();
+    // $sepatu_gambar = Sepatu_gambar::all();
 
 return view('sepatu.list', compact('mereks', 'sepatus', 'sizes'));
 }

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('sepatuis', function (Blueprint $table) {
             $table->id();
             $table->string('gambar_sepatu');
+            $table->string('gambar_sepatu_kiri');
+            $table->string('gambar_sepatu_kanan');
             $table->timestamps();
         });
     }

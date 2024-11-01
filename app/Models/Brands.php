@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kategori extends Model
+class Brands extends Model
 {
     use HasFactory;
-    protected $table = 'kategoris';
-    protected $fillable = ['nama'];
-
+    protected $table = 'brands';
+    protected $fillable = ['nama_merek','gambar'];
     public function sepatu(){
         return $this->hasMany(Sepatu::class);
     }

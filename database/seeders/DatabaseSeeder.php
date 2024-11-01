@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Color;
 use App\Models\Kategori;
-use App\Models\Merek;
+use App\Models\Brands;
 use App\Models\sepatui;
 use App\Models\Size;
 use App\Models\User;
@@ -25,24 +25,24 @@ class DatabaseSeeder extends Seeder
             'nama'=> 'Pria'
         ]);
 
-        Merek::create([
-            'nama_merek'=> 'adidas',
+        Brands::create([
+            'nama_brand'=> 'adidas',
             'gambar'=> 'adidas.png'
         ]);
-        Merek::create([
-            'nama_merek'=> 'ventela',
+        Brands::create([
+            'nama_brand'=> 'ventela',
             'gambar'=> 'ventela.png'
         ]);
-        Merek::create([
-            'nama_merek'=> 'nike',
+        Brands::create([
+            'nama_brand'=> 'nike',
             'gambar'=> 'nike.png'
         ]);
-        Merek::create([
-            'nama_merek'=> 'vans',
+        Brands::create([
+            'nama_brand'=> 'vans',
             'gambar'=> 'vans.png'
         ]);
-        Merek::create([
-            'nama_merek'=> 'new balance',
+        Brands::create([
+            'nama_brand'=> 'new balance',
             'gambar'=> 'newbalance.png'
         ]);
 
@@ -63,29 +63,33 @@ class DatabaseSeeder extends Seeder
         ]);
 
         sepatui::create([
-            'gambar_sepatu' => 'sepatu1.jpeg'
+            'gambar_sepatu' => 'sample_left.jpg',
+            'gambar_sepatu_kiri' => 'sample_left.jpg',
+            'gambar_sepatu_kanan' => 'sample_right.jpg'
         ]);
         sepatui::create([
-            'gambar_sepatu' => 'sepatu2.jpeg'
+            'gambar_sepatu' => 'sepatu1.jpeg',
+            'gambar_sepatu_kiri' => 'sepatu2.jpeg',
+            'gambar_sepatu_kanan' => 'sepatu3.jpeg'
         ]);
-        sepatui::create([
-            'gambar_sepatu' => 'sepatu3.jpeg'
-        ]);
-        sepatui::create([
-            'gambar_sepatu' => 'sepatu4.jpeg'
-        ]);
-        sepatui::create([
-            'gambar_sepatu' => 'sepatu5.jpeg'
-        ]);
-        sepatui::create([
-            'gambar_sepatu' => 'sepatu6.jpeg'
-        ]);
-        sepatui::create([
-            'gambar_sepatu' => 'sepatu7.jpeg'
-        ]);
-        sepatui::create([
-            'gambar_sepatu' => 'sepatu8.jpeg'
-        ]);
+        // sepatui::create([
+        //     'gambar_sepatu' => 'sepatu3.jpeg'
+        // ]);
+        // sepatui::create([
+        //     'gambar_sepatu' => 'sepatu4.jpeg'
+        // ]);
+        // sepatui::create([
+        //     'gambar_sepatu' => 'sepatu5.jpeg'
+        // ]);
+        // sepatui::create([
+        //     'gambar_sepatu' => 'sepatu6.jpeg'
+        // ]);
+        // sepatui::create([
+        //     'gambar_sepatu' => 'sepatu7.jpeg'
+        // ]);
+        // sepatui::create([
+        //     'gambar_sepatu' => 'sepatu8.jpeg'
+        // ]);
 
         //hilangkan semua command jika database memang kosong semua/tidak ada isi
 

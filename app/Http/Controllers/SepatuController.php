@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use Illuminate\Http\Request;
 use App\Models\Sepatu;
 use App\Models\Merek;
@@ -11,8 +12,9 @@ class SepatuController extends Controller
 {
     public function index()
     {
-        $mereks = Merek::all(); // Mengambil semua data merek
-        $sepatus = Sepatu::all(); // Mengambil semua data sepatu
+        $mereks = Brands::all();
+        // $sepatus = Sepatu::with('sepatu_gambars')->get();
+        $sepatus = Sepatu::all();
         $sizes = Size::all();
 
     return view('home', compact('mereks', 'sepatus', 'sizes'));

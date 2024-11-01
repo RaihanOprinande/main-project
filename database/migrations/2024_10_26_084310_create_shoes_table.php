@@ -16,12 +16,9 @@ return new class extends Migration
             $table->string('kode_sepatu');
             $table->string('nama');
             $table->char('harga');
+            $table->string('qty');
             $table->foreignId('kategori_id');
-            $table->foreignId('gambar_id');
-            $table->foreignId('merek_id');
-            $table->foreignId('color_id');
-            $table->foreignId('size_id');
-            $table->char('stock');
+            $table->foreignId('brands_id');
             $table->timestamps();
         });
     }

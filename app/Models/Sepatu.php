@@ -7,24 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sepatu extends Model
 {
-    protected $table = 'shoes'; // Nama tabel
-    protected $fillable = ['kode_sepatu','nama', 'harga', 'kategori_id' ,'gambar_id','merek_id', 'size_id', 'color_id', 'stock']; // Kolom yang bisa diisi
     use HasFactory;
+    protected $table = 'shoes';
+    protected $fillable = ['kode_sepatu','nama', 'harga', 'kategori_id' ,'brands_id', 'stock'];
 
-    public function merek(){
-        return $this->belongsTo(Merek::class);
+    public function sepatu_size(){
+        return $this->belongsToMany(Sepatu_size::class);
+    }
+    public function sepatu_gambar(){
+        return $this->hasMany(Sepatu_gambar::class);
     }
     public function kategori(){
         return $this->belongsTo(Kategori::class);
     }
-    public function gambar(){
-        return $this->belongsTo(sepatui::class);
-    }
-    public function color(){
-        return $this->belongsTo(Color::class);
-    }
-    public function size(){
-        return $this->belongsTo(Size::class);
+    public function brands(){
+        return $this->belongsTo(Brands::class);
     }
 
 }

@@ -12,6 +12,6 @@ class Size extends Model
     protected $fillable = ['size'];
 
     public function size(){
-        return $this->hasMany(Sepatu::class);
+        return $this->belongsToMany(Sepatu_size::class);
     }
 }

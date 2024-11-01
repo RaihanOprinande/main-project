@@ -65,9 +65,9 @@
                 <div class="col-md-3 col-sm-6"> <!-- Setiap card 1/4 lebar pada md, 1/2 pada sm -->
                     <div class="product-card card">
                         <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}">
-                            <img src="{{ asset('images/' . $sepatu->gambar->gambar_sepatu) }}" class="card-img-top" alt="{{ $sepatu->nama }}">
+                            <img src="{{ asset('images/' . $sepatu->sepatu_gambar) }}" class="card-img-top" alt="{{ $sepatu->nama }}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $sepatu-> gambar->gambar_sepatu }}</h5>
+                                <h5 class="card-title">{{ $sepatu-> sepatu_gambar }}</h5>
                                 <p class="card-text">{{ $sepatu-> kategori->nama }}</p>
                                 <p>Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
                             </div>

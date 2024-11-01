@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use App\Models\Kategori;
 use App\Models\Merek;
 use App\Models\Sepatu;
@@ -22,7 +23,7 @@ class DashboardSepatuController extends Controller
     public function create(){
         $kategoris = Kategori::all();
         $gambars = sepatui::all();
-        $mereks = Merek::all();
+        $mereks = Brands::all();
         $colors = Color::all();
         $sizes = Size::all();
 
@@ -54,7 +55,7 @@ class DashboardSepatuController extends Controller
      {
         $kategoris = Kategori::all();
         $gambars = sepatui::all();
-        $mereks = Merek::all();
+        $mereks = Brands::all();
         $colors = Color::all();
         $sizes = Size::all();
         $sepatus = Sepatu::find($id);

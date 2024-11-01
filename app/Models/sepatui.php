@@ -10,10 +10,11 @@ class sepatui extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'gambar_sepatu'
+        'gambar_sepatu',
+        'gambar_sepatu_kanan',
+        'gambar_sepatu_kiri'
     ];
-
-    public function sepatu(){
-        return $this->hasMany(Sepatu::class);
+    public function gambar(){
+        return $this->belongsTo(Sepatu_gambar::class);
     }
 }
