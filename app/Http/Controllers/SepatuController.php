@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Sepatu;
 use App\Models\Merek;
 use App\Models\Size;
+use App\Models\Pemesanan;
 
 class SepatuController extends Controller
 {
@@ -49,30 +50,38 @@ public function pemesanan(Request $request)
     $warna = $request->warna;
     $ukuran = $request->ukuran;
     $totalHarga = $jumlah * $sepatu->harga;
-    
+
 
     return view('sepatu.pemesanan', compact('sepatu', 'jumlah', 'warna', 'ukuran', 'totalHarga'));
 }
 
-public function uploadBukti(Request $request)
+public function prosesBayar(Request $request)
 {
-    // Validasi file yang diunggah
     $request->validate([
-        'bukti_transfer' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'bukti' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'id' => 'required|exists:shoes,id', // Memastikan sepatu ID ada
+        'jumlah' => 'required|integer',
     ]);
 
-    // Simpan file ke storage
-    if ($request->hasFile('bukti_transfer')) {
-        $file = $request->file('bukti_transfer');
-        $path = $file->store('bukti_transfer', 'public'); // Simpan di storage/app/public/bukti_transfer
+    // Mengambil data sepatu beserta warna dan ukuran
+    $sepatu = Sepatu::with(['color', 'size'])->find($request->id);
+    $totalHarga = $sepatu->harga * $request->jumlah; // Menghitung total harga
 
-        // Lakukan apa pun yang perlu dilakukan dengan path file,
-        // Misalnya, menyimpan informasi ke database jika diperlukan.
+    // Menyimpan bukti bukti pembayaran
+    $path = $request->file('bukti')->store('bukti', 'public');
 
-        return redirect()->back()->with('success', 'Bukti transfer berhasil diunggah!');
-    }
+    // Menyimpan data pemesanan ke dalam tabel `pemesanans`
+    Pemesanan::create([
+        'sepatu_id' => $sepatu->id,
+        'harga' => $sepatu->harga,
+        'jumlah' => $request->jumlah,
+        'color_id' => $sepatu->color_id,
+        'size_id' => $sepatu->size_id,
+        'total' => $totalHarga,
+        'bukti' => $path,
+    ]);
 
-    return redirect()->back()->with('error', 'Gagal mengunggah bukti transfer.');
+    return redirect()->route('sepatu.home')->with('success', 'Pemesanan berhasil disimpan');
 }
 
 

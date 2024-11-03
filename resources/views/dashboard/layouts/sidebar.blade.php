@@ -42,6 +42,12 @@
                   Colors
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-order">
+                  <i class="bi bi-person-fill"></i>
+                  Orders
+                </a>
+              </li>
         </ul>
 
         <hr class="my-3">

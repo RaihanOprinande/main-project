@@ -3,50 +3,56 @@
     <style>
         /* Styling untuk memusatkan konten */
         .detail-container {
-            max-width: 600px; /* Lebar maksimal untuk detail */
-            margin: 50px auto; /* Margin atas dan bawah, auto untuk tengah */
-            padding: 20px; /* Padding di dalam kontainer */
-            background-color: #fff; /* Warna latar belakang putih */
-            border-radius: 10px; /* Sudut melengkung */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek 3D */
-            text-align: center; /* Teks di tengah */
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         h1 {
-            margin-bottom: 20px; /* Jarak bawah untuk judul */
+            margin-bottom: 20px;
         }
 
         p {
-            margin: 10px 0; /* Jarak vertikal untuk paragraf */
+            margin: 10px 0;
         }
 
         .btn {
-            margin-top: 20px; /* Jarak atas untuk tombol */
-            display: inline-block; /* Agar tombol terlihat lebih baik */
-            padding: 10px 20px; /* Padding dalam tombol */
-            background-color: #000; /* Warna latar belakang tombol */
-            color: #fff; /* Warna teks tombol */
-            text-decoration: none; /* Menghapus garis bawah */
-            border-radius: 5px; /* Sudut tombol melengkung */
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
         }
 
         .btn:hover {
-            background-color: #333; /* Warna tombol saat hover */
+            background-color: #333;
         }
 
         .upload-container {
-            margin-top: 20px; /* Jarak atas untuk kontainer upload */
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .upload-container label {
+            margin-right: 10px;
         }
 
         input[type="file"] {
-            margin-top: 10px; /* Jarak atas untuk input file */
+            flex: 1;
         }
 
         .action-buttons {
-            margin-top: 20px; /* Jarak atas untuk kontainer tombol aksi */
-            display: flex; /* Menggunakan flexbox untuk menata tombol */
-            justify-content: center; /* Mengatur tombol di tengah */
-            gap: 20px; /* Jarak antara tombol */
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
     </style>
 
@@ -62,24 +68,29 @@
         <p>No Rekening Pemilik: <strong>5434 0100 3078 521</strong><br>
         Atas Nama: <strong>M WAHYU FIKRI</strong></p>
 
-        <div class="upload-container">
-            <h4>Upload Bukti Transfer:</h4>
-            <form action="{{ route('upload.bukti') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="file" name="bukti_transfer" accept="image/*" required>
-                <button type="submit" class="btn">Upload</button>
-            </form>
-        </div>
+        <form action="{{ route('proses.bayar') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="id" value="{{ $sepatu->id }}">
+            <input type="hidden" name="harga" value="{{ $sepatu->harga }}">
+            <input type="hidden" name="jumlah" value="{{ $jumlah }}">
+            <input type="hidden" name="warna" value="{{ $sepatu->color_id }}">
+            <input type="hidden" name="ukuran" value="{{ $sepatu->size_id }}">
+            <input type="hidden" name="totalHarga" value="{{ $totalHarga }}">
 
-        <div class="action-buttons">
-            <form action="{{ route('proses.bayar') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="id" value="{{ $sepatu->id }}">
+            <div class="upload-container">
+                <label for="bukti" class="form-label">Upload Bukti :</label>
+                <input type="file" accept="image/*" class="form-control @error('bukti') is-invalid @enderror" id="bukti" name="bukti" required>
+                @error('bukti')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
+            <div class="action-buttons">
                 <button type="submit" class="btn">Konfirmasi</button>
-            </form>
-
-            <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}" class="btn">Kembali</a>
-
-        </div>
+                <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}" class="btn">Kembali</a>
+            </div>
+        </form>
     </div>
 @endsection
