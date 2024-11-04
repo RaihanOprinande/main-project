@@ -40,10 +40,8 @@
         /* Details Section */
         .details-section {
             flex: 1;
-            /* background-color: #fff; */
             padding: 40px;
             border-radius: 10px;
-            /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
         }
 
         .details-section h1 {
@@ -64,40 +62,27 @@
             margin-bottom: 20px;
         }
 
-        .selection, .color-selection {
+        .size-selection, .color-selection {
             margin-bottom: 30px;
         }
 
-        .selection h4, .color-selection h4 {
+        .size-selection h4, .color-selection h4 {
             font-size: 18px;
             margin-bottom: 10px;
         }
 
-        .selection input, .color-selection input {
+        .size-selection input, .color-selection input {
             margin-right: 10px;
-
         }
 
-        .selection {
-            /* display: flex; */
+        .size-selection {
             flex-wrap: wrap;
         }
 
-        .selection {
-            margin-bottom: 30px;
-        }
-
-        .selection h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .selection label {
+        .size-selection label {
             display: inline-block;
             padding: 10px 20px;
-            /* background-color: #f0f0f0; */
-            border: 1px solid transparent;
-            border-color: #c5c5c5;
+            border: 1px solid #c5c5c5;
             border-radius: 5px;
             cursor: pointer;
             margin-right: 10px;
@@ -107,24 +92,18 @@
             margin-bottom: 10px;
         }
 
-        .selection input[type="radio"] {
+        .size-selection input[type="radio"] {
             display: none;
         }
 
-        .selection input[type="radio"]:checked + label {
+        .size-selection input[type="radio"]:checked + label {
             background-color: #000000;
             color: #ffffff;
             border-color: #f8f8f8;
         }
 
-        .selection label:hover {
-            /* background-color: #e0e0e0; */
+        .size-selection label:hover {
             border-color: #000000;
-        }
-        .size-tersedia {
-            display: flex;
-            flex-wrap: wrap;
-            /* margin-right: 40px; */
         }
 
         .btn {
@@ -135,23 +114,46 @@
             text-decoration: none;
             border-radius: 5px;
             font-size: 16px;
+            margin-top: 20px; /* Tambahan jarak antara tombol Add to Bag dan input jumlah */
         }
 
         .btn:hover {
             background-color: #333;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
+        .quantity-selection {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+        }
+
+        .quantity-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        #quantity {
+            width: 50px;
+            text-align: center;
+            font-size: 18px;
+            border: none;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
-    {{-- @foreach ($stocks as $shoe ) --}}
     <div class="container">
         <!-- Image Section -->
         <div class="image-section">
@@ -165,28 +167,28 @@
             <p class="price">Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
 
             <!-- Size Selection -->
-
-            <div class="selection">
+            <div class="size-selection">
                 <h4>Select Size:</h4>
+                <p>Size yang tersedia:</p>
+                <div class="size-tersedia">
+                    @foreach ($stocks as $ent)
+                        @if ($ent->kode_sepatu === $sepatu->kode_sepatu)
+                            <p>{{ $ent->size->size }}</p>
+                        @endif
+                    @endforeach
+                </div>
 
                 @foreach ($sizes as $size)
                     @php
-                        // Cek apakah size ini tersedia untuk kode sepatu yang ditampilkan
                         $isAvailable = $stocks->contains(function ($stock) use ($size, $sepatu) {
                             return $stock->size_id == $size->id && $stock->kode_sepatu == $sepatu->kode_sepatu;
                         });
                     @endphp
 
-                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->id }}"
-                           {{ $isAvailable ? '' : 'disabled' }}>
-                    <label for="size{{ $size->id }}"
-                           style="{{ $isAvailable ? '' : 'color: gray;' }}">
-                        {{ $size->size }}
-                    </label>
+                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->size }}" {{ $isAvailable ? '' : 'disabled' }}>
+                    <label for="size{{ $size->id }}" style="{{ $isAvailable ? '' : 'color: gray;' }}">{{ $size->size }}</label>
                 @endforeach
             </div>
-
-
 
             <!-- Color Selection -->
             <div class="color-selection">
@@ -196,14 +198,110 @@
                 <label><input type="radio" name="color" value="Red">Red</label>
             </div>
 
+            <!-- Quantity Selection -->
+            <div class="quantity-selection">
+                <h4>Select Quantity:</h4>
+                <div class="quantity-container">
+                    <button type="button" onclick="decreaseQuantity()" class="quantity-btn">-</button>
+                    <input type="text" id="quantity" name="quantity" value="1" readonly>
+                    <button type="button" onclick="increaseQuantity()" class="quantity-btn">+</button>
+                </div>
+            </div>
+
             <!-- Add to Bag Button -->
-            <a href="#" class="btn">Add to Bag</a>
+            <!-- Add to Bag Button -->
+            <form action="{{ route('pemesanan') }}" method="POST">
+                @csrf
+                <input type="hidden" name="sepatu_id" value="{{ $sepatu->id }}">
+                <input type="hidden" name="jumlah" id="form_quantity" value="1">
+                <input type="hidden" name="warna" id="form_color" value="">
+                <input type="hidden" name="ukuran" id="form_size" value="">
+
+                <button type="submit" class="btn" id="orderButton" disabled>Order Now</button>
+            </form>
+
+
 
             <!-- Back to List Button -->
             <a href="{{ route('sepatu.home') }}" class="btn">Kembali ke Daftar Sepatu</a>
         </div>
     </div>
-    {{-- @endforeach --}}
+
+    <!-- JavaScript untuk kontrol jumlah -->
+    <script>
+
+        function decreaseQuantity() {
+    let quantityInput = document.getElementById('quantity');
+    let formQuantityInput = document.getElementById('form_quantity');
+    let currentQuantity = parseInt(quantityInput.value);
+    if (currentQuantity > 1) {
+        quantityInput.value = currentQuantity - 1;
+        formQuantityInput.value = currentQuantity - 1;
+    }
+}
+
+function increaseQuantity() {
+    let quantityInput = document.getElementById('quantity');
+    let formQuantityInput = document.getElementById('form_quantity');
+    let currentQuantity = parseInt(quantityInput.value);
+    quantityInput.value = currentQuantity + 1;
+    formQuantityInput.value = currentQuantity + 1;
+}
+
+document.querySelectorAll('input[name="color"]').forEach((radio) => {
+    radio.addEventListener('change', function () {
+        document.getElementById('form_color').value = this.value;
+    });
+});
+
+document.querySelectorAll('input[name="size"]').forEach((radio) => {
+    radio.addEventListener('change', function () {
+        document.getElementById('form_size').value = this.value;
+    });
+});
+
+function disableOrderButton() {
+    document.getElementById('orderButton').disabled = true; // Nonaktifkan tombol
+}
+
+// Validasi pemilihan ukuran dan warna
+function validateForm() {
+    const selectedColor = document.querySelector('input[name="color"]:checked');
+    const selectedSize = document.querySelector('input[name="size"]:checked');
+
+    const orderButton = document.getElementById('orderButton');
+
+    // Aktifkan tombol jika ukuran dan warna dipilih
+    if (selectedColor && selectedSize) {
+        orderButton.disabled = false; // Aktifkan tombol
+    } else {
+        orderButton.disabled = true; // Nonaktifkan tombol
+    }
+}
+
+// Event listener untuk memperbarui tombol saat ukuran dan warna dipilih
+document.querySelectorAll('input[name="color"]').forEach((radio) => {
+    radio.addEventListener('change', function () {
+        document.getElementById('form_color').value = this.value;
+        validateForm(); // Cek validitas saat warna dipilih
+    });
+});
+
+document.querySelectorAll('input[name="size"]').forEach((radio) => {
+    radio.addEventListener('change', function () {
+        document.getElementById('form_size').value = this.value;
+        validateForm(); // Cek validitas saat ukuran dipilih
+    });
+});
+
+// Nonaktifkan tombol "Order Now" saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function () {
+    disableOrderButton(); // Pastikan tombol dinonaktifkan saat halaman dimuat
+});
+
+
+
+    </script>
 </body>
 </html>
 @endsection
