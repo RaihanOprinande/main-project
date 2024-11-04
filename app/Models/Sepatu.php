@@ -11,17 +11,20 @@ class Sepatu extends Model
     protected $table = 'shoes';
     protected $fillable = ['kode_sepatu','nama', 'harga', 'kategori_id' ,'brands_id', 'stock'];
 
-    public function sepatu_size(){
-        return $this->belongsToMany(Sepatu_size::class);
+    public function sizes(){
+        return $this->belongsToMany(Size::class,'sepatu_sizes','sepatu_id','size_id');
     }
-    public function sepatu_gambar(){
-        return $this->hasMany(Sepatu_gambar::class);
+    public function gambars(){
+        return $this->belongsToMany(sepatui::class,'sepatu_gambars','sepatu_id','sepatui_id');
     }
     public function kategori(){
         return $this->belongsTo(Kategori::class);
     }
     public function brands(){
         return $this->belongsTo(Brands::class);
+    }
+    public function colors(){
+        return $this->belongsTo(Color::class);
     }
 
 }

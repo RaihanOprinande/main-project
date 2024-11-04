@@ -6,13 +6,6 @@
     <title>Footer Example</title>
     <!-- Internal CSS -->
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
 
         .content {
             flex: 1;
@@ -127,7 +120,7 @@
 </div>
 
 <footer class="footer">
-    <div class="container">
+    <div class="container-fluid">
         <div class="footer-border"></div>
         <div class="footer-container">
             <div class="footer-left">

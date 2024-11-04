@@ -57,6 +57,20 @@
     </style>
 
     <div class="detail-container">
+        <tr>
+            <th>No</th>
+            <th>Shoes</th>
+            <th>Harga</th>
+            <th>Kategori</th>
+            <th>Merek</th>
+            <th>Sizes</th>
+            <th>Gambar</th>
+            <th>Aksi</th>
+        </tr>
+
+        <tr>
+            <th>{{ $sepatu->gambar_sepatu }}</th>
+        </tr>
         <h1>Detail Pemesanan</h1>
         <p>Sepatu: {{ $sepatu->nama }}</p>
         <p>Harga per Unit: Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>

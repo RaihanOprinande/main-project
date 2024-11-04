@@ -11,7 +11,7 @@ class Size extends Model
     protected $table = 'sizes';
     protected $fillable = ['size'];
 
-    public function size(){
-        return $this->belongsToMany(Sepatu_size::class);
+    public function sepatu(){
+        return $this->belongsToMany(Sepatu::class,'sepatu_sizes', 'size_id','sepatu_id');
     }
 }

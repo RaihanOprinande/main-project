@@ -157,7 +157,7 @@
     <div class="container">
         <!-- Image Section -->
         <div class="image-section">
-            <img src="{{ asset('images/' . $sepatu->gambar->gambar_sepatu) }}" alt="{{ $sepatu->nama }}">
+            {{-- <img src="{{ asset('images/' . $sepatu->gambar->gambar_sepatu) }}" alt="{{ $sepatu->nama }}"> --}}
         </div>
 
         <!-- Details Section -->
@@ -171,22 +171,11 @@
                 <h4>Select Size:</h4>
                 <p>Size yang tersedia:</p>
                 <div class="size-tersedia">
-                    @foreach ($stocks as $ent)
-                        @if ($ent->kode_sepatu === $sepatu->kode_sepatu)
-                            <p>{{ $ent->size->size }}</p>
-                        @endif
-                    @endforeach
                 </div>
 
-                @foreach ($sizes as $size)
-                    @php
-                        $isAvailable = $stocks->contains(function ($stock) use ($size, $sepatu) {
-                            return $stock->size_id == $size->id && $stock->kode_sepatu == $sepatu->kode_sepatu;
-                        });
-                    @endphp
-
-                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->size }}" {{ $isAvailable ? '' : 'disabled' }}>
-                    <label for="size{{ $size->id }}" style="{{ $isAvailable ? '' : 'color: gray;' }}">{{ $size->size }}</label>
+                @foreach ($sepatu->sizes as $size)
+                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->size }}">
+                    <label for="size{{ $size->id }}" >{{ $size->size }}</label>
                 @endforeach
             </div>
 
@@ -214,8 +203,6 @@
                 @csrf
                 <input type="hidden" name="sepatu_id" value="{{ $sepatu->id }}">
                 <input type="hidden" name="jumlah" id="form_quantity" value="1">
-                <input type="hidden" name="warna" id="form_color" value="">
-                <input type="hidden" name="ukuran" id="form_size" value="">
 
                 <button type="submit" class="btn" id="orderButton" disabled>Order Now</button>
             </form>
@@ -261,7 +248,7 @@ document.querySelectorAll('input[name="size"]').forEach((radio) => {
 });
 
 function disableOrderButton() {
-    document.getElementById('orderButton').disabled = true; // Nonaktifkan tombol
+    document.getElementById('orderButton').disabled = true;
 }
 
 // Validasi pemilihan ukuran dan warna

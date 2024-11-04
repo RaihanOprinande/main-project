@@ -11,7 +11,7 @@ class Color extends Model
     protected $table = 'colors';
     protected $fillable = ['color'];
 
-    public function color(){
+    public function sepatu(){
         return $this->hasMany(Sepatu::class);
     }
 }

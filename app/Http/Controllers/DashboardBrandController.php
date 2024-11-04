@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use App\Models\Merek;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class DashboardBrandController extends Controller
 {
     public function index()
     {
-        $brands = Merek::paginate(10); // Adjust the number as needed
+        $brands = Brands::paginate(10); // Adjust the number as needed
         return view('dashboard.brands.index', compact('brands'));
     }
 
@@ -25,7 +26,7 @@ class DashboardBrandController extends Controller
         'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
-    $brand = new Merek();
+    $brand = new Brands();
     $brand->nama_merek = $validatedData['nama_merek'];
 
     if ($request->hasFile('gambar')) {
@@ -40,13 +41,13 @@ class DashboardBrandController extends Controller
 }
     public function show($id)
     {
-        $brand = Merek::findOrFail($id);
+        $brand = Brands::findOrFail($id);
         return view('dashboard.brands.show', compact('brand'));
     }
 
     public function edit($id)
     {
-        $brand = Merek::findOrFail($id);
+        $brand = Brands::findOrFail($id);
         return view('dashboard.brands.edit', compact('brand'));
     }
 
@@ -57,7 +58,7 @@ class DashboardBrandController extends Controller
         'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
-    $brand = Merek::findOrFail($id);
+    $brand = Brands::findOrFail($id);
     $brand->nama_merek = $request->nama_merek;
 
     if ($request->hasFile('gambar')) {
@@ -84,7 +85,7 @@ class DashboardBrandController extends Controller
 
     public function destroy($id)
     {
-        $brand = Merek::findOrFail($id);
+        $brand = Brands::findOrFail($id);
         $brand->delete();
 
         return redirect()->route('dashboard-brand.index')->with('pesan', 'Brand berhasil dihapus!');

@@ -15,6 +15,6 @@ class sepatui extends Model
         'gambar_sepatu_kiri'
     ];
     public function gambar(){
-        return $this->belongsTo(Sepatu_gambar::class);
+        return $this->belongsToMany(Sepatu::class,'sepatu_gambars','sepatui_id','sepatu_id');
     }
 }

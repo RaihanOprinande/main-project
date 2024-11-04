@@ -28,8 +28,6 @@
         <th>Merek</th>
         <th>Sizes</th>
         <th>Gambar</th>
-
-
         <th>Aksi</th>
     </tr>
     @foreach ($sepatus as $sepatu)

@@ -15,19 +15,17 @@ class SepatuController extends Controller
     public function index()
     {
         $mereks = Brands::all();
-        // $sepatus = Sepatu::with('sepatu_gambars')->get();
         $sepatus = Sepatu::all();
         $sizes = Size::all();
 
     return view('home', compact('mereks', 'sepatus', 'sizes'));
     }
     public function show($id) {
-        $sepatu = Sepatu::find($id);
-        $sizes = Size::all();
-        $kode_sepatu = Sepatu::find('kode_sepatu');
-        $stocks = Sepatu::with(['gambar', 'kategori', 'color', 'merek'])->get();
+        $sepatu = Sepatu::with('sizes','gambars')->find($id);
+        // $sizes = Size::all();
+        // $stocks = Sepatu::with(['gambars', 'kategori', 'color', 'merek'])->get();
         // $sepatus = Sepatu::with(['size'])->find('$id');
-        return view('sepatu.detail', compact('sepatu','stocks','sizes','kode_sepatu'));
+        return view('sepatu.detail', compact('sepatu'));
     }
     public function aboutus()
     {
@@ -48,13 +46,14 @@ public function filterByKategori($kategori)
 public function pemesanan(Request $request)
 {
     $sepatu = Sepatu::find($request->sepatu_id);
+    $gambar = $request->gambar;
     $jumlah = $request->jumlah;
     $warna = $request->warna;
     $ukuran = $request->ukuran;
     $totalHarga = $jumlah * $sepatu->harga;
 
 
-    return view('sepatu.pemesanan', compact('sepatu', 'jumlah', 'warna', 'ukuran', 'totalHarga'));
+    return view('sepatu.pemesanan', compact('sepatu', 'jumlah', 'warna', 'ukuran', 'totalHarga','gambar'));
 }
 
 public function prosesBayar(Request $request)
@@ -66,7 +65,7 @@ public function prosesBayar(Request $request)
     ]);
 
     // Mengambil data sepatu beserta warna dan ukuran
-    $sepatu = Sepatu::with(['color', 'size'])->find($request->id);
+    $sepatu = Sepatu::with(['colors', 'sizes'])->find($request->id);
     $totalHarga = $sepatu->harga * $request->jumlah; // Menghitung total harga
 
     // Menyimpan bukti bukti pembayaran
