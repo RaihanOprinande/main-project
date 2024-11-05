@@ -5,38 +5,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemesanan extends Model
+class Pemasukan extends Model
 {
     use HasFactory;
-    protected $table = 'orders';
+    protected $table = 'incomes';
 
-    // Tentukan kolom yang dapat diisi
+    // Tentukan kolom-kolom yang bisa diisi secara massal
     protected $fillable = [
         'sepatu_id',
         'harga',
-
         'color_id',
         'size_id',
         'jumlah',
         'total',
-        'bukti',
-        'status',
     ];
 
-    public function getStatusTextAttribute()
-    {
-        return $this->status === 'pending' ? 'Pesanan Sedang Dibuat' : 'Pesanan Sukses';
-    }
-
+    // Relasi dengan model Sepatu
     public function sepatu()
     {
         return $this->belongsTo(Sepatu::class);
     }
 
-    public function color(){
+    // Relasi dengan model Color (Warna)
+    public function color()
+    {
         return $this->belongsTo(Color::class);
     }
-    public function size(){
+
+    // Relasi dengan model Size (Ukuran)
+    public function size()
+    {
         return $this->belongsTo(Size::class);
     }
 }

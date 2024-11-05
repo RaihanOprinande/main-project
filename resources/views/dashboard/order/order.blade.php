@@ -1,78 +1,81 @@
 @extends('dashboard.layouts.main')
-
 @section('content')
-<h1>Orders</h1>
 
-<table class="table table-bordered">
-    <tr>
-        <th>No</th>
-        <th>Sepatu</th>
-        <th>Harga</th>
-        <th>Warna</th>
-        <th>Size</th>
-        <th>Jumlah</th>
-        <th>Total</th>
-        <th>Bukti</th>
-        <th>Konfirmasi</th>
-    </tr>
-    @foreach ($orders as $order)
-    <tr>
-        <td>{{ $orders->firstItem() + $loop->index }}</td>
-        <td>{{ $order->sepatu->nama }}</td>
-        <td>{{ number_format($order->harga, 0, ',', '.') }}</td>
-        <td>{{ $order->color->color }}</td>
-        <td>{{ $order->size->size }}</td>
-        <td>{{ $order->jumlah }}</td>
-        <td>{{ number_format($order->total, 0, ',', '.') }}</td>
-        <td>
-            @if($order->bukti)
-                <img src="{{ asset('storage/' . $order->bukti) }}" alt="Bukti Pembayaran" style="width: 100px; height: auto; cursor: pointer;"
-                     data-bs-toggle="modal" data-bs-target="#imageModal{{ $order->id }}">
-                <!-- Modal -->
-                <div class="modal fade" id="imageModal{{ $order->id }}" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="imageModalLabel">Bukti Pembayaran</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="{{ asset('storage/' . $order->bukti) }}" alt="Bukti Pembayaran" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @else
-                Tidak ada bukti
-            @endif
-        </td>
-        <td class="text-nowrap">
+<h1>Order</h1>
 
-            <a href="/dashboard-order/{{$order->id}}/edit" class="btn btn-success">Konfirmasi</a>
-            <form action="/dashboard-order/{{$order->id}}" method="post" class="d-inline">
-                @method('DELETE')
-                @csrf
-                <button class="btn btn-danger btn-sm" onclick="return confirm('yakin akan menghapus data ini?')">hapus</button>
-            </form>
-        </td>
-    </tr>
-    @endforeach
+<table class="table table-bordered table-striped table-hover text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>No</th>
+            <th>Sepatu</th>
+            <th>Harga</th>
+            <th>Warna</th>
+            <th>Ukuran</th>
+            <th>Jumlah</th>
+            <th>Total</th>
+            <th>Bukti</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($orders as $order)
+        <tr>
+            <td>{{ $orders->firstItem() + $loop->index }}</td>
+            <td>{{ $order->sepatu->nama }}</td>
+            <td>Rp {{ number_format($order->harga, 0, ',', '.') }}</td>
+            <td>{{ $order->color->color }}</td>
+            <td>{{ $order->size->size }}</td>
+            <td>{{ $order->jumlah }}</td>
+            <td>Rp {{ number_format($order->total, 0, ',', '.') }}</td>
+            <td>
+                @if($order->bukti)
+                    <a href="{{ asset('storage/' . $order->bukti) }}" target="_blank">
+                        <img src="{{ asset('storage/' . $order->bukti) }}" alt="Bukti Pembayaran" style="width: 60px; height: auto; cursor: pointer;">
+                    </a>
+                @else
+                    <span class="text-muted">Tidak ada bukti</span>
+                @endif
+            </td>
+            <td>
+                <span class="badge {{ $order->status == 'pending' ? 'bg-warning' : 'bg-success' }}">
+                    {{ $order->status == 'pending' ? 'Pesanan Sedang Dibuat' : 'Pesanan Sukses' }}
+                </span>
+            </td>
+            <td>
+                <form action="{{ route('orders.confirm', $order->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Konfirmasi pesanan ini?')">Konfirmasi</button>
+                </form>
+
+                <form action="/dashboard-order/{{ $order->id }}" method="POST" class="d-inline">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin akan menghapus data ini?')">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
 </table>
 
-{{ $orders->links() }}
+<div class="d-flex justify-content-center mt-3">
+    {{ $orders->links() }}
+</div>
 
-<!-- CSS untuk gambar dalam modal -->
+<!-- Modal styling for enlarged image -->
 <style>
     .modal-body img {
         max-width: 100%;
         height: auto;
         display: block;
-        margin: 0 auto; /* Pusatkan gambar */
+        margin: 0 auto;
     }
 </style>
 
+<!-- Script for Bootstrap modal initialization -->
 <script>
-    // Menginisialisasi modal saat halaman dimuat
     $(document).ready(function() {
         $('.modal').on('shown.bs.modal', function () {
             console.log('Modal dibuka');
@@ -83,4 +86,5 @@
         });
     });
 </script>
+
 @endsection

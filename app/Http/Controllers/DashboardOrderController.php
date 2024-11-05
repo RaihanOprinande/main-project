@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pemasukan;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+
 
 class DashboardOrderController extends Controller
 {
@@ -19,6 +21,8 @@ class DashboardOrderController extends Controller
         Pemesanan::destroy($id);
         return redirect('dashboard-order')->with('pesan','Data berhasil dihapus');
      }
+
+     
 
 
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemesanan extends Model
+class History extends Model
 {
     use HasFactory;
     protected $table = 'orders';
@@ -19,14 +19,9 @@ class Pemesanan extends Model
         'size_id',
         'jumlah',
         'total',
-        'bukti',
         'status',
     ];
-
-    public function getStatusTextAttribute()
-    {
-        return $this->status === 'pending' ? 'Pesanan Sedang Dibuat' : 'Pesanan Sukses';
-    }
+    
 
     public function sepatu()
     {
@@ -39,4 +34,8 @@ class Pemesanan extends Model
     public function size(){
         return $this->belongsTo(Size::class);
     }
+    public function order(){
+        return $this->belongsTo(Pemesanan::class);
+    }
+
 }

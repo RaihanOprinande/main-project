@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Sepatu;
 use App\Models\Merek;
+use App\Models\Pemasukan;
 use App\Models\Size;
 use App\Models\Pemesanan;
 
@@ -81,8 +83,62 @@ public function prosesBayar(Request $request)
         'bukti' => $path,
     ]);
 
-    return redirect()->route('sepatu.home')->with('success', 'Pemesanan berhasil disimpan');
+
+
+    return redirect()->route('riwayat.pemesanan')->with('success', 'Pemesanan berhasil disimpan');
 }
+public function riwayatPemesanan()
+{
+    $histories = History::with(['sepatu', 'color', 'size','order'])->paginate(10); // Menggunakan pagination
+    return view('sepatu.riwayat-pemesanan', compact('histories'));
+}
+
+public function confirmOrder($id)
+{
+    // Temukan pesanan berdasarkan ID
+    $order = Pemesanan::findOrFail($id);
+
+    // Update status pesanan menjadi "diproses"
+    $order->status = 'processed';
+    $order->save();
+
+    // Simpan data ke tabel pemasukan
+    Pemasukan::create([
+        'sepatu_id' => $order->sepatu_id,
+        'harga' => $order->harga,
+        'color_id' => $order->color_id,
+        'size_id' => $order->size_id,
+        'jumlah' => $order->jumlah,
+        'total' => $order->total,
+    ]);
+
+    // Redirect dengan pesan sukses
+    return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui dan data telah disimpan ke tabel pemasukan.');
+}
+
+public function history($id)
+{
+    // Temukan pesanan berdasarkan ID
+    $order = Pemesanan::findOrFail($id);
+
+
+
+    // Simpan data ke tabel pemasukan
+    History::create([
+        'sepatu_id' => $order->sepatu_id,
+        'harga' => $order->harga,
+        'color_id' => $order->color_id,
+        'size_id' => $order->size_id,
+        'jumlah' => $order->jumlah,
+        'total' => $order->total,
+        'status' => $order->status,
+    ]);
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('riwayat.pemesanan')->with('success', 'Pemesanan berhasil disimpan');
+}
+
+
 
 
 
