@@ -33,7 +33,7 @@ class SepatuController extends Controller
     {
         $aboutus = Sepatu::all(); // Ambil semua data sepatu
         return view('sepatu.aboutus', compact('aboutus'));
-    }
+    } 
 
 
 
