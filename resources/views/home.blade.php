@@ -222,7 +222,6 @@
                 <div class="isi-women">
                     <div class="gambar-women">
                         <a href="{{ route('sepatu.kategori', ['kategori' => '2']) }}">
-
                             <img src="/images/miki_matsubara.jpeg" alt="">
                             <div class="text-kategori">
                                 view women's shoes
@@ -237,31 +236,13 @@
         <!-- BRANDS -->
         <div class="brands">
             <div class="group-brands">
+             @foreach ($mereks as $brand )
                 <div class="solo-brand">
                     <div class="text">
-                        ADIDAS
+                        {{ strtoupper($brand->nama_brand) }}
                     </div>
                 </div>
-                <div class="solo-brand">
-                    <div class="text">
-                        ADIDAS
-                    </div>
-                </div>
-                <div class="solo-brand">
-                    <div class="text">
-                        ADIDAS
-                    </div>
-                </div>
-                <div class="solo-brand">
-                    <div class="text">
-                        ADIDAS
-                    </div>
-                </div>
-                <div class="solo-brand">
-                    <div class="text">
-                        ADIDAS
-                    </div>
-                </div>
+            @endforeach
             </div>
         </div>
 

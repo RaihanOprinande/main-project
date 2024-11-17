@@ -57,8 +57,6 @@
 </head>
 <body>
     <div class="container">
-
-
         <!-- Row Bootstrap untuk grid card -->
         <div class="row">
             @forelse($sepatus as $sepatu)
