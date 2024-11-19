@@ -2,185 +2,7 @@
 @section('content')
 <title>Step-off</title>
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
-    <style>
-        /* Gaya untuk judul */
-        h1 {
-            margin-top: 100px;
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        /* heroes */
-        .heroes {
-            background-color: rgb(204, 204, 204);
-            object-fit: cover;
-            height: 700px;
-            margin-bottom:20px;
-            margin-top: 70px;
-        }
-        .isi-heroes{
-            margin-top: 55px;
-        }
-        .gambar-heroes{
-            margin-top: 55px
-        }
-        .list-page{
-            width: 200px;
-            height: 40px;
-            background-color: white;
-            text-align: center;
-            text-justify: center;
-            margin-left: 25px;
-            border-radius: 5px;
-            color: black;
-            border-color: black;
-        }
-        a{
-            text-decoration: none;
-            color: black
-        }
-
-
-        /* Produk */
-        .product-card {
-            flex: 0 0 18rem;
-            max-width: 18rem;
-            margin: 0 5px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            max-height: 440px;
-        }
-
-        /* Konten dalam card */
-        .card-body {
-            color: black;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-        }
-
-        .card-title {
-            margin-bottom: 0; /* Menghilangkan margin bawah */
-        }
-
-        .product-card:hover {
-            transform: scale(1.05);
-        }
-
-        .card a {
-            color: black;
-            text-decoration: none;
-        }
-
-        .card a:hover {
-            color: gray;
-        }
-        /* BRANDS */
-        .brands{
-            /* align-items: center; */
-            margin-bottom: 80px;
-        }
-        .group-brands{
-            justify-content: center;
-        }
-        .solo-brand {
-            cursor: pointer;
-            border: 1px solid black;
-            height: 65px;
-            width: 180px;
-            margin-right: 20px;
-            align-content: center;
-            justify-items: center;
-            border-radius: 8px;
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .solo-brand:hover  {
-            border-color: white;
-            background-color: black;
-            color: white;
-            transform: translateY(-5px);
-        }
-        .group-brands{
-            display: flex;
-            text-align: center;
-        }
-
-        /* KATEGORI */
-        .kategori {
-            /* display: flex;
-            flex-direction: column;
-            align-items: center; */
-            margin-bottom: 80px
-        }
-        .sex{
-            display: flex;
-        }
-
-        .gambar-men, .gambar-women {
-            position: relative;
-            /* margin-bottom: 200px; */
-        }
-
-        .gambar-men img, .gambar-women img {
-            height: 400px;
-            width: 770px;
-            /* border-radius: 10px; */
-            object-fit: cover;
-        }
-        .gambar-men img{
-            align-content: flex-start;
-
-        }
-
-        .text-kategori {
-            position: absolute;
-            bottom: 45%;
-            left: 50%;
-            transform: translate(-50%, 50%);
-            color: white;
-            width: 220px;
-            height: 50px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            font-size: 24px
-            }
-
-        .gambar-men:hover img, .gambar-women:hover img {
-            filter: brightness(0.5);
-
-        }
-
-        .gambar-men:hover .text-kategori, .gambar-women:hover .text-kategori {
-            opacity: 1;
-        }
-
-        /* LIST SEPATU */
-        .list-sepatu{
-        }
-        .konten-list{
-            display: flex;
-            justify-content: center;
-        }
-        .isi-list{
-            margin-right: 20px;
-            cursor: pointer;
-            border: 1px solid rgb(186, 186, 186);
-        }
-        .isi-list:hover{
-
-
-        }
-
-
-
-    </style>
+    <link rel="stylesheet" href="/css/home.css">
 
 <body>
     <div class="container-fluid">
@@ -234,9 +56,13 @@
     </div>
 
         <!-- BRANDS -->
+        {{-- <a href="{{ route('/sepatu' }}"> --}}
+
+        </a>
         <div class="brands">
             <div class="group-brands">
              @foreach ($mereks as $brand )
+             <a href="/merek/{{ $brand->id }}/sepatu">
                 <div class="solo-brand">
                     <div class="text-uppercase">
                         {{ ($brand->nama_brand) }}
@@ -272,7 +98,7 @@
         <div class="list-sepatu">
             <div class="konten-list ">
                 @foreach ($sepatus->take(5) as $sepatu)
-                <a href="/sepatu/{{ $sepatu->id }}" ></i>
+                <a href="/sepatu/{{ $sepatu->id }}">
                 <div class="isi-list ">
                         <img src="{{ asset('images/' . $sepatu-> gambar_sepatu) }}" alt="" height="300px" width="250px">
                         <h6 class="ms-1">{{ $sepatu->kategori->nama }}</h6>

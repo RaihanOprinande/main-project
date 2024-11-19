@@ -42,8 +42,8 @@ class ListController extends Controller
 
 public function sepatuByMerek($id)
 {
-    $mereks = Brands::all(); // Jika ingin tetap menampilkan merek di halaman
-    $sepatus = Sepatu::where('merek_id', $id)->get(); // Mengambil sepatu berdasarkan merek
+    $mereks = Brands::all();
+    $sepatus = Sepatu::where('merek_id', $id)->get();
 
     return view('sepatu.list', compact('mereks', 'sepatus'));
 }

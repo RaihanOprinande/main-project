@@ -22,18 +22,18 @@
         .nav-link::after {
             content: "";
             position: absolute;
-            left: 50%; /* Awal dari tengah */
+            left: 50%;
             bottom: 0;
             width: 0;
             height: 2px;
             background-color: black;
-            transition: width 0.3s; /* Animasikan 'left' juga */
-            transform: translateX(-50%); /* Agar posisi awal benar-benar di tengah */
+            transition: width 0.3s;
+            transform: translateX(-50%);
         }
 
         .nav-link:hover::after {
-            left: 0; /* Geser kiri saat animasi berlangsung */
-            transform: translateX(0); /* Reset transformasi saat hover */
+            left: 0;
+            transform: translateX(0);
         }
         .btn-search{
             color: black;
@@ -54,7 +54,7 @@
         <div class="head mb-2">
             @include('layouts.header')
         </div>
-        <div class=" main-content mx-3">
+        <div class=" main-content">
             @yield('content')
         </div>
         <div class="footer">

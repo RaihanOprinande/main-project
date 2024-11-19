@@ -23,7 +23,7 @@ Route::get('/sepatu/{id}', [SepatuController::class, 'show'])->name('sepatu.deta
 Route::get('/aboutus', [SepatuController::class, 'aboutus']);
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('list',[ListController::class,'index'])->name('sepatu.list');
-Route::get('/merek/{id}/sepatu', [ListController::class, 'sepatuByMerek'])->name('sepatu.byMerek');
+Route::get('/merek/{id}/sepatu', [ListController::class, 'sepatuByMerek']);
 Route::get('/sepatu/kategori/{kategori}', [SepatuController::class, 'filterByKategori'])->name('sepatu.kategori');
 Route::get('list-search',[ListController::class,'search']);
 Route::get('/dashboard',[DashboardAdminController::class, 'Dashboard'])->middleware('auth');
