@@ -48,6 +48,12 @@
                   Orders
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-income">
+                  <i class="bi bi-person-fill"></i>
+                  Incomes
+                </a>
+              </li>
         </ul>
 
         <hr class="my-3">

@@ -18,6 +18,12 @@
           <li class="nav-item">
             <a class="nav-link active" href="/aboutus">About Us</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/riwayat-pemesanan">Riwayat</a>
+          </li>
+
+
+
         </ul>
         <ul class="navbar-nav">
 
