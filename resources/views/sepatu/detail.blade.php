@@ -10,16 +10,16 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            /* background-color: #f7f7f7; */
             margin: 0;
             padding: 0;
         }
 
         .container {
-            max-width: 1200px;
+            /* max-width: 1200px; */
             margin: 50px auto;
             display: flex;
-            gap: 20px;
+            /* gap: 20px; */
         }
 
         /* Image Section */
@@ -157,7 +157,7 @@
     <div class="container">
         <!-- Image Section -->
         <div class="image-section">
-            {{-- <img src="{{ asset('images/' . $sepatu->gambar->gambar_sepatu) }}" alt="{{ $sepatu->nama }}"> --}}
+            <img src="{{ asset('images/' . $sepatu->gambar_sepatu) }}" alt="{{ $sepatu->nama }}">
         </div>
 
         <!-- Details Section -->

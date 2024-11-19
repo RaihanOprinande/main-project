@@ -238,8 +238,8 @@
             <div class="group-brands">
              @foreach ($mereks as $brand )
                 <div class="solo-brand">
-                    <div class="text">
-                        {{ strtoupper($brand->nama_brand) }}
+                    <div class="text-uppercase">
+                        {{ ($brand->nama_brand) }}
                     </div>
                 </div>
             @endforeach
@@ -252,15 +252,36 @@
         {{-- <a href="{{ url('/list') }}" class="float-right text-dark font-weight-bold">Show All</a> --}}
 
         <!-- LIST SEPATU -->
-        <div class="list-sepatu">
-            <div class="konten-list">
-                <div class="isi-list">
-                    <img src="/images/sepatu3.jpeg" alt="" height="300px" width="250px">
-                    <h6 class="ms-1">pria</h6>
-                    <h5 class="ms-1">sepatu ope</h5>
-                    <h6 class="ms-1">Rp. 400.000</h6>
+        {{-- <div class="row mt-5">
+            @foreach($sepatus->take(4) as $sepatu) <!-- Mengambil 4 item pertama -->
+                <div class="col-md-3 col-sm-6 mb-4" {{ $sepatu->stock > 0 ? '' : 'disabled-card' }}>
+                    <div class="card h-100" >
+                        <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}">
+                            <img src="{{ asset('images/' . $sepatu-> gambar_sepatu) }}" class="card-img-top" alt="{{ $sepatu-> nama }}">
+                            <div class="card-body" >
+                                <h5 class="card-title">{{ $sepatu->nama }}</h5>
+                                <p class="card-text">{{ $sepatu-> kategori->nama }}
+                                </p></p>
+                                <p>Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="isi-list">
+            @endforeach
+        </div> --}}
+        <div class="list-sepatu">
+            <div class="konten-list ">
+                @foreach ($sepatus->take(5) as $sepatu)
+                <a href="/sepatu/{{ $sepatu->id }}" ></i>
+                <div class="isi-list ">
+                        <img src="{{ asset('images/' . $sepatu-> gambar_sepatu) }}" alt="" height="300px" width="250px">
+                        <h6 class="ms-1">{{ $sepatu->kategori->nama }}</h6>
+                        <h5 class="ms-1">{{ $sepatu->nama }}</h5>
+                        <h6 class="ms-1">RP {{ number_format($sepatu->harga, 0, ',','.') }}</h6>
+                    </div>
+                </a>
+                @endforeach
+                {{-- <div class="isi-list">
                     <img src="/images/sepatu4.jpeg" alt="" height="300px" width="250px">
                     <h6 class="ms-1">pria</h6>
                     <h5 class="ms-1">sepatu wahyu</h5>
@@ -283,7 +304,7 @@
                     <h6>wanita</h6>
                     <h5>sepatu si ini</h5>
                     <h6>Rp. 400.000</h6>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
