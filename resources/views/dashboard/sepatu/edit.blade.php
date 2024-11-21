@@ -87,9 +87,9 @@
             <option value="">Pilih Gambar</option>
             @foreach ($gambars as $gambar)
             @if (old('gambar_sepatu',$sepatus->gambar_sepatu) == $gambar->id)
-            <option value="{{ $gambar->id}}" selected>{{ $gambar->gambar_sepatu}}</option>
+            <option value="{{ $gambar->gambar_sepatu}}" selected>{{ $gambar->gambar_sepatu}}</option>
             @else
-            <option value="{{ $gambar->id}}">{{ $gambar->gambar_sepatu}}</option>
+            <option value="{{ $gambar->gambar_sepatu}}">{{ $gambar->gambar_sepatu}}</option>
             @endif
 
             @endforeach

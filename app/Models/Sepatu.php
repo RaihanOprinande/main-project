@@ -14,9 +14,9 @@ class Sepatu extends Model
     public function sizes(){
         return $this->belongsToMany(Size::class,'sepatu_sizes','sepatu_id','size_id');
     }
-    public function gambars(){
-        return $this->belongsToMany(sepatui::class,'sepatu_gambars','sepatu_id','sepatui_id');
-    }
+    // public function gambars(){
+    //     return $this->belongsToMany(sepatui::class,'sepatu_gambars','sepatu_id','sepatui_id');
+    // }
     public function kategori(){
         return $this->belongsTo(Kategori::class);
     }

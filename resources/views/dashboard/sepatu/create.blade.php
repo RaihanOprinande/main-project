@@ -67,16 +67,26 @@
             @endforeach
         </select>
       </div>
-
       <div class="mb-3">
+        <label for="gambar_sepatu" class="form-label">Gambar</label>
+        <input type="text" class="form-control @error('gambar_sepatu') is-invalid @enderror" name="gambar_sepatu" id="gambar_sepatu" value="{{ old('gambar_sepatu') }}">
+        @error('gambar_sepatu')
+           <div class="invalid-feedback">
+            {{ $message }}
+           </div>
+         @enderror
+
+      </div>
+
+      {{-- <div class="mb-3">
         <label class="form-label">Gambar</label>
         <select name="gambar_sepatu" class="form-select">
             <option value="">Pilih Gambar</option>
             @foreach ($gambars as $gambar)
-            <option value="{{ $gambar->id}}">{{ $gambar->gambar_sepatu}}</option>
+            <option value="{{ $gambar->gambar_sepatu}}">{{ $gambar->gambar_sepatu}}</option>
             @endforeach
         </select>
-      </div>
+      </div> --}}
 
 
 
