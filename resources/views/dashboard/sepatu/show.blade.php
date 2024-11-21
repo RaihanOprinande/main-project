@@ -39,10 +39,10 @@
             <tr>
               <th scope="row">Gambar</th>
               <td>
-                <img src="{{ asset('images/' . $sepatus->gambar_sepatu) }}"
-                     class="card-img-top"
-                     alt="{{ $sepatus->gambar_sepatu }}"
-                     style="width: 300px; height: auto; object-fit: cover;">
+                <img src="{{ asset('storage/' . $sepatus->gambar_sepatu) }}"
+     class="card-img-top"
+     alt="{{ $sepatus->gambar_sepatu }}"
+     style="width: 300px; height: auto; object-fit: cover;">
               </td>
             </tr>
 

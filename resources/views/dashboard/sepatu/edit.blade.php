@@ -9,7 +9,7 @@
     <div class="col-6">
 
 
-<form action="/dashboard-sepatu/{{$sepatus->id}}" method="post">
+<form action="/dashboard-sepatu/{{$sepatus->id}}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <div class="mb-3">
@@ -80,21 +80,14 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Gambar</label>
-        <select name="gambar_sepatu" class="form-select @error('gambar_sepatu') is-invalid
-
-        @enderror" >
-            <option value="">Pilih Gambar</option>
-            @foreach ($gambars as $gambar)
-            @if (old('gambar_sepatu',$sepatus->gambar_sepatu) == $gambar->id)
-            <option value="{{ $gambar->gambar_sepatu}}" selected>{{ $gambar->gambar_sepatu}}</option>
-            @else
-            <option value="{{ $gambar->gambar_sepatu}}">{{ $gambar->gambar_sepatu}}</option>
-            @endif
-
-            @endforeach
-        </select>
-      </div>
+        <label for="gambar_sepatu" class="form-label">Gambar</label>
+        <input type="file" class="form-control @error('gambar_sepatu') is-invalid @enderror" name="gambar_sepatu" id="gambar_sepatu" value="{{ old('gambar_sepatu',$sepatus->gambar_sepatu) }}">
+        @error('gambar_sepatu')
+           <div class="invalid-feedback">
+            {{ $message }}
+           </div>
+         @enderror
+    </div>
 
 
 

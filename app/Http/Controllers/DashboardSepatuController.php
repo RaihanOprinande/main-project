@@ -28,6 +28,8 @@ class DashboardSepatuController extends Controller
         $sizes = Size::all();
 
 
+
+
         return view('dashboard.sepatu.create',compact('kategoris','mereks','sizes'));
      }
 
@@ -38,10 +40,14 @@ class DashboardSepatuController extends Controller
          'nama' => 'required',
          'harga' => 'required',
          'kategori_id' => 'required',
-         'gambar_sepatu' => 'required',
+         'gambar_sepatu' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
          'brands_id' => 'required',
          'qty' => 'required',
         ]);
+
+        if ($request->file('gambar_sepatu')) {
+            $validated['gambar_sepatu'] = $request->file('gambar_sepatu')->store('images','public');
+        }
 
         //dd($validated);
 
@@ -70,6 +76,10 @@ class DashboardSepatuController extends Controller
          'brands_id' => 'required',
          'qty' => 'required',
         ]);
+
+        if ($request->file('gambar_sepatu')) {
+            $validated['gambar_sepatu'] = $request->file('gambar_sepatu')->store('images','public');
+        }
 
            Sepatu::where('id', $id)->update($validated);
            return redirect('dashboard-sepatu')->with('pesan','Data berhasil diubah');
