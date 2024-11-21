@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sepatu_id');
             $table->foreignId('size_id');
-            $table->integer('qty');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
