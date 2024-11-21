@@ -2,6 +2,9 @@
 
 @section('content')
     <h1 class="mb-4">Data Pemasukan</h1>
+    <a href="{{ route('dashboard.income.cetakPdf') }}" class="btn btn-success mb-3">Cetak PDF</a>
+
+
 
     <table class="table table-bordered table-striped table-hover text-center">
         <thead class="table-dark">

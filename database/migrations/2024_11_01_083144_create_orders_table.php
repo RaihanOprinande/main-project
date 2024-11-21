@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->foreignId('sepatu_id');
             $table->char('harga');
-            $table->foreignId('kategori_id');
-            $table->foreignId('gambar_id');
-            $table->foreignId('merek_id');
             $table->foreignId('color_id');
             $table->foreignId('size_id');
             $table->char('jumlah');
             $table->char('total');
+            $table->string('bukti');
 
             $table->timestamps();
         });
@@ -33,5 +31,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('orders');
-    }
+}
 };

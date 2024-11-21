@@ -50,6 +50,7 @@ Route::get('/riwayat-pemesanan', [SepatuController::class, 'riwayatPemesanan'])-
 Route::put('/dashboard-order/{id}/confirm', [SepatuController::class, 'confirmOrder'])->name('orders.confirm');
 
 
+Route::get('/dashboard/income/cetak-pdf', [DashboardIncomesController::class, 'cetakPdf'])->name('dashboard.income.cetakPdf');
 
 
 
