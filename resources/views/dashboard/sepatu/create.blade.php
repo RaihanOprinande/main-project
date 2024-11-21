@@ -9,7 +9,7 @@
     <div class="col-6">
 
 
-<form action="/dashboard-sepatu" method="post">
+<form action="/dashboard-sepatu" method="post" enctype="multipart/form-data">
     @csrf
 
     <div class="mb-3">
@@ -69,14 +69,14 @@
       </div>
       <div class="mb-3">
         <label for="gambar_sepatu" class="form-label">Gambar</label>
-        <input type="text" class="form-control @error('gambar_sepatu') is-invalid @enderror" name="gambar_sepatu" id="gambar_sepatu" value="{{ old('gambar_sepatu') }}">
+        <input type="file" class="form-control @error('gambar_sepatu') is-invalid @enderror" name="gambar_sepatu" id="gambar_sepatu">
         @error('gambar_sepatu')
            <div class="invalid-feedback">
             {{ $message }}
            </div>
          @enderror
+    </div>
 
-      </div>
 
       {{-- <div class="mb-3">
         <label class="form-label">Gambar</label>
