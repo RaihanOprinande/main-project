@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('kode_sepatu');
             $table->string('nama');
             $table->char('harga');
+            $table->char('gambar_sepatu');
             $table->string('qty');
             $table->foreignId('kategori_id');
             $table->foreignId('brands_id');
