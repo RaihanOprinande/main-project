@@ -157,7 +157,7 @@
     <div class="container">
         <!-- Image Section -->
         <div class="image-section">
-            <img src="{{ asset('images/' . $sepatu->gambar_sepatu) }}" alt="{{ $sepatu->nama }}">
+            <img src="{{ asset('images/' . $sepatu->gambar_sepatu) }}" alt="">
         </div>
 
         <!-- Details Section -->

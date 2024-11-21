@@ -18,12 +18,8 @@
                 Sepatu
               </a>
             </li>
-              <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-user">
-                <i class="bi bi-person-fill"></i>
-                User
-              </a>
-            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-brand">
                   <i class="bi bi-person-fill"></i>
@@ -48,6 +44,16 @@
                   Orders
                 </a>
               </li>
+              @can('admin')
+              <hr>
+
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-user">
+                    <i class="bi bi-person-fill"></i>
+                    User
+                </a>
+            </li>
+            @endcan
         </ul>
 
         <hr class="my-3">

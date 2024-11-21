@@ -64,15 +64,15 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Merek</label>
-        <select name="merek_id" class="form-select @error('merek_id') is-invalid
+        <select name="brands_id" class="form-select @error('brands') is-invalid
 
         @enderror" >
-            <option value="">Pilih Prodi</option>
+            <option value="">Pilih Merek</option>
             @foreach ($mereks as $merek)
-            @if (old('merek_id',$sepatus->merek_id) == $merek->id)
-            <option value="{{ $merek->id}}" selected>{{ $merek->nama_merek}}</option>
+            @if (old('brands',$sepatus->brands) == $merek->id)
+            <option value="{{ $merek->id}}" selected>{{ $merek->nama_brand}}</option>
             @else
-            <option value="{{ $merek->id}}">{{ $merek->nama_merek}}</option>
+            <option value="{{ $merek->id}}">{{ $merek->nama_brand}}</option>
             @endif
 
             @endforeach
@@ -81,12 +81,12 @@
 
       <div class="mb-3">
         <label class="form-label">Gambar</label>
-        <select name="gambar_id" class="form-select @error('gambar_id') is-invalid
+        <select name="gambar_sepatu" class="form-select @error('gambar_sepatu') is-invalid
 
         @enderror" >
             <option value="">Pilih Gambar</option>
             @foreach ($gambars as $gambar)
-            @if (old('gambar_id',$sepatus->gambar_id) == $gambar->id)
+            @if (old('gambar_sepatu',$sepatus->gambar_sepatu) == $gambar->id)
             <option value="{{ $gambar->id}}" selected>{{ $gambar->gambar_sepatu}}</option>
             @else
             <option value="{{ $gambar->id}}">{{ $gambar->gambar_sepatu}}</option>
@@ -95,43 +95,13 @@
             @endforeach
         </select>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Warna</label>
-        <select name="color_id" class="form-select @error('size_id') is-invalid
 
-        @enderror" >
-            <option value="">Pilih Warna</option>
-            @foreach ($colors as $color)
-            @if (old('color_id',$sepatus->color_id) == $color->id)
-            <option value="{{ $color->id}}" selected>{{ $color->color}}</option>
-            @else
-            <option value="{{ $color->id}}">{{ $color->color}}</option>
-            @endif
 
-            @endforeach
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Ukuran</label>
-        <select name="size_id" class="form-select @error('size_id') is-invalid
-
-        @enderror" >
-            <option value="">Pilih Ukuran</option>
-            @foreach ($sizes as $size)
-            @if (old('size_id',$sepatus->color_id) == $size->id)
-            <option value="{{ $size->id}}" selected>{{ $size->size}}</option>
-            @else
-            <option value="{{ $size->id}}">{{ $size->size}}</option>
-            @endif
-
-            @endforeach
-        </select>
-      </div>
 
       <div class="mb-3">
-        <label for="stock" class="form-label">Stock</label>
-        <input type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock" value="{{ old('stock',$sepatus->stock) }}">
-        @error('stock')
+        <label for="qty" class="form-label">Stock</label>
+        <input type="text" class="form-control @error('qty') is-invalid @enderror" name="qty" id="qty" value="{{ old('qty',$sepatus->qty) }}">
+        @error('qty')
            <div class="invalid-feedback">
             {{ $message }}
            </div>

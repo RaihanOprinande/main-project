@@ -60,46 +60,30 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Merek</label>
-        <select name="merek_id" class="form-select">
+        <select name="brands_id" class="form-select">
             <option value="">Pilih Merek</option>
             @foreach ($mereks as $merek)
-            <option value="{{ $merek->id}}">{{ $merek->nama_merek}}</option>
+            <option value="{{ $merek->id}}">{{ $merek->nama_brand}}</option>
             @endforeach
         </select>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Gambar</label>
-        <select name="gambar_id" class="form-select">
+        <select name="gambar_sepatu" class="form-select">
             <option value="">Pilih Gambar</option>
             @foreach ($gambars as $gambar)
             <option value="{{ $gambar->id}}">{{ $gambar->gambar_sepatu}}</option>
             @endforeach
         </select>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Warna</label>
-        <select name="color_id" class="form-select">
-            <option value="">Pilih Warna</option>
-            @foreach ($colors as $color)
-            <option value="{{ $color->id}}">{{ $color->color}}</option>
-            @endforeach
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Size</label>
-        <select name="size_id" class="form-select">
-            <option value="">Pilih Ukuran</option>
-            @foreach ($sizes as $size)
-            <option value="{{ $size->id}}">{{ $size->size}}</option>
-            @endforeach
-        </select>
-      </div>
+
+
 
       <div class="mb-3">
-        <label for="stock" class="form-label">Stock</label>
-        <input type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock" value="{{ old('stock') }}">
-        @error('stock')
+        <label for="qty" class="form-label">Stock</label>
+        <input type="text" class="form-control @error('qty') is-invalid @enderror" name="qty" id="qty" value="{{ old('qty') }}">
+        @error('qty')
            <div class="invalid-feedback">
             {{ $message }}
            </div>

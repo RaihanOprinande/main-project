@@ -26,8 +26,8 @@
         <th>Harga</th>
         <th>Kategori</th>
         <th>Merek</th>
-        <th>Sizes</th>
-        <th>Gambar</th>
+        {{-- <th>Sizes</th>
+        <th>Gambar</th> --}}
         <th>Aksi</th>
     </tr>
     @foreach ($sepatus as $sepatu)
@@ -37,15 +37,12 @@
         <td>{{ $sepatu->nama }}</td>
         <td>{{ $sepatu->harga }}</td>
         <td>{{ $sepatu->kategori->nama }}</td>
+        <td>{{ $sepatu->brands->nama_brand }}</td>
+        {{-- <td>{{ $sepatu->size->size }}</td> --}}
 
-
-
-        <td>{{ $sepatu->merek->nama_merek }}</td>
-        <td>{{ $sepatu->size->size }}</td>
-
-        <td>
+        {{-- <td>
             {{$sepatu->gambar->gambar_sepatu }}
-        </td>
+        </td> --}}
 
         <td class="text-nowrap">
             <a href="/dashboard-sepatu/{{$sepatu->id}}" class="btn btn-success btn-sm" title="lihat detail">Detail</a>

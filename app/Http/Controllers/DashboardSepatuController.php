@@ -38,11 +38,9 @@ class DashboardSepatuController extends Controller
          'nama' => 'required',
          'harga' => 'required',
          'kategori_id' => 'required',
-         'gambar_id' => 'required',
-         'merek_id' => 'required',
-         'color_id' => 'required',
-         'size_id' => 'required',
-         'stock' => 'required',
+         'gambar_sepatu' => 'required',
+         'brands_id' => 'required',
+         'qty' => 'required',
         ]);
 
         //dd($validated);
@@ -68,11 +66,9 @@ class DashboardSepatuController extends Controller
          'nama' => 'required',
          'harga' => 'required',
          'kategori_id' => 'required',
-         'gambar_id' => 'required',
-         'merek_id' => 'required',
-         'color_id' => 'required',
-         'size_id' => 'required',
-         'stock' => 'required',
+         'gambar_sepatu' => 'required',
+         'brands_id' => 'required',
+         'qty' => 'required',
         ]);
 
            Sepatu::where('id', $id)->update($validated);
@@ -88,7 +84,7 @@ class DashboardSepatuController extends Controller
 
      public function show(string $id)
      {
-        $sepatus = Sepatu::findOrFail($id);
+        $sepatus = Sepatu::with('sizes','gambars')->find($id);
         return view('dashboard.sepatu.show',compact('sepatus'));
      }
 

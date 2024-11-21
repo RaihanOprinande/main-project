@@ -28,14 +28,20 @@
 
             <tr>
               <th scope="row">Merek</th>
-              <td>{{ $sepatus->merek->nama_merek }}</td>
+              <td>{{ $sepatus->brands->nama_brand }}</td>
             </tr>
+            <tr>
+                <th scope="row">Size</th>
+                @foreach ($sepatus->sizes as $size)
+                <td>{{ $size->size }}</td>
+                @endforeach
+              </tr>
             <tr>
               <th scope="row">Gambar</th>
               <td>
-                <img src="{{ asset('images/' . $sepatus->gambar->gambar_sepatu) }}"
+                <img src="{{ asset('images/' . $sepatus->gambar_sepatu) }}"
                      class="card-img-top"
-                     alt="{{ $sepatus->gambar->gambar_sepatu }}"
+                     alt="{{ $sepatus->gambar_sepatu }}"
                      style="width: 300px; height: auto; object-fit: cover;">
               </td>
             </tr>

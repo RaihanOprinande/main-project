@@ -9,7 +9,7 @@ class Sepatu extends Model
 {
     use HasFactory;
     protected $table = 'shoes';
-    protected $fillable = ['kode_sepatu','nama', 'harga', 'kategori_id' ,'brands_id', 'stock'];
+    protected $fillable = ['kode_sepatu','nama', 'harga', 'kategori_id' ,'brands_id', 'qty','gambar_sepatu'];
 
     public function sizes(){
         return $this->belongsToMany(Size::class,'sepatu_sizes','sepatu_id','size_id');
@@ -25,6 +25,9 @@ class Sepatu extends Model
     }
     public function colors(){
         return $this->belongsTo(Color::class);
+    }
+    public function size(){
+        return $this->belongsTo(Sepatu_size::class);
     }
 
 }
