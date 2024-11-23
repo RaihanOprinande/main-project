@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBrandController;
 use App\Http\Controllers\DashboardColorsController;
 use App\Http\Controllers\DashboardSizesController;
+use App\Http\Controllers\DashboardIncomesController;
 use App\Http\Controllers\DashboardOrderController;
 use App\Http\Controllers\DashboardSepatuSizeController;
 use App\Http\Controllers\PaymentController;
@@ -47,6 +48,7 @@ Route::resource('/dashboard-stock',DashboardSepatuSizeController::class)->middle
 Route::post('/pemesanan', [SepatuController::class, 'pemesanan'])->name('pemesanan');
 Route::post('/proses-bayar', [SepatuController::class, 'prosesBayar'])->name('proses.bayar');
 Route::put('/dashboard-order/{id}/confirm', [SepatuController::class, 'confirmOrder'])->name('orders.confirm');
+Route::resource('/dashboard-income',DashboardIncomesController::class)->middleware(['auth']);
 
 
 
