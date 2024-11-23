@@ -93,13 +93,13 @@ class DatabaseSeeder extends Seeder
 
         //hilangkan semua command jika database memang kosong semua/tidak ada isi
 
-        Color::create([
-            'color' => 'putih'
-        ]);
+        // Color::create([
+        //     'color' => 'putih'
+        // ]);
 
-        Color::create([
-            'color' => 'hitam'
-        ]);
+        // Color::create([
+        //     'color' => 'hitam'
+        // ]);
 
         Size::create([
             'size' => '36'

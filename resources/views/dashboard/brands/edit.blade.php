@@ -17,15 +17,15 @@
     @method('PUT')
 
     <div class="mb-3">
-        <label for="nama_merek" class="form-label">Nama Merek</label>
-        <input type="text" name="nama_merek" id="nama_merek" class="form-control" value="{{ old('nama_merek', $brand->nama_merek) }}" required>
+        <label for="nama_brand" class="form-label">Nama Merek</label>
+        <input type="text" name="nama_brand" id="nama_brand" class="form-control" value="{{ old('nama_brand', $brand->nama_brand) }}" required>
     </div>
 
     <div class="mb-3">
         <label for="gambar" class="form-label">Gambar</label>
         @if ($brand->gambar)
         <div class="mb-2">
-            <img src="{{ asset('images/' . $brand->gambar) }}" alt="{{ $brand->nama_merek }}" style="width: 100px; height: auto;">
+            <img src="{{ asset('images/' . $brand->gambar) }}" alt="{{ $brand->nama_brand }}" style="width: 100px; height: auto;">
         </div>
         @endif
         <input type="file" name="gambar" id="gambar" class="form-control">

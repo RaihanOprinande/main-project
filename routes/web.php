@@ -8,8 +8,10 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBrandController;
 use App\Http\Controllers\DashboardColorsController;
+use App\Http\Controllers\DashboardIncomesController;
 use App\Http\Controllers\DashboardSizesController;
 use App\Http\Controllers\DashboardOrderController;
+use App\Http\Controllers\DashboardPengeluaransController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LoginController;
 
@@ -39,6 +41,7 @@ Route::resource('/list',ListController::class);
 Route::resource('/dashboard-sepatu',DashboardSepatuController::class)->middleware(['auth']);
 Route::resource('/dashboard-user',DashboardAdminController::class)->middleware(['auth']);
 Route::resource('/dashboard-brand',DashboardBrandController::class)->middleware(['auth']);
+Route::resource('/dashboard-pengeluarans',DashboardPengeluaransController::class)->middleware(['auth']);
 Route::resource('/dashboard-sizes',DashboardSizesController::class)->middleware(['auth']);
 Route::resource('/dashboard-color',DashboardColorsController::class)->middleware(['auth']);
 Route::resource('/dashboard-order',DashboardOrderController::class)->middleware(['auth']);

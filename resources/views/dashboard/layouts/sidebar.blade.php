@@ -32,16 +32,17 @@
                   Sizes
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-color">
-                  <i class="bi bi-person-fill"></i>
-                  Colors
-                </a>
-              </li>
+
               <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-order">
                   <i class="bi bi-person-fill"></i>
                   Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-pengeluarans">
+                  <i class="bi bi-person-fill"></i>
+                  Pengeluaran
                 </a>
               </li>
               @can('admin')
