@@ -46,14 +46,14 @@ public function filterByKategori($kategori)
 public function pemesanan(Request $request)
 {
     $sepatu = Sepatu::find($request->sepatu_id);
+
     $gambar = $request->gambar;
     $jumlah = $request->jumlah;
-    $warna = $request->warna;
-    $ukuran = $request->ukuran;
+    $ukuran = $request->size;
     $totalHarga = $jumlah * $sepatu->harga;
 
 
-    return view('sepatu.pemesanan', compact('sepatu', 'jumlah', 'warna', 'ukuran', 'totalHarga','gambar'));
+    return view('sepatu.pemesanan', compact('sepatu', 'jumlah','ukuran', 'totalHarga','gambar'));
 }
 
 public function prosesBayar(Request $request)
@@ -73,11 +73,12 @@ public function prosesBayar(Request $request)
 
     // Menyimpan data pemesanan ke dalam tabel `pemesanans`
     Pemesanan::create([
-        'sepatu_id' => $sepatu->id,
+        'nama' => $sepatu->nama,
         'harga' => $sepatu->harga,
         'jumlah' => $request->jumlah,
-        'color_id' => $sepatu->color_id,
-        'size_id' => $sepatu->size_id,
+        'kategori_id' => $sepatu->kategori_id,
+        'merek_id' => $sepatu->brands_id,
+        'size_id' => $request->ukuran,
         'total' => $totalHarga,
         'bukti' => $path,
     ]);

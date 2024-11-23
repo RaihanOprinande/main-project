@@ -57,7 +57,7 @@
     </style>
 
     <div class="detail-container">
-        <tr>
+        {{-- <tr>
             <th>No</th>
             <th>Shoes</th>
             <th>Harga</th>
@@ -66,16 +66,16 @@
             <th>Sizes</th>
             <th>Gambar</th>
             <th>Aksi</th>
-        </tr>
+        </tr> --}}
 
-        <tr>
+        {{-- <tr>
             <th>{{ $sepatu->gambar_sepatu }}</th>
-        </tr>
+        </tr> --}}
         <h1>Detail Pemesanan</h1>
         <p>Sepatu: {{ $sepatu->nama }}</p>
         <p>Harga per Unit: Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
         <p>Jumlah: {{ $jumlah }}</p>
-        <p>Warna: {{ $warna }}</p>
+
         <p>Ukuran: {{ $ukuran }}</p>
         <p>Total Harga: Rp {{ number_format($totalHarga, 0, ',', '.') }}</p>
 
@@ -85,10 +85,13 @@
         <form action="{{ route('proses.bayar') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $sepatu->id }}">
+            <input type="hidden" name="nama" value="{{ $sepatu->nama }}">
             <input type="hidden" name="harga" value="{{ $sepatu->harga }}">
+            <input type="hidden" name="kategori_id" value="{{ $sepatu->kategori_id }}">
+            <input type="hidden" name="merek_id" value="{{ $sepatu->brands_id }}">
             <input type="hidden" name="jumlah" value="{{ $jumlah }}">
-            <input type="hidden" name="warna" value="{{ $sepatu->color_id }}">
-            <input type="hidden" name="ukuran" value="{{ $sepatu->size_id }}">
+
+            <input type="hidden" name="ukuran" value="{{ $ukuran }}">
             <input type="hidden" name="totalHarga" value="{{ $totalHarga }}">
 
             <div class="upload-container">

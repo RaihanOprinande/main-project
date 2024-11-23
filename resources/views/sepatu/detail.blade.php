@@ -1,4 +1,3 @@
-<!-- resources/views/sepatu/detail.blade.php -->
 @extends('layouts.main')
 @section('content')
 <!DOCTYPE html>
@@ -10,76 +9,56 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            /* background-color: #f7f7f7; */
             margin: 0;
             padding: 0;
         }
-
         .container {
-            /* max-width: 1200px; */
             margin: 50px auto;
             display: flex;
-            /* gap: 20px; */
         }
-
-        /* Image Section */
         .image-section {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .image-section img {
             width: 100%;
             max-width: 450px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        /* Details Section */
         .details-section {
             flex: 1;
             padding: 40px;
             border-radius: 10px;
         }
-
         .details-section h1 {
             font-size: 28px;
             margin-bottom: 10px;
             font-weight: bold;
         }
-
         .details-section p {
             font-size: 18px;
             margin-bottom: 20px;
             color: #666;
         }
-
         .price {
             font-size: 22px;
             color: #333;
             margin-bottom: 20px;
         }
-
         .size-selection, .color-selection {
             margin-bottom: 30px;
         }
-
         .size-selection h4, .color-selection h4 {
             font-size: 18px;
             margin-bottom: 10px;
         }
-
         .size-selection input, .color-selection input {
             margin-right: 10px;
         }
-
-        .size-selection {
-            flex-wrap: wrap;
-        }
-
-        .size-selection label {
+        .size-selection label, .color-selection label {
             display: inline-block;
             padding: 10px 20px;
             border: 1px solid #c5c5c5;
@@ -87,25 +66,18 @@
             cursor: pointer;
             margin-right: 10px;
             transition: background-color 0.3s, border-color 0.3s;
-            width: 20%;
             text-align: center;
             margin-bottom: 10px;
         }
-
-        .size-selection input[type="radio"] {
+        .size-selection input[type="radio"], .color-selection input[type="radio"] {
             display: none;
         }
-
-        .size-selection input[type="radio"]:checked + label {
+        .size-selection input[type="radio"]:checked + label,
+        .color-selection input[type="radio"]:checked + label {
             background-color: #000000;
             color: #ffffff;
             border-color: #f8f8f8;
         }
-
-        .size-selection label:hover {
-            border-color: #000000;
-        }
-
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -114,23 +86,23 @@
             text-decoration: none;
             border-radius: 5px;
             font-size: 16px;
-            margin-top: 20px; /* Tambahan jarak antara tombol Add to Bag dan input jumlah */
+            margin-top: 20px;
         }
-
-        .btn:hover {
-            background-color: #333;
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
-
+        .btn:not(:disabled):hover {
+            background-color: #444;
+        }
         .quantity-selection {
             margin-top: 20px;
             font-size: 18px;
         }
-
         .quantity-container {
             display: flex;
             align-items: center;
         }
-
         .quantity-btn {
             padding: 10px 15px;
             font-size: 18px;
@@ -138,11 +110,9 @@
             border: 1px solid #ccc;
             background-color: #f0f0f0;
         }
-
         .quantity-btn:hover {
             background-color: #e0e0e0;
         }
-
         #quantity {
             width: 50px;
             text-align: center;
@@ -169,23 +139,14 @@
             <!-- Size Selection -->
             <div class="size-selection">
                 <h4>Select Size:</h4>
-                <p>Size yang tersedia:</p>
-                <div class="size-tersedia">
-                </div>
-
                 @foreach ($sepatu->sizes as $size)
                     <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->size }}">
-                    <label for="size{{ $size->id }}" >{{ $size->size }}</label>
+                    <label for="size{{ $size->id }}">{{ $size->size }}</label>
                 @endforeach
             </div>
 
             <!-- Color Selection -->
-            <div class="color-selection">
-                <h4>Available Colors:</h4>
-                <label><input type="radio" name="color" value="White">White</label>
-                <label><input type="radio" name="color" value="Black">Black</label>
-                <label><input type="radio" name="color" value="Red">Red</label>
-            </div>
+
 
             <!-- Quantity Selection -->
             <div class="quantity-selection">
@@ -198,96 +159,60 @@
             </div>
 
             <!-- Add to Bag Button -->
-            <!-- Add to Bag Button -->
             <form action="{{ route('pemesanan') }}" method="POST">
                 @csrf
                 <input type="hidden" name="sepatu_id" value="{{ $sepatu->id }}">
                 <input type="hidden" name="jumlah" id="form_quantity" value="1">
+                <input type="hidden" name="size" id="form_size">
+                
 
                 <button type="submit" class="btn" id="orderButton" disabled>Order Now</button>
             </form>
-
-
 
             <!-- Back to List Button -->
             <a href="{{ route('sepatu.home') }}" class="btn">Kembali ke Daftar Sepatu</a>
         </div>
     </div>
 
-    <!-- JavaScript untuk kontrol jumlah -->
+    <!-- JavaScript -->
     <script>
-
         function decreaseQuantity() {
-    let quantityInput = document.getElementById('quantity');
-    let formQuantityInput = document.getElementById('form_quantity');
-    let currentQuantity = parseInt(quantityInput.value);
-    if (currentQuantity > 1) {
-        quantityInput.value = currentQuantity - 1;
-        formQuantityInput.value = currentQuantity - 1;
-    }
-}
+            let quantityInput = document.getElementById('quantity');
+            let formQuantityInput = document.getElementById('form_quantity');
+            let currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+                formQuantityInput.value = currentQuantity - 1;
+            }
+        }
 
-function increaseQuantity() {
-    let quantityInput = document.getElementById('quantity');
-    let formQuantityInput = document.getElementById('form_quantity');
-    let currentQuantity = parseInt(quantityInput.value);
-    quantityInput.value = currentQuantity + 1;
-    formQuantityInput.value = currentQuantity + 1;
-}
+        function increaseQuantity() {
+            let quantityInput = document.getElementById('quantity');
+            let formQuantityInput = document.getElementById('form_quantity');
+            let currentQuantity = parseInt(quantityInput.value);
+            quantityInput.value = currentQuantity + 1;
+            formQuantityInput.value = currentQuantity + 1;
+        }
 
-document.querySelectorAll('input[name="color"]').forEach((radio) => {
-    radio.addEventListener('change', function () {
-        document.getElementById('form_color').value = this.value;
-    });
-});
+        function validateForm() {
 
-document.querySelectorAll('input[name="size"]').forEach((radio) => {
-    radio.addEventListener('change', function () {
-        document.getElementById('form_size').value = this.value;
-    });
-});
+            const selectedSize = document.querySelector('input[name="size"]:checked');
+            const orderButton = document.getElementById('orderButton');
 
-function disableOrderButton() {
-    document.getElementById('orderButton').disabled = true;
-}
-
-// Validasi pemilihan ukuran dan warna
-function validateForm() {
-    const selectedColor = document.querySelector('input[name="color"]:checked');
-    const selectedSize = document.querySelector('input[name="size"]:checked');
-
-    const orderButton = document.getElementById('orderButton');
-
-    // Aktifkan tombol jika ukuran dan warna dipilih
-    if (selectedColor && selectedSize) {
-        orderButton.disabled = false; // Aktifkan tombol
-    } else {
-        orderButton.disabled = true; // Nonaktifkan tombol
-    }
-}
-
-// Event listener untuk memperbarui tombol saat ukuran dan warna dipilih
-document.querySelectorAll('input[name="color"]').forEach((radio) => {
-    radio.addEventListener('change', function () {
-        document.getElementById('form_color').value = this.value;
-        validateForm(); // Cek validitas saat warna dipilih
-    });
-});
-
-document.querySelectorAll('input[name="size"]').forEach((radio) => {
-    radio.addEventListener('change', function () {
-        document.getElementById('form_size').value = this.value;
-        validateForm(); // Cek validitas saat ukuran dipilih
-    });
-});
-
-// Nonaktifkan tombol "Order Now" saat halaman dimuat
-document.addEventListener('DOMContentLoaded', function () {
-    disableOrderButton(); // Pastikan tombol dinonaktifkan saat halaman dimuat
-});
+            orderButton.disabled = !(selectedSize);
+        }
 
 
+        document.querySelectorAll('input[name="size"]').forEach((radio) => {
+            radio.addEventListener('change', function () {
+                document.getElementById('form_size').value = this.value;
+                validateForm();
+            });
+        });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('orderButton').disabled = true;
+        });
     </script>
 </body>
 </html>

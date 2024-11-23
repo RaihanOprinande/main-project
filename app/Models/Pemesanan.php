@@ -12,10 +12,10 @@ class Pemesanan extends Model
 
     // Tentukan kolom yang dapat diisi
     protected $fillable = [
-        'sepatu_id',
+        'nama',
         'harga',
-
-        'color_id',
+        'merek_id',
+        'kategori_id',
         'size_id',
         'jumlah',
         'total',
@@ -24,7 +24,7 @@ class Pemesanan extends Model
 
     public function sepatu()
     {
-        return $this->belongsTo(Sepatu::class, 'sepatu_id');
+        return $this->belongsTo(Sepatu::class);
     }
 
     public function color(){

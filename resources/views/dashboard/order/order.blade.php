@@ -6,9 +6,10 @@
 <table class="table table-bordered">
     <tr>
         <th>No</th>
-        <th>Sepatu</th>
+        <th>Nama</th>
         <th>Harga</th>
-        <th>Warna</th>
+        <th>Kategori</th>
+        <th>Merek</th>
         <th>Size</th>
         <th>Jumlah</th>
         <th>Total</th>
@@ -18,10 +19,11 @@
     @foreach ($orders as $order)
     <tr>
         <td>{{ $orders->firstItem() + $loop->index }}</td>
-        <td>{{ $order->sepatu->nama }}</td>
+        <td>{{ $order->nama }}</td>
         <td>{{ number_format($order->harga, 0, ',', '.') }}</td>
-        <td>{{ $order->color->color }}</td>
-        <td>{{ $order->size->size }}</td>
+        <td>{{ $order->kategori_id }}</td>
+        <td>{{ $order->merek_id }}</td>
+        <td>{{ $order->size_id }}</td>
         <td>{{ $order->jumlah }}</td>
         <td>{{ number_format($order->total, 0, ',', '.') }}</td>
         <td>
