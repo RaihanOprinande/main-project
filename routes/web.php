@@ -10,7 +10,7 @@ use App\Http\Controllers\DashboardBrandController;
 use App\Http\Controllers\DashboardColorsController;
 use App\Http\Controllers\DashboardIncomesController;
 use App\Http\Controllers\DashboardSizesController;
-use App\Http\Controllers\DashboardIncomesController;
+// use App\Http\Controllers\DashboardIncomesController;
 use App\Http\Controllers\DashboardOrderController;
 use App\Http\Controllers\DashboardSepatuSizeController;
 use App\Http\Controllers\PaymentController;
