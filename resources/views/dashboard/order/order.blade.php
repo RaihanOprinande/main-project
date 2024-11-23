@@ -48,13 +48,17 @@
                 Tidak ada bukti
             @endif
         </td>
-        <td class="text-nowrap">
+        <td>
+            <form action="{{ route('orders.confirm', $order->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Konfirmasi pesanan ini?')">Konfirmasi</button>
+            </form>
 
-            <a href="/dashboard-order/{{$order->id}}/edit" class="btn btn-success">Konfirmasi</a>
-            <form action="/dashboard-order/{{$order->id}}" method="post" class="d-inline">
+            <form action="/dashboard-order/{{ $order->id }}" method="POST" class="d-inline">
                 @method('DELETE')
                 @csrf
-                <button class="btn btn-danger btn-sm" onclick="return confirm('yakin akan menghapus data ini?')">hapus</button>
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin akan menghapus data ini?')">Hapus</button>
             </form>
         </td>
     </tr>

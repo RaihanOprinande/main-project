@@ -46,6 +46,7 @@ Route::resource('/dashboard-order',DashboardOrderController::class)->middleware(
 Route::resource('/dashboard-stock',DashboardSepatuSizeController::class)->middleware(['auth']);
 Route::post('/pemesanan', [SepatuController::class, 'pemesanan'])->name('pemesanan');
 Route::post('/proses-bayar', [SepatuController::class, 'prosesBayar'])->name('proses.bayar');
+Route::put('/dashboard-order/{id}/confirm', [SepatuController::class, 'confirmOrder'])->name('orders.confirm');
 
 
 
