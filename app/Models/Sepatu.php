@@ -9,14 +9,14 @@ class Sepatu extends Model
 {
     use HasFactory;
     protected $table = 'shoes';
-    protected $fillable = ['kode_sepatu','nama', 'harga', 'kategori_id' ,'brands_id', 'qty','gambar_sepatu'];
+    protected $fillable = ['kode_sepatu','nama', 'harga', 'kategori_id' ,'brands_id','gambar_sepatu'];
 
     public function sizes(){
-        return $this->belongsToMany(Size::class,'sepatu_sizes','sepatu_id','size_id');
+        return $this->belongsToMany(Size::class,'sepatu_sizes','sepatu_id','size_id')->withPivot('quantity');
     }
-    public function gambars(){
-        return $this->belongsToMany(sepatui::class,'sepatu_gambars','sepatu_id','sepatui_id');
-    }
+    // public function gambars(){
+    //     return $this->belongsToMany(sepatui::class,'sepatu_gambars','sepatu_id','sepatui_id');
+    // }
     public function kategori(){
         return $this->belongsTo(Kategori::class);
     }

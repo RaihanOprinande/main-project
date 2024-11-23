@@ -22,13 +22,12 @@ class DashboardSepatuController extends Controller
     }
     public function create(){
         $kategoris = Kategori::all();
-        $gambars = sepatui::all();
+        // $gambars = sepatui::all();
         $mereks = Brands::all();
-        $colors = Color::all();
+        // $colors = Color::all();
         $sizes = Size::all();
 
-
-        return view('dashboard.sepatu.create',compact('kategoris','gambars','mereks','colors','sizes'));
+        return view('dashboard.sepatu.create',compact('kategoris','mereks','sizes'));
      }
 
      public function store(Request $request){
@@ -38,10 +37,13 @@ class DashboardSepatuController extends Controller
          'nama' => 'required',
          'harga' => 'required',
          'kategori_id' => 'required',
-         'gambar_sepatu' => 'required',
+         'gambar_sepatu' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
          'brands_id' => 'required',
-         'qty' => 'required',
         ]);
+
+        if ($request->file('gambar_sepatu')) {
+            $validated['gambar_sepatu'] = $request->file('gambar_sepatu')->store('images','public');
+        }
 
         //dd($validated);
 
@@ -52,12 +54,12 @@ class DashboardSepatuController extends Controller
      public function edit(string $id)
      {
         $kategoris = Kategori::all();
-        $gambars = sepatui::all();
+        // $gambars = sepatui::all();
         $mereks = Brands::all();
-        $colors = Color::all();
+        // $colors = Color::all();
         $sizes = Size::all();
         $sepatus = Sepatu::find($id);
-        return view('dashboard.sepatu.edit', compact('kategoris','gambars','mereks','sepatus','colors','sizes'));
+        return view('dashboard.sepatu.edit', compact('kategoris','mereks','sepatus','sizes'));
      }
 
      public function update(Request $request,string $id){
@@ -68,8 +70,11 @@ class DashboardSepatuController extends Controller
          'kategori_id' => 'required',
          'gambar_sepatu' => 'required',
          'brands_id' => 'required',
-         'qty' => 'required',
         ]);
+
+        if ($request->file('gambar_sepatu')) {
+            $validated['gambar_sepatu'] = $request->file('gambar_sepatu')->store('images','public');
+        }
 
            Sepatu::where('id', $id)->update($validated);
            return redirect('dashboard-sepatu')->with('pesan','Data berhasil diubah');
@@ -84,7 +89,7 @@ class DashboardSepatuController extends Controller
 
      public function show(string $id)
      {
-        $sepatus = Sepatu::with('sizes','gambars')->find($id);
+        $sepatus = Sepatu::with('sizes')->find($id);
         return view('dashboard.sepatu.show',compact('sepatus'));
      }
 

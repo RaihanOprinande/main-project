@@ -100,7 +100,7 @@
                 @foreach ($sepatus->take(5) as $sepatu)
                 <a href="/sepatu/{{ $sepatu->id }}">
                 <div class="isi-list ">
-                        <img src="{{ asset('images/' . $sepatu-> gambar_sepatu) }}" alt="{{ $sepatu-> nama_sepatu}}" height="300px" width="250px">
+                        <img src="{{ asset('storage/' . $sepatu-> gambar_sepatu) }}" alt="{{ $sepatu-> nama_sepatu}}" height="300px" width="250px">
                         <h6 class="ms-1">{{ $sepatu->kategori->nama }}</h6>
                         <h5 class="ms-1">{{ $sepatu->nama }}</h5>
                         <h6 class="ms-1">RP {{ number_format($sepatu->harga, 0, ',','.') }}</h6>
