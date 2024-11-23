@@ -14,6 +14,7 @@
         <th>Jumlah</th>
         <th>Total</th>
         <th>Bukti</th>
+        <th>Status</th>
         <th>Konfirmasi</th>
     </tr>
     @foreach ($orders as $order)
@@ -47,6 +48,11 @@
             @else
                 Tidak ada bukti
             @endif
+        </td>
+        <td>
+            <span class="badge {{ $order->status == 'pending' ? 'bg-warning' : 'bg-success' }}">
+                {{ $order->status == 'pending' ? 'Pesanan Sedang Dibuat' : 'Pesanan Sukses' }}
+            </span>
         </td>
         <td>
             <form action="{{ route('orders.confirm', $order->id) }}" method="POST" class="d-inline">

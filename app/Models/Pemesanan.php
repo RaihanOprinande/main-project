@@ -20,7 +20,13 @@ class Pemesanan extends Model
         'jumlah',
         'total',
         'bukti',
+        'status'
     ];
+
+    public function getStatusTextAttribute()
+    {
+        return $this->status === 'pending' ? 'Pesanan Sedang Dibuat' : 'Pesanan Sukses';
+    }
 
     public function sepatu()
     {
