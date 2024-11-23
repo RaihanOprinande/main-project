@@ -10,7 +10,7 @@ class Sepatu_size extends Model
     use HasFactory;
 
     protected $table = 'sepatu_sizes';
-    protected $fillable = ['sepatu_id,size_id','quaintity'];
+    protected $fillable = ['sepatu_id,size_id','quantity'];
 
     public function sepatu_size(){
         return $this->hasMany(Sepatu::class);
