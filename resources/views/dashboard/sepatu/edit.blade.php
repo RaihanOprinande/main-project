@@ -42,10 +42,6 @@
 
       </div>
 
-
-
-
-
       <div class="mb-3">
         <label class="form-label">Kategori</label>
         <select name="kategori_id" class="form-select @error('kategori_id') is-invalid
@@ -88,22 +84,6 @@
            </div>
          @enderror
     </div>
-
-
-
-      <div class="mb-3">
-        <label for="qty" class="form-label">Stock</label>
-        <input type="text" class="form-control @error('qty') is-invalid @enderror" name="qty" id="qty" value="{{ old('qty',$sepatus->qty) }}">
-        @error('qty')
-           <div class="invalid-feedback">
-            {{ $message }}
-           </div>
-         @enderror
-
-      </div>
-
-
-
 
       <div class="mb-3">
 

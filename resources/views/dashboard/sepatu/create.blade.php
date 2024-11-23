@@ -45,10 +45,6 @@
 
       </div>
 
-
-
-
-
       <div class="mb-3">
         <label class="form-label">Kategori</label>
         <select name="kategori_id" class="form-select">
@@ -76,33 +72,6 @@
            </div>
          @enderror
     </div>
-
-
-      {{-- <div class="mb-3">
-        <label class="form-label">Gambar</label>
-        <select name="gambar_sepatu" class="form-select">
-            <option value="">Pilih Gambar</option>
-            @foreach ($gambars as $gambar)
-            <option value="{{ $gambar->gambar_sepatu}}">{{ $gambar->gambar_sepatu}}</option>
-            @endforeach
-        </select>
-      </div> --}}
-
-
-
-      <div class="mb-3">
-        <label for="qty" class="form-label">Stock</label>
-        <input type="text" class="form-control @error('qty') is-invalid @enderror" name="qty" id="qty" value="{{ old('qty') }}">
-        @error('qty')
-           <div class="invalid-feedback">
-            {{ $message }}
-           </div>
-         @enderror
-
-      </div>
-
-
-
 
       <div class="mb-3">
 

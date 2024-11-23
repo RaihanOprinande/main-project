@@ -27,9 +27,6 @@ class DashboardSepatuController extends Controller
         // $colors = Color::all();
         $sizes = Size::all();
 
-
-
-
         return view('dashboard.sepatu.create',compact('kategoris','mereks','sizes'));
      }
 
@@ -42,7 +39,6 @@ class DashboardSepatuController extends Controller
          'kategori_id' => 'required',
          'gambar_sepatu' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
          'brands_id' => 'required',
-         'qty' => 'required',
         ]);
 
         if ($request->file('gambar_sepatu')) {
@@ -74,7 +70,6 @@ class DashboardSepatuController extends Controller
          'kategori_id' => 'required',
          'gambar_sepatu' => 'required',
          'brands_id' => 'required',
-         'qty' => 'required',
         ]);
 
         if ($request->file('gambar_sepatu')) {

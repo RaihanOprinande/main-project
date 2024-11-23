@@ -12,14 +12,24 @@
               Dashboard
             </a>
           </li>
-          <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-sepatu">
                 <i class="bi bi-people"></i>
                 Sepatu
               </a>
             </li>
-
-
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-order">
+                  <i class="bi bi-person-fill"></i>
+                  Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-stock">
+                  <i class="bi bi-person-fill"></i>
+                  Stocks
+                </a>
+              </li>
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="/dashboard-brand">
                   <i class="bi bi-person-fill"></i>

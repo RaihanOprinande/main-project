@@ -21,7 +21,7 @@ class SepatuController extends Controller
     return view('home', compact('mereks', 'sepatus', 'sizes'));
     }
     public function show($id) {
-        $sepatu = Sepatu::with('sizes','gambars')->find($id);
+        $sepatu = Sepatu::with('sizes')->find($id);
         // $sizes = Size::all();
         // $stocks = Sepatu::with(['gambars', 'kategori', 'color', 'merek'])->get();
         // $sepatus = Sepatu::with(['size'])->find('$id');
