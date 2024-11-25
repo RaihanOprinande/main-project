@@ -14,6 +14,10 @@
                 <th>Ukuran</th>
                 <th>Jumlah</th>
                 <th>Total</th>
+                @can('admin')
+
+                <th>Aksi</th>
+                @endcan
             </tr>
         </thead>
         <tbody>
@@ -27,6 +31,17 @@
                 <td>{{ $data->size_id }}</td>
                 <td>{{ $data->jumlah }}</td>
                 <td>Rp {{ number_format($data->total, 0, ',', '.') }}</td>
+                @can('admin')
+                <td class="text-nowrap">
+                    <a href="/dashboard-income/{{$data->id}}/edit" class="btn btn-warning">Edit</a>
+                    <form action="/dashboard-income/{{$data->id}}" method="post" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('yakin akan menghapus data ini?')">hapus</button>
+                    </form>
+                </td>
+
+                @endcan
             </tr>
             @endforeach
         </tbody>
