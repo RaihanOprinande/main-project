@@ -21,10 +21,10 @@
     @foreach ($brands as $brand)
     <tr>
         <td>{{ $brands->firstItem() + $loop->index }}</td>
-        <td>{{ $brand->nama_merek }}</td>
+        <td>{{ $brand->nama_brand }}</td>
         <td>
             @if ($brand->gambar)
-            <img src="{{ asset('images/'. $brand->gambar) }}" alt="{{ $brand->nama_merek }}" style="width: 100px; height: auto;">
+            <img src="{{ asset('images/'. $brand->gambar) }}" alt="{{ $brand->nama_brand }}" style="width: 100px; height: auto;">
             @else
             <span>Tidak ada gambar</span>
             @endif

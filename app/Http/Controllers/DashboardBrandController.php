@@ -22,12 +22,12 @@ class DashboardBrandController extends Controller
     public function store(Request $request)
 {
     $validatedData = $request->validate([
-        'nama_merek' => 'required|string|max:255',
+        'nama_brand' => 'required|string|max:255',
         'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
     $brand = new Brands();
-    $brand->nama_merek = $validatedData['nama_merek'];
+    $brand->nama_brand = $validatedData['nama_brand'];
 
     if ($request->hasFile('gambar')) {
         $originalImageName = $request->file('gambar')->getClientOriginalName();
@@ -54,12 +54,12 @@ class DashboardBrandController extends Controller
     public function update(Request $request, $id)
 {
     $request->validate([
-        'nama_merek' => 'required|string|max:255',
+        'nama_brand' => 'required|string|max:255',
         'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
     $brand = Brands::findOrFail($id);
-    $brand->nama_merek = $request->nama_merek;
+    $brand->nama_brand = $request->nama_brand;
 
     if ($request->hasFile('gambar')) {
         // Hapus gambar lama jika ada

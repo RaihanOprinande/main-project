@@ -8,9 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Brands extends Model
 {
     use HasFactory;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'brands';
-    protected $fillable = ['nama_merek','gambar'];
-    public function sepatu(){
-        return $this->hasMany(Sepatu::class);
-    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nama_brand',
+        'gambar',
+    ];
 }

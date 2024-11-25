@@ -15,9 +15,9 @@
 <form action="{{ route('dashboard-brand.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
-        <label for="nama_merek" class="form-label">Nama Merek</label>
-        <input type="text" class="form-control @error('nama_merek') is-invalid @enderror" id="nama_merek" name="nama_merek" value="{{ old('nama_merek') }}" required>
-        @error('nama_merek')
+        <label for="nama_brand" class="form-label">Nama Brand</label>
+        <input type="text" class="form-control @error('nama_brand') is-invalid @enderror" id="nama_brand" name="nama_brand" value="{{ old('nama_brand') }}" required>
+        @error('nama_brand')
         <div class="invalid-feedback">
             {{ $message }}
         </div>
