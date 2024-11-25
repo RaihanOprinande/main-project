@@ -82,6 +82,7 @@ public function prosesBayar(Request $request)
         'size_id' => $request->ukuran,
         'total' => $totalHarga,
         'bukti' => $path,
+        'status' => 'pending',
     ]);
 
     return redirect()->route('sepatu.home')->with('success', 'Pemesanan berhasil disimpan');

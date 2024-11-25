@@ -43,14 +43,14 @@ class ListController extends Controller
 public function sepatuByMerek($id)
 {
     $mereks = Brands::all();
-    $sepatus = Sepatu::where('merek_id', $id)->get();
+    $sepatus = Sepatu::where('brands_id', $id)->get();
 
     return view('sepatu.list', compact('mereks', 'sepatus'));
 }
 public function index()
 {
     $mereks = Brands::all();
-    $sepatus = Sepatu::with('sepatu_gambar');
+    $sepatus = Sepatu::all();
     $sizes = Size::all();
     // $sepatu_gambar = Sepatu_gambar::all();
 

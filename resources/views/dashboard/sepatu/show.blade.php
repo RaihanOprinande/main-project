@@ -30,12 +30,7 @@
               <th scope="row">Merek</th>
               <td>{{ $sepatus->brands->nama_brand }}</td>
             </tr>
-            <tr>
-                <th scope="row">Size</th>
-                @foreach ($sepatus->sizes as $size)
-                <td>{{ $size->size }}</td>
-                @endforeach
-              </tr>
+            
             <tr>
               <th scope="row">Gambar</th>
               <td>

@@ -65,7 +65,7 @@
         @enderror" >
             <option value="">Pilih Merek</option>
             @foreach ($mereks as $merek)
-            @if (old('brands',$sepatus->brands) == $merek->id)
+            @if (old('brands_id',$sepatus->brands_id) == $merek->id)
             <option value="{{ $merek->id}}" selected>{{ $merek->nama_brand}}</option>
             @else
             <option value="{{ $merek->id}}">{{ $merek->nama_brand}}</option>
@@ -77,13 +77,30 @@
 
       <div class="mb-3">
         <label for="gambar_sepatu" class="form-label">Gambar</label>
-        <input type="file" class="form-control @error('gambar_sepatu') is-invalid @enderror" name="gambar_sepatu" id="gambar_sepatu" value="{{ old('gambar_sepatu',$sepatus->gambar_sepatu) }}">
+
+        <!-- Menampilkan nama file lama -->
+        @if ($sepatus->gambar_sepatu)
+            <div class="mb-2">
+                <img src="{{ asset('storage/' . $sepatus->gambar_sepatu) }}"
+     class="card-img-top"
+     alt="{{ $sepatus->gambar_sepatu }}"
+     style="width: 300px; height: auto; object-fit: cover;">
+            </div>
+        @endif
+
+        <!-- Input file untuk mengganti gambar -->
+        <input type="file"
+               class="form-control @error('gambar_sepatu') is-invalid @enderror"
+               name="gambar_sepatu"
+               id="gambar_sepatu">
         @error('gambar_sepatu')
-           <div class="invalid-feedback">
-            {{ $message }}
-           </div>
-         @enderror
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
+
+
 
       <div class="mb-3">
 
