@@ -14,6 +14,7 @@ class Pengeluaran extends Model
 
     // Tentukan kolom-kolom yang dapat diisi (mass assignable)
     protected $fillable = [
+        'sepatu',
         'size',
         'brand',
         'kategori',

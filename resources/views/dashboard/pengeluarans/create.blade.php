@@ -1,61 +1,57 @@
 @extends('dashboard.layouts.main')
-
 @section('content')
 
-<h1>Create Pengeluaran</h1>
+<h1>Tambah Pengeluaran</h1>
 
-@if (session('pesan'))
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Hei Tayo!</strong> {{ session('pesan') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+@if ($errors->any())
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
   </div>
 @endif
 
-<form action="{{ url('/dashboard-pengeluarans') }}" method="POST">
-  @csrf
-  <div class="mb-3">
-    <label for="size" class="form-label">Size</label>
-    <input type="text" class="form-control" id="size" name="size" value="{{ old('size') }}" required>
-    @error('size')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+<form action="/dashboard-pengeluarans" method="POST">
+    @csrf
+    <div class="mb-3">
+        <label for="sepatu" class="form-label">Sepatu</label>
+        <input type="text" name="sepatu" class="form-control" id="sepatu" value="{{ old('sepatu') }}" required>
+    </div>
 
-  <div class="mb-3">
-    <label for="brand" class="form-label">Brand</label>
-    <input type="text" class="form-control" id="brand" name="brand" value="{{ old('brand') }}" required>
-    @error('brand')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="size" class="form-label">Size</label>
+        <input type="number" name="size" class="form-control" id="size" value="{{ old('size') }}" required>
+    </div>
 
-  <div class="mb-3">
-    <label for="kategori" class="form-label">Kategori</label>
-    <input type="text" class="form-control" id="kategori" name="kategori" value="{{ old('kategori') }}" required>
-    @error('kategori')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="brand" class="form-label">Brand</label>
+        <input type="text" name="brand" class="form-control" id="brand" value="{{ old('brand') }}" required>
+    </div>
 
-  <div class="mb-3">
-    <label for="harga" class="form-label">Harga</label>
-    <input type="number" class="form-control" id="harga" name="harga" value="{{ old('harga') }}" step="0.01" required>
-    @error('harga')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="kategori" class="form-label">Kategori</label>
+        <select name="kategori" id="kategori" class="form-select" required>
+            <option value="" disabled selected>Pilih Kategori</option>
+            <option value="Casual" {{ old('kategori') == 'Casual' ? 'selected' : '' }}>Casual</option>
+            <option value="Sport" {{ old('kategori') == 'Sport' ? 'selected' : '' }}>Sport</option>
+            <option value="Formal" {{ old('kategori') == 'Formal' ? 'selected' : '' }}>Formal</option>
+        </select>
+    </div>
 
-  <div class="mb-3">
-    <label for="quantity" class="form-label">Quantity</label>
-    <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity') }}" required>
-    @error('quantity')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="harga" class="form-label">Harga</label>
+        <input type="number" name="harga" class="form-control" id="harga" value="{{ old('harga') }}" required>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Create Pengeluaran</button>
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" name="quantity" class="form-control" id="quantity" value="{{ old('quantity') }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+    <a href="/dashboard-pengeluarans" class="btn btn-secondary">Batal</a>
 </form>
-
-<a href="/dashboard-pengeluarans" class="btn btn-secondary mt-3">Back to List</a>
 
 @endsection
