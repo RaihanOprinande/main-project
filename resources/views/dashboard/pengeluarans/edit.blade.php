@@ -11,53 +11,47 @@
   </div>
 @endif
 
-<form action="{{ url('/dashboard-pengeluarans/' . $pengeluaran->id) }}" method="POST">
-  @csrf
-  @method('PUT') <!-- Method spoofing for PUT request -->
+<a href="/dashboard-pengeluarans" class="btn btn-secondary mb-2">Kembali ke Daftar</a>
 
-  <div class="mb-3">
-    <label for="size" class="form-label">Size</label>
-    <input type="text" class="form-control" id="size" name="size" value="{{ old('size', $pengeluaran->size) }}" required>
-    @error('size')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+<form action="{{ route('dashboard-pengeluarans.update', $pengeluaran->id) }}" method="POST">
+    @csrf
+    @method('PUT')
 
-  <div class="mb-3">
-    <label for="brand" class="form-label">Brand</label>
-    <input type="text" class="form-control" id="brand" name="brand" value="{{ old('brand', $pengeluaran->brand) }}" required>
-    @error('brand')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="sepatu" class="form-label">Sepatu</label>
+        <input type="text" class="form-control" id="sepatu" name="sepatu" value="{{ old('sepatu', $pengeluaran->sepatu) }}" required>
+    </div>
 
-  <div class="mb-3">
-    <label for="kategori" class="form-label">Kategori</label>
-    <input type="text" class="form-control" id="kategori" name="kategori" value="{{ old('kategori', $pengeluaran->kategori) }}" required>
-    @error('kategori')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="size" class="form-label">Size</label>
+        <input type="number" class="form-control" id="size" name="size" value="{{ old('size', $pengeluaran->size) }}" required min="30" max="50">
+    </div>
 
-  <div class="mb-3">
-    <label for="harga" class="form-label">Harga</label>
-    <input type="number" class="form-control" id="harga" name="harga" value="{{ old('harga', $pengeluaran->harga) }}" step="0.01" required>
-    @error('harga')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="brand" class="form-label">Brand</label>
+        <input type="text" class="form-control" id="brand" name="brand" value="{{ old('brand', $pengeluaran->brand) }}" required>
+    </div>
 
-  <div class="mb-3">
-    <label for="quantity" class="form-label">Quantity</label>
-    <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $pengeluaran->quantity) }}" required>
-    @error('quantity')
-      <div class="text-danger">{{ $message }}</div>
-    @enderror
-  </div>
+    <div class="mb-3">
+        <label for="kategori" class="form-label">Kategori</label>
+        <select class="form-select" id="kategori" name="kategori" required>
+            <option value="Casual" {{ $pengeluaran->kategori == 'Casual' ? 'selected' : '' }}>Casual</option>
+            <option value="Sport" {{ $pengeluaran->kategori == 'Sport' ? 'selected' : '' }}>Sport</option>
+            <option value="Formal" {{ $pengeluaran->kategori == 'Formal' ? 'selected' : '' }}>Formal</option>
+        </select>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Update Pengeluaran</button>
+    <div class="mb-3">
+        <label for="harga" class="form-label">Harga</label>
+        <input type="number" class="form-control" id="harga" name="harga" value="{{ old('harga', $pengeluaran->harga) }}" required min="0" step="0.01">
+    </div>
+
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $pengeluaran->quantity) }}" required min="1">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
 </form>
-
-<a href="/dashboard-pengeluarans" class="btn btn-secondary mt-3">Back to List</a>
 
 @endsection

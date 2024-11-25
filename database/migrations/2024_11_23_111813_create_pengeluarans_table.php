@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengeluarans', function (Blueprint $table) {
             $table->id();
+            $table->string('sepatu')->comment('Nama sepatu');
             $table->integer('size')->comment('Ukuran sepatu');
             $table->string('brand')->comment('Merek sepatu');
             $table->string('kategori')->comment('Kategori sepatu');
