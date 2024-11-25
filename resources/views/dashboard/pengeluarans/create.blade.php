@@ -20,24 +20,44 @@
         <input type="text" name="sepatu" class="form-control" id="sepatu" value="{{ old('sepatu') }}" required>
     </div>
 
-    <div class="mb-3">
-        <label for="size" class="form-label">Size</label>
-        <input type="number" name="size" class="form-control" id="size" value="{{ old('size') }}" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="brand" class="form-label">Brand</label>
-        <input type="text" name="brand" class="form-control" id="brand" value="{{ old('brand') }}" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="kategori" class="form-label">Kategori</label>
-        <select name="kategori" id="kategori" class="form-select" required>
-            <option value="" disabled selected>Pilih Kategori</option>
-            <option value="Casual" {{ old('kategori') == 'Casual' ? 'selected' : '' }}>Casual</option>
-            <option value="Sport" {{ old('kategori') == 'Sport' ? 'selected' : '' }}>Sport</option>
-            <option value="Formal" {{ old('kategori') == 'Formal' ? 'selected' : '' }}>Formal</option>
+    <div class="form-group">
+        <label for="size_id">Select Size:</label>
+        <select name="size_id" id="size_id" class="form-control" required>
+            <option value="">-- Selece Size --</option>
+            @foreach ($sizes as $sizes)
+                <option value="{{ $sizes->id }}">{{ $sizes->size }}</option>
+            @endforeach
         </select>
+    </div>
+
+    <div class="form-group">
+        <label for="brand_id">Select Brand:</label>
+        <select name="brand_id" id="brand" class="form-control" required>
+            <option value="">-- Select Brand --</option>
+            @foreach ($brands as $brand)
+                <option value="{{ $brand->id }}">{{ $brand->nama_brand }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="kategori_id">Select Category:</label>
+        <select name="kategori_id" id="kategori_id" class="form-control" required>
+            <option value="">-- Select Category --</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->nama }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="date" class="form-label">Tanggal</label>
+        <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}">
+        @error('date')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+        @enderror
     </div>
 
     <div class="mb-3">
@@ -53,5 +73,10 @@
     <button type="submit" class="btn btn-primary">Simpan</button>
     <a href="/dashboard-pengeluarans" class="btn btn-secondary">Batal</a>
 </form>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').value = today;
+    });
+</script>
 @endsection

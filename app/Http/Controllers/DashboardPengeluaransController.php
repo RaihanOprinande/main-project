@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
+use App\Models\Kategori;
 use App\Models\Pengeluaran;
+use App\Models\Sepatu;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class DashboardPengeluaransController extends Controller
@@ -12,23 +16,23 @@ class DashboardPengeluaransController extends Controller
      */
     public function index(Request $request)
 {
-    // Ambil query pencarian dari input
-    $search = $request->input('search');
+    $query = Pengeluaran::query();
 
-    // Query data dengan filter pencarian jika ada
-    $pengeluarans = Pengeluaran::when($search, function ($query, $search) {
-        return $query->where('sepatu', 'like', "%{$search}%")
-            ->orWhere('brand', 'like', "%{$search}%")
-            ->orWhere('kategori', 'like', "%{$search}%");
-    })->paginate(10);
+    // if ($request->filled('kategori_id')) {
+    //     $query->where('kategori_id', $request->kategori_id);
+    // }
+
+    if ($request->filled('date')) {
+        $query->where('date', $request->date);
+    }
 
     // Hitung total pengeluaran berdasarkan semua data yang diambil
-    $total = $pengeluarans->sum(function ($pengeluaran) {
-        return $pengeluaran->harga * $pengeluaran->quantity;
-    });
+    $total = $query->sum('harga');
+    $pengeluarans = Pengeluaran::with('size','brand','kategori')->paginate(10);
+    $tanggal = Pengeluaran::latest()->paginate(10);
 
     // Return view dengan data yang diperlukan
-    return view('dashboard.pengeluarans.index', compact('pengeluarans', 'total'));
+    return view('dashboard.pengeluarans.index', compact( 'total','pengeluarans','tanggal'));
 }
 
     /**
@@ -36,7 +40,11 @@ class DashboardPengeluaransController extends Controller
      */
     public function create()
     {
-        return view('dashboard.pengeluarans.create');
+        $sepatus = Sepatu::all();
+        $brands = Brands::all();
+        $sizes = Size::all();
+        $categories = Kategori::all();
+        return view('dashboard.pengeluarans.create',compact('sepatus','brands','sizes','categories'));
     }
 
     /**
@@ -46,12 +54,13 @@ class DashboardPengeluaransController extends Controller
     {
         // Validasi input
         $request->validate([
-            'sepatu' => 'required|string|max:255',
-            'size' => 'required|integer|min:30|max:50',
-            'brand' => 'required|string|max:255',
-            'kategori' => 'required|string|in:Casual,Sport,Formal',
-            'harga' => 'required|numeric|min:0',
-            'quantity' => 'required|integer|min:1',
+            'sepatu' => 'required',
+            'size_id' => 'required',
+            'brand_id' => 'required',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'quantity' => 'required',
+            'date' => 'required',
         ]);
 
         // Simpan data ke database
@@ -72,9 +81,13 @@ class DashboardPengeluaransController extends Controller
 {
     // Ambil data pengeluaran berdasarkan ID
     $pengeluaran = Pengeluaran::findOrFail($id);
+    // $sepatus = Sepatu::all();
+    $brands = Brands::all();
+    $sizes = Size::all();
+    $categories = Kategori::all();
 
     // Tampilkan view edit dengan data pengeluaran
-    return view('dashboard.pengeluarans.edit', compact('pengeluaran'));
+    return view('dashboard.pengeluarans.edit', compact('pengeluaran','brands','sizes','categories'));
 }
 
 
@@ -85,12 +98,13 @@ class DashboardPengeluaransController extends Controller
     {
         // Validasi data yang diterima dari form
         $validated = $request->validate([
-            'sepatu' => 'required|string|max:255',
-            'size' => 'required|integer|min:30|max:50',
-            'brand' => 'required|string|max:255',
-            'kategori' => 'required|string|max:50',
-            'harga' => 'required|numeric|min:0',
-            'quantity' => 'required|integer|min:1',
+            'sepatu' => 'required',
+            'size_id' => 'required',
+            'brand_id' => 'required',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'quantity' => 'required',
+            'date' => 'required',
         ]);
 
         // Cari data pengeluaran berdasarkan ID

@@ -5,21 +5,33 @@
 
 @if (session('pesan'))
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Hei Tayo!</strong> {{ session('pesan') }}
+    <strong>Berhasil!</strong> {{ session('pesan') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 @endif
 
 <a href="/dashboard-pengeluarans/create" class="btn btn-primary mb-2">Tambah Pengeluaran</a>
 
-<div class="row mb-3 mt-4">
-    <div class="col-md-4">
-        <form class="d-flex" role="search" action="{{ url('/dashboard-pengeluarans') }}" method="GET">
-            <input class="form-control me-2" name="search" type="search" placeholder="Cari sepatu, brand, atau kategori" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Cari</button>
-        </form>
+<form method="GET" action="/dashboard-pengeluarans" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <select name="kategori_id" class="form-select">
+                <option value="">Pilih Kategori</option>
+                @foreach ($pengeluarans as $tanggal)
+                    <option value="{{ $tanggal->id }}" {{ request('date') == $tanggal->id ? 'selected' : '' }}>
+                        {{ $tanggal->date }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-4">
+            <input type="date" name="tanggal" class="form-control" value="{{ request('date') }}">
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
     </div>
-</div>
+</form>
 
 <table class="table table-bordered">
     <thead class="table-primary">
@@ -29,9 +41,9 @@
             <th>Size</th>
             <th>Brand</th>
             <th>Kategori</th>
-            <th>Harga</th>
             <th>Quantity</th>
-            <th>Total Harga</th>
+            <th>Tanggal</th>
+            <th>Harga</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -40,12 +52,12 @@
         <tr>
             <td>{{ $pengeluarans->firstItem() + $loop->index }}</td>
             <td>{{ $pengeluaran->sepatu }}</td>
-            <td>{{ $pengeluaran->size }}</td>
-            <td>{{ $pengeluaran->brand }}</td>
-            <td>{{ $pengeluaran->kategori }}</td>
-            <td>Rp {{ number_format($pengeluaran->harga, 0, ',', '.') }}</td>
+            <td>{{ $pengeluaran->size->size }}</td>
+            <td>{{ $pengeluaran->brand->nama_brand }}</td>
+            <td>{{ $pengeluaran->kategori->nama }}</td>
             <td>{{ $pengeluaran->quantity }}</td>
-            <td>Rp {{ number_format($pengeluaran->harga * $pengeluaran->quantity, 0, ',', '.') }}</td>
+            <td>{{ $pengeluaran->date }}</td>
+            <td>Rp {{ number_format($pengeluaran->harga, 0, ',', '.') }}</td>
             <td class="text-nowrap">
                 <a href="/dashboard-pengeluarans/{{ $pengeluaran->id }}" class="btn btn-success btn-sm" title="Lihat detail">Detail</a>
                 <a href="/dashboard-pengeluarans/{{ $pengeluaran->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
@@ -60,7 +72,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="7" class="text-end"><strong>Total Pengeluaran</strong></td>
+            <td colspan="7" class="text-start"><strong>Total Pengeluaran</strong></td>
             <td colspan="2">Rp {{ number_format($total, 0, ',', '.') }}</td>
         </tr>
     </tfoot>

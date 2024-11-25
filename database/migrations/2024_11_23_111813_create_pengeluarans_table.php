@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('pengeluarans', function (Blueprint $table) {
             $table->id();
             $table->string('sepatu')->comment('Nama sepatu');
-            $table->integer('size')->comment('Ukuran sepatu');
-            $table->string('brand')->comment('Merek sepatu');
-            $table->string('kategori')->comment('Kategori sepatu');
-            $table->decimal('harga', 10, 2)->comment('Harga sepatu'); // Format harga (max 10 digit, 2 desimal)
+            $table->foreignId('size_id')->comment('Ukuran sepatu');
+            $table->foreignId('brand_id')->comment('Merek sepatu');
+            $table->foreignId('kategori_id')->comment('Kategori sepatu');
+            $table->integer('harga')->comment('Harga sepatu');
             $table->integer('quantity')->comment('Jumlah sepatu');
+            $table->date('date');
             $table->timestamps();
         });
     }
