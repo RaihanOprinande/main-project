@@ -12,7 +12,7 @@ class DashboardSepatuSizeController extends Controller
     public function index()
     {
 
-            $sepatusizes = Sepatu::with('sizes')->paginate(10);
+            $sepatusizes = Sepatu_size::with('sizes','sepatus')->paginate(10);
 
             return view('dashboard.stock.index', compact('sepatusizes'));
     }
@@ -39,22 +39,26 @@ class DashboardSepatuSizeController extends Controller
 
     public function edit(string $id)
     {
+        $stocks = Sepatu_size::with('sizes','sepatus')->findOrFail($id);
         $sepatus = Sepatu::all();
         $sizes = Size::all();
-        $sepatuSize = Sepatu_size::all();
 
-        return view('dashboard.stock.edit', compact('sepatus', 'sizes', 'sepatuSize'));
+
+        return view('dashboard.stock.edit', compact('sepatus', 'sizes','stocks'));
     }
 
     // Memperbarui sepatu_size
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id){
         $validated = $request->validate([
-
-            'quantity' => 'required',
-
+            'quantity' => 'required'
         ]);
         Sepatu_size::where('id',$id)->update($validated);
-        return redirect('/dashboard-stock')->with('success', 'Sepatu Size updated successfully.');
+        return redirect('/dashboard-stock')-> with('pesan', 'Data berhasil diubah');
+    }
+
+    public function destroy(string $id)
+    {
+       Sepatu_size::destroy($id);
+       return redirect('/dashboard-stock')->with('pesan','Data berhasil dihapus');
     }
 }
