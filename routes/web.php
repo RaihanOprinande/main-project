@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardSizesController;
 // use App\Http\Controllers\DashboardIncomesController;
 use App\Http\Controllers\DashboardOrderController;
 use App\Http\Controllers\DashboardSepatuSizeController;
+use App\Http\Controllers\DashboardPengeluaransController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LoginController;
 

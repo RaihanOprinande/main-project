@@ -10,7 +10,7 @@
         <div class="heroes">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div class="col-10 col-sm-8 col-lg-6 gambar-heroes">
-                    <img src="/images/baner.jpg" class="d-block mx-lg-auto img-fluid mt-5" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                    <img src="/images/baner3.jpg" class="d-block mx-lg-auto img-fluid mt-5" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
                 </div>
                 <div class="col-lg-6 isi-heroes">
                     <h1 class="display-5 fw-bold lh-1 mb-3 ms-4">Step-Off: Langkah Pasti untuk Gaya Terbaik!</h1>
@@ -31,7 +31,7 @@
             <div class="men me-4">
                 <div class="isi-men">
                     <div class="gambar-men ">
-                        <a href="{{ route('sepatu.kategori', ['kategori' => '1']) }}">
+                        <a href="{{ route('sepatu.kategori', ['kategori' => '2']) }}">
                             <img src="/images/hiroyuki_Sanada.jpg" alt="">
                             <div class="text-kategori">
                                 view men's shoes
@@ -43,7 +43,7 @@
             <div class="women">
                 <div class="isi-women">
                     <div class="gambar-women">
-                        <a href="{{ route('sepatu.kategori', ['kategori' => '2']) }}">
+                        <a href="{{ route('sepatu.kategori', ['kategori' => '1']) }}">
                             <img src="/images/miki_matsubara.jpeg" alt="">
                             <div class="text-kategori">
                                 view women's shoes
