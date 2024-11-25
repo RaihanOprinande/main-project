@@ -30,7 +30,7 @@
                 @if (old('size_id',$stocks->size_id) == $size->id)
                     <option value="{{ $size->id }}" selected>{{ $stocks->sizes->size }}</option>
                 @else
-                    <option value="{{ $size->id }}">{{ $size->nama }}</option>
+                    <option value="{{ $size->id }}">{{ $size->size }}</option>
                 @endif
                 @endforeach
             </select>
