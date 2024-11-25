@@ -133,6 +133,7 @@
         <!-- Details Section -->
         <div class="details-section">
             <h1>{{ $sepatu->nama }}</h1>
+            <p>{{ $sepatu->brands->nama_brand }}</p>
             <p>Kategori: {{ $sepatu->kategori->nama }}</p>
             <p class="price">Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
 
@@ -164,7 +165,7 @@
                 <input type="hidden" name="sepatu_id" value="{{ $sepatu->id }}">
                 <input type="hidden" name="jumlah" id="form_quantity" value="1">
                 <input type="hidden" name="size" id="form_size">
-                
+
 
                 <button type="submit" class="btn" id="orderButton" disabled>Order Now</button>
             </form>
