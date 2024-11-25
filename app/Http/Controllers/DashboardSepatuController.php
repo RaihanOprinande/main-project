@@ -68,7 +68,7 @@ class DashboardSepatuController extends Controller
          'nama' => 'required',
          'harga' => 'required',
          'kategori_id' => 'required',
-         'gambar_sepatu' => 'required',
+         'gambar_sepatu' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
          'brands_id' => 'required',
         ]);
 

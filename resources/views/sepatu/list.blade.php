@@ -49,24 +49,29 @@
         .card a:hover {
             color: gray;
         }
+
         .card-title {
             margin-bottom: 0; /* Menghilangkan margin bawah */
         }
 
+        /* Tambahkan padding untuk list sepatu */
+        .list-padding {
+            padding-top: 20px; /* Atur padding atas */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Row Bootstrap untuk grid card -->
-        <div class="row">
+        <div class="row list-padding">
             @forelse($sepatus as $sepatu)
                 <div class="col-md-3 col-sm-6"> <!-- Setiap card 1/4 lebar pada md, 1/2 pada sm -->
                     <div class="product-card card">
                         <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}">
-                            <img src="{{ asset('images/' . $sepatu->sepatu_gambar) }}" class="card-img-top" alt="{{ $sepatu->nama }}">
+                            <img src="{{ asset('storage/' . $sepatu->gambar_sepatu) }}" alt="{{ $sepatu->nama_sepatu }}" height="300px" width="250px">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $sepatu-> sepatu_gambar }}</h5>
-                                <p class="card-text">{{ $sepatu-> kategori->nama }}</p>
+                                <h6 class="card-text">{{ $sepatu->nama }}</h6>
+                                <p class="card-text">{{ $sepatu->kategori->nama }}</p>
                                 <p>Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
                             </div>
                         </a>
