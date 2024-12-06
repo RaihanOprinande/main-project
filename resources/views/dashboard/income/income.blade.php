@@ -48,6 +48,7 @@
         <tfoot>
             <tr class="table-secondary">
                 <td colspan="6" class="text-start fw-bold">Total Pemasukan:</td>
+                <td></td>
                 <td class="fw-bold">Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</td>
             </tr>
         </tfoot>
