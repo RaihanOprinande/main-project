@@ -20,25 +20,23 @@ class LoginPelangganController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('customer')->attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/');
         }
 
+
         return back()->withErrors([
-            'login' => 'Email atau password salah.',
+            'loginpelanggan' => 'Email atau password salah.',
         ])->onlyInput('email');
     }
 
     public function logout(Request $request): RedirectResponse
 {
-    Auth::logout();
-
+    Auth::guard('customer')->logout(); // Logout dari guard customer
     $request->session()->invalidate();
-
     $request->session()->regenerateToken();
-
-    return redirect('/');
+    return redirect('/loginpelanggan');
 }
+
 }

@@ -21,10 +21,11 @@
         </ul>
         <ul class="navbar-nav">
 
-            <li class="nav-item px-3 ">
-                <a class="nav-link" href="/login">Login</a>
+            <form action="/logoutpelanggan" method="POST">
+                @csrf
+                <button class="nav-link text-black" type="submit">Log Out</button>
 
-            </li>
+            </form>
            </ul>
         <form class="d-flex" role="search" action="{{ url('/list-search') }}" method="GET">
             <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">

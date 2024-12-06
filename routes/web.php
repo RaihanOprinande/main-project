@@ -62,5 +62,12 @@ Route::put('/dashboard-order/{id}/confirm', [SepatuController::class, 'confirmOr
 Route::resource('/dashboard-income',DashboardIncomesController::class)->middleware(['auth']);
 
 
+Route::middleware('auth:customer')->group(function () {
+    Route::get('/loginpelanggan', [LoginPelangganController::class, 'login']);
+});
+
+Route::middleware('auth:web')->group(function () {
+    Route::get('/login', [LoginController::class, 'login']);
+});
 
 

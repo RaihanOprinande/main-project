@@ -147,6 +147,7 @@
                 </div>
                 @enderror
             </div>
+
             <div class="input-field">
                 <input type="password" class="form-control"
                        id="floatingPassword" name="password" placeholder="Password">
@@ -154,9 +155,9 @@
             </div>
 
             <!-- Pesan error login -->
-            @if ($errors->has('login'))
+            @if ($errors->has('loginpelanggan'))
                 <div style="color: red; margin-bottom: 10px;">
-                    {{ $errors->first('login') }}
+                    {{ $errors->first('loginpelanggan') }}
                 </div>
             @endif
 
