@@ -27,16 +27,15 @@ class Pemasukan extends Model
     {
         return $this->belongsTo(Sepatu::class);
     }
-
-    // Relasi dengan model Color (Warna)
-    public function color()
+    public function kategori()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Kategori::class);
     }
 
-    // Relasi dengan model Size (Ukuran)
-    public function size()
-    {
+    public function merek(){
+        return $this->belongsTo(Brands::class);
+    }
+    public function size(){
         return $this->belongsTo(Size::class);
     }
 }

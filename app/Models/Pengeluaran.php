@@ -14,21 +14,13 @@ class Pengeluaran extends Model
 
     // Tentukan kolom-kolom yang dapat diisi (mass assignable)
     protected $fillable = [
-        'sepatu',
-        'size_id',
-        'brand_id',
         'kategori_id',
-        'harga',
-        'quantity',
+        'uang',
+        'keterangan',
         'date',
     ];
-    public function size(){
-        return $this->belongsTo(Size::class);
-    }
-    public function brand(){
-        return $this->belongsTo(Brands::class);
-    }
     public function kategori(){
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(KategoriPengeluaran::class);
     }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brands;
 use App\Models\Kategori;
+use App\Models\KategoriPengeluaran;
 use App\Models\Pengeluaran;
 use App\Models\Sepatu;
 use App\Models\Size;
@@ -22,17 +23,24 @@ class DashboardPengeluaransController extends Controller
     //     $query->where('kategori_id', $request->kategori_id);
     // }
 
-    if ($request->filled('date')) {
-        $query->where('date', $request->date);
+    if ($request->filled('kategori_id')) {
+        $query->where('kategori_id', $request->kategori_id);
     }
 
+    if ($request->filled('date')) {
+        $query->whereDate('date', $request->date);
+    }
+
+
     // Hitung total pengeluaran berdasarkan semua data yang diambil
-    $total = $query->sum('harga');
-    $pengeluarans = Pengeluaran::with('size','brand','kategori')->paginate(10);
+    $total = $query->sum('uang');
+    $pengeluarans = $query->with('kategori')->paginate(10);
+
     $tanggal = Pengeluaran::latest()->paginate(10);
+    $kategoris = KategoriPengeluaran::latest()->paginate(10);
 
     // Return view dengan data yang diperlukan
-    return view('dashboard.pengeluarans.index', compact( 'total','pengeluarans','tanggal'));
+    return view('dashboard.pengeluarans.index', compact( 'total','pengeluarans','tanggal','kategoris'));
 }
 
     /**
@@ -40,11 +48,9 @@ class DashboardPengeluaransController extends Controller
      */
     public function create()
     {
-        $sepatus = Sepatu::all();
-        $brands = Brands::all();
-        $sizes = Size::all();
-        $categories = Kategori::all();
-        return view('dashboard.pengeluarans.create',compact('sepatus','brands','sizes','categories'));
+
+        $kategoris = KategoriPengeluaran::latest()->paginate(10);
+        return view('dashboard.pengeluarans.create',compact('kategoris'));
     }
 
     /**
@@ -54,12 +60,9 @@ class DashboardPengeluaransController extends Controller
     {
         // Validasi input
         $request->validate([
-            'sepatu' => 'required',
-            'size_id' => 'required',
-            'brand_id' => 'required',
             'kategori_id' => 'required',
-            'harga' => 'required',
-            'quantity' => 'required',
+            'uang' => 'required',
+            'keterangan' => 'nullable',
             'date' => 'required',
         ]);
 
@@ -84,10 +87,10 @@ class DashboardPengeluaransController extends Controller
     // $sepatus = Sepatu::all();
     $brands = Brands::all();
     $sizes = Size::all();
-    $categories = Kategori::all();
+    $kategoris = KategoriPengeluaran::all();
 
     // Tampilkan view edit dengan data pengeluaran
-    return view('dashboard.pengeluarans.edit', compact('pengeluaran','brands','sizes','categories'));
+    return view('dashboard.pengeluarans.edit', compact('pengeluaran','brands','sizes','kategoris'));
 }
 
 
@@ -98,12 +101,9 @@ class DashboardPengeluaransController extends Controller
     {
         // Validasi data yang diterima dari form
         $validated = $request->validate([
-            'sepatu' => 'required',
-            'size_id' => 'required',
-            'brand_id' => 'required',
-            'kategori_id' => 'required',
-            'harga' => 'required',
-            'quantity' => 'required',
+           'kategori_id' => 'required',
+            'uang' => 'required',
+            'keterangan' => 'nullable',
             'date' => 'required',
         ]);
 
@@ -120,14 +120,7 @@ class DashboardPengeluaransController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function show($id)
-    {
-        // Cari data pengeluaran berdasarkan ID
-        $pengeluaran = Pengeluaran::findOrFail($id);
 
-        // Tampilkan halaman show dengan data pengeluaran
-        return view('dashboard.pengeluarans.show', compact('pengeluaran'));
-    }
     public function destroy($id)
     {
         // Cari data pengeluaran berdasarkan ID

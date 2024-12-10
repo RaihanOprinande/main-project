@@ -32,9 +32,13 @@ class Pemesanan extends Model
     {
         return $this->belongsTo(Sepatu::class);
     }
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 
-    public function color(){
-        return $this->belongsTo(Color::class);
+    public function merek(){
+        return $this->belongsTo(Brands::class);
     }
     public function size(){
         return $this->belongsTo(Size::class);

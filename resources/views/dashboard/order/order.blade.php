@@ -22,9 +22,9 @@
         <td>{{ $orders->firstItem() + $loop->index }}</td>
         <td>{{ $order->nama }}</td>
         <td>{{ number_format($order->harga, 0, ',', '.') }}</td>
-        <td>{{ $order->kategori_id }}</td>
-        <td>{{ $order->merek_id }}</td>
-        <td>{{ $order->size_id }}</td>
+        <td>{{ $order->kategori->nama }}</td>
+        <td>{{ $order->merek->nama_brand }}</td>
+        <td>{{ $order->size->size }}</td>
         <td>{{ $order->jumlah }}</td>
         <td>{{ number_format($order->total, 0, ',', '.') }}</td>
         <td>

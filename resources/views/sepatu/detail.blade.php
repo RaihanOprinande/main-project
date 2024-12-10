@@ -141,7 +141,7 @@
             <div class="size-selection">
                 <h4>Select Size:</h4>
                 @foreach ($sepatu->sizes as $size)
-                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->size }}">
+                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->id }}">
                     <label for="size{{ $size->id }}">{{ $size->size }}</label>
                 @endforeach
             </div>

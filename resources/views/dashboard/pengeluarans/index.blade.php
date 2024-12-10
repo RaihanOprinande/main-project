@@ -12,20 +12,20 @@
 
 <a href="/dashboard-pengeluarans/create" class="btn btn-primary mb-2">Tambah Pengeluaran</a>
 
-<form method="GET" action="/dashboard-pengeluarans" class="mb-3">
+<form method="GET" action="{{ url('/dashboard-pengeluarans') }}" class="mb-3">
     <div class="row">
         <div class="col-md-4">
             <select name="kategori_id" class="form-select">
                 <option value="">Pilih Kategori</option>
-                @foreach ($pengeluarans as $tanggal)
-                    <option value="{{ $tanggal->id }}" {{ request('date') == $tanggal->id ? 'selected' : '' }}>
-                        {{ $tanggal->date }}
+                @foreach ($kategoris as $kategori)
+                    <option value="{{ $kategori->id }}" {{ request('kategori_id') == $kategori->id ? 'selected' : '' }}>
+                        {{ $kategori->nama }}
                     </option>
                 @endforeach
             </select>
         </div>
         <div class="col-md-4">
-            <input type="date" name="tanggal" class="form-control" value="{{ request('date') }}">
+            <input type="date" name="date" class="form-control" value="{{ request('date') }}">
         </div>
         <div class="col-md-4">
             <button type="submit" class="btn btn-primary">Filter</button>
@@ -37,11 +37,8 @@
     <thead class="table-primary">
         <tr>
             <th>No</th>
-            <th>Sepatu</th>
-            <th>Size</th>
-            <th>Brand</th>
             <th>Kategori</th>
-            <th>Quantity</th>
+            <th>Keterangan</th>
             <th>Tanggal</th>
             <th>Harga</th>
             <th>Aksi</th>
@@ -51,15 +48,12 @@
         @foreach ($pengeluarans as $pengeluaran)
         <tr>
             <td>{{ $pengeluarans->firstItem() + $loop->index }}</td>
-            <td>{{ $pengeluaran->sepatu }}</td>
-            <td>{{ $pengeluaran->size->size }}</td>
-            <td>{{ $pengeluaran->brand->nama_brand }}</td>
             <td>{{ $pengeluaran->kategori->nama }}</td>
-            <td>{{ $pengeluaran->quantity }}</td>
+            <td>{{ $pengeluaran->keterangan }}</td>
             <td>{{ $pengeluaran->date }}</td>
-            <td>Rp {{ number_format($pengeluaran->harga, 0, ',', '.') }}</td>
+            <td>Rp {{ number_format($pengeluaran->uang, 0, ',', '.') }}</td>
             <td class="text-nowrap">
-                <a href="/dashboard-pengeluarans/{{ $pengeluaran->id }}" class="btn btn-success btn-sm" title="Lihat detail">Detail</a>
+                
                 <a href="/dashboard-pengeluarans/{{ $pengeluaran->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
                 <form action="/dashboard-pengeluarans/{{ $pengeluaran->id }}" method="post" class="d-inline">
                     @method('DELETE')
@@ -72,7 +66,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="7" class="text-start"><strong>Total Pengeluaran</strong></td>
+            <td colspan="4" class="text-start"><strong>Total Pengeluaran</strong></td>
             <td colspan="2">Rp {{ number_format($total, 0, ',', '.') }}</td>
         </tr>
     </tfoot>

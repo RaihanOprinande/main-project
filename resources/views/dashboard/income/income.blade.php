@@ -26,9 +26,9 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->nama }}</td>
                 <td>Rp {{ number_format($data->harga, 0, ',', '.') }}</td>
-                <td>{{ $data->kategori_id }}</td>
-                <td>{{ $data->merek_id }}</td>
-                <td>{{ $data->size_id }}</td>
+                <td>{{ $data->kategori->nama }}</td>
+                <td>{{ $data->merek->nama_brand }}</td>
+                <td>{{ $data->size->size }}</td>
                 <td>{{ $data->jumlah }}</td>
                 <td>Rp {{ number_format($data->total, 0, ',', '.') }}</td>
                 @can('admin')
