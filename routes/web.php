@@ -70,4 +70,9 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/login', [LoginController::class, 'login']);
 });
 
+// Route untuk cetak PDF
+Route::get('/dashboard-income/cetak-pdf', [DashboardIncomesController::class, 'show'])->name('incomes.cetak-pdf');
+Route::get('/dashboard-pengeluarans/cetak-pdf', [DashboardPengeluaransController::class, 'show']);
+
+
 

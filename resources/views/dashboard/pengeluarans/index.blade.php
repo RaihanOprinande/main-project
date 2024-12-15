@@ -27,8 +27,12 @@
         <div class="col-md-4">
             <input type="date" name="date" class="form-control" value="{{ request('date') }}">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+
+        <div class="col-md-2">
+            <a href="{{ url('/dashboard-pengeluarans/cetak-pdf') }}" class="btn btn-success mb-2">Cetak Pdf</a>
         </div>
     </div>
 </form>
@@ -53,7 +57,7 @@
             <td>{{ $pengeluaran->date }}</td>
             <td>Rp {{ number_format($pengeluaran->uang, 0, ',', '.') }}</td>
             <td class="text-nowrap">
-                
+
                 <a href="/dashboard-pengeluarans/{{ $pengeluaran->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
                 <form action="/dashboard-pengeluarans/{{ $pengeluaran->id }}" method="post" class="d-inline">
                     @method('DELETE')

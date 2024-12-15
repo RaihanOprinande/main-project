@@ -6,17 +6,54 @@ use App\Models\Brands;
 use App\Models\Kategori;
 use App\Models\Pemasukan;
 use App\Models\Size;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class DashboardIncomesController extends Controller
 {
-    public function index()
+    public function show(Request $request)
     {
-        $incomes=Pemasukan::latest();
-         // $sepatus=Sepatu::latest()->paginate(10);
-         $totalPemasukan = Pemasukan::sum('total');
-         return view('dashboard.income.income',['incomes'=>$incomes->paginate(10),'totalPemasukan'=>$totalPemasukan]);
+        // Ambil data pemasukan, filter berdasarkan tanggal jika ada
+        $pemasukans = Pemasukan::query();
+
+        if ($request->has('tanggal') && $request->tanggal) {
+            $pemasukans->whereDate('tanggal', $request->tanggal);
+        }
+
+        $pemasukans = $pemasukans->get();  // Ambil data pemasukan
+        $totalPemasukan = Pemasukan::sum('total');  // Total pemasukan
+
+        // Buat PDF dengan data yang sudah diproses
+        $pdf = Pdf::loadView('dashboard.income.cetak_pdf', [
+            'pemasukans' => $pemasukans,
+            'totalPemasukan' => $totalPemasukan
+        ]);
+
+        // Stream file PDF (langsung download)
+        return $pdf->stream('laporan-data-pemasukan.pdf');
     }
+    public function index(Request $request)
+{
+    // Inisialisasi query untuk model Pemasukan
+    $query = Pemasukan::latest();
+
+    if ($request->filled('tanggal')) {
+        $query->whereDate('tanggal', $request->tanggal);
+    }
+
+    // Mengambil data dengan pagination
+    $incomes = $query->paginate(10);
+
+    // Menghitung total pemasukan
+    $totalPemasukan = $query->sum('total');
+
+    // Mengembalikan view dengan data yang diperlukan
+    return view('dashboard.income.income', [
+        'incomes' => $incomes,
+        'totalPemasukan' => $totalPemasukan
+    ]);
+}
+
 
     public function edit(string $id)
      {
@@ -41,6 +78,7 @@ class DashboardIncomesController extends Controller
          'size_id' => 'required',
          'jumlah' => 'required',
          'total' => 'required',
+         'tanggal' => 'required',
         ]);
 
         if ($request->file('gambar_sepatu')) {

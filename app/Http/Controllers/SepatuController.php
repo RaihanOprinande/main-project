@@ -60,10 +60,17 @@ public function pemesanan(Request $request)
 public function prosesBayar(Request $request)
 {
     $request->validate([
-        'bukti' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'bukti' => 'required|image|mimes:jpeg,png,jpg,gif|max:5000',
         'id' => 'required|exists:shoes,id', // Memastikan sepatu ID ada
         'jumlah' => 'required|integer',
+    ], [
+        'bukti.required' => 'Harap upload bukti pembayaran.',
+        'bukti.image' => 'File yang diupload harus berupa gambar.',
+        'bukti.mimes' => 'Hanya diperbolehkan format: jpeg, png, jpg.',
+        'bukti.max' => 'Ukuran gambar maksimal 2MB.',
     ]);
+
+
 
     // Mengambil data sepatu beserta warna dan ukuran
     $sepatu = Sepatu::with(['colors', 'sizes'])->find($request->id);
@@ -86,6 +93,8 @@ public function prosesBayar(Request $request)
     ]);
 
     return redirect()->route('sepatu.home')->with('success', 'Pemesanan berhasil disimpan');
+
+
 }
 
 public function confirmOrder($id)
@@ -107,6 +116,7 @@ public function confirmOrder($id)
         'size_id' => $order->size_id,
         'jumlah' => $order->jumlah,
         'total' => $order->total,
+        'tanggal'=>now(),
     ]);
 
     // Redirect dengan pesan sukses
