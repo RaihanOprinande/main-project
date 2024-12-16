@@ -41,6 +41,7 @@ Route::get('dshbrd-usr',[DashboardAdminController::class,'index'])->middleware([
 Route::get('dshbrd-brd',[DashboardBrandController::class,'index'])->middleware(['auth']);
 Route::get('/cart',[cartController::class, 'index']);
 
+
 Route::post('/cart/{id}',[cartController::class,'store']);
 
 
@@ -59,11 +60,15 @@ Route::resource('/dashboard-sizes',DashboardSizesController::class)->middleware(
 Route::resource('/dashboard-color',DashboardColorsController::class)->middleware(['auth']);
 Route::resource('/dashboard-order',DashboardOrderController::class)->middleware(['auth']);
 Route::resource('/dashboard-stock',DashboardSepatuSizeController::class)->middleware(['auth']);
+Route::resource('/cartedit',cartController::class)->middleware(['auth']);
 Route::post('/pemesanan', [SepatuController::class, 'pemesanan'])->name('pemesanan');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/proses-bayar', [SepatuController::class, 'prosesBayar'])->name('proses.bayar');
 Route::put('/dashboard-order/{id}/confirm', [SepatuController::class, 'confirmOrder'])->name('orders.confirm');
 Route::resource('/dashboard-income',DashboardIncomesController::class)->middleware(['auth']);
+
+Route::resource('/cart/update-customer', cartController::class);
+
 
 
 // Route::middleware('auth:customers')->group(function () {

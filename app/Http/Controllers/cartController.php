@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Pengambilan;
 use App\Models\Sepatu_size;
 use Illuminate\Http\Request;
@@ -42,4 +43,30 @@ class cartController extends Controller
 
         return redirect('cart')->with('pesan', 'Produk berhasil ditambahkan ke keranjang.');
     }
+
+    public function edit(string $id){
+        $customers = Customer::find($id);
+        return view('sepatu.editcart',compact('customers'));
+    }
+
+
+
+    public function update(Request $request, $id)
+{
+    // Validasi input
+    $validated = $request->validate([
+        'name' => 'nullable',
+        'nohp' => 'nullable',
+        'alamat' => 'required',
+    ]);
+
+    // Update data customer
+    Customer::where('id',$id)->update($validated);
+
+    // Redirect dengan pesan sukses
+    return redirect('cart')->with('pesan', 'Customer berhasil diperbarui!');
+}
+
+
+
 }
