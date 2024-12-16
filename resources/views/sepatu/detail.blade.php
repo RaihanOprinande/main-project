@@ -124,6 +124,8 @@
     </style>
 </head>
 <body>
+    <form action="/cart/store" method="POST">
+        @csrf
     <div class="container">
         <!-- Image Section -->
         <div class="image-section">
@@ -141,7 +143,7 @@
             <div class="size-selection">
                 <h4>Select Size:</h4>
                 @foreach ($sepatu->sizes as $size)
-                    <input type="radio" name="size" id="size{{ $size->id }}" value="{{ $size->id }}">
+                    <input type="radio" name="size_id" id="size{{ $size->id }}" value="{{ $size->id }}">
                     <label for="size{{ $size->id }}">{{ $size->size }}</label>
                 @endforeach
             </div>
@@ -160,18 +162,14 @@
             </div>
 
             <!-- Add to Bag Button -->
-            <form action="{{ route('pemesanan') }}" method="POST">
-                @csrf
+
                 <input type="hidden" name="sepatu_id" value="{{ $sepatu->id }}">
-                <input type="hidden" name="jumlah" id="form_quantity" value="1">
+                <input type="hidden" name="quantity" id="form_quantity" value="1">
                 <input type="hidden" name="size" id="form_size">
+                {{-- <p>silahkan login terlebih dahulu jika ingin membeli produk</p> --}}
+                <button type="submit" class="btn" id="orderButton" disabled>Add to cart</button>
 
-
-                <button type="submit" class="btn" id="orderButton" disabled>Order Now</button>
             </form>
-
-            <!-- Back to List Button -->
-            <a href="{{ route('sepatu.home') }}" class="btn">Kembali ke Daftar Sepatu</a>
         </div>
     </div>
 
@@ -197,14 +195,14 @@
 
         function validateForm() {
 
-            const selectedSize = document.querySelector('input[name="size"]:checked');
+            const selectedSize = document.querySelector('input[name="size_id"]:checked');
             const orderButton = document.getElementById('orderButton');
 
             orderButton.disabled = !(selectedSize);
         }
 
 
-        document.querySelectorAll('input[name="size"]').forEach((radio) => {
+        document.querySelectorAll('input[name="size_id"]').forEach((radio) => {
             radio.addEventListener('change', function () {
                 document.getElementById('form_size').value = this.value;
                 validateForm();

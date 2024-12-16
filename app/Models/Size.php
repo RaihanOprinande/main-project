@@ -14,4 +14,8 @@ class Size extends Model
     public function sepatu(){
         return $this->belongsToMany(Sepatu::class,'sepatu_sizes', 'size_id','sepatu_id')->withPivot('quantity');
     }
+
+    public function carts(){
+        return $this->belongsToMany(Cart::class,'carts','size_id','size_id')->withPivot('quantity');
+    }
 }

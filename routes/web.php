@@ -5,6 +5,7 @@ use App\Http\Controllers\SepatuController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\DashboardSepatuController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBrandController;
 use App\Http\Controllers\DashboardColorsController;
@@ -28,7 +29,7 @@ Route::get('/', [SepatuController::class, 'index'])->name('sepatu.home');
 Route::get('/sepatu/{id}', [SepatuController::class, 'show'])->name('sepatu.detail');
 Route::get('/aboutus', [SepatuController::class, 'aboutus']);
 Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/loginpelanggan', [LoginPelangganController::class, 'login'])->name('loginpelanggan');
+Route::get('/loginpelanggan', [LoginPelangganController::class, 'loginpelanggan']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::get('list',[ListController::class,'index'])->name('sepatu.list');
 Route::get('/merek/{id}/sepatu', [ListController::class, 'sepatuByMerek']);
@@ -38,6 +39,9 @@ Route::get('/dashboard',[DashboardAdminController::class, 'Dashboard'])->middlew
 Route::get('dshbrd-spt',[DashboardSepatuController::class,'index'])->middleware(['auth']);
 Route::get('dshbrd-usr',[DashboardAdminController::class,'index'])->middleware(['auth']);
 Route::get('dshbrd-brd',[DashboardBrandController::class,'index'])->middleware(['auth']);
+Route::get('/cart',[cartController::class, 'index']);
+
+Route::post('/cart/{id}',[cartController::class,'store']);
 
 
 Route::post('/login',[LoginController::class,'authenticate']);
@@ -62,12 +66,13 @@ Route::put('/dashboard-order/{id}/confirm', [SepatuController::class, 'confirmOr
 Route::resource('/dashboard-income',DashboardIncomesController::class)->middleware(['auth']);
 
 
-Route::middleware('auth:customer')->group(function () {
-    Route::get('/loginpelanggan', [LoginPelangganController::class, 'login']);
-});
+// Route::middleware('auth:customers')->group(function () {
+//     Route::get('/loginpelanggan', [LoginPelangganController::class, 'loginpelanggan']);
+//     Route::get('/cart',[cartController::class, 'index']);
+// });
 
-Route::middleware('auth:web')->group(function () {
-    Route::get('/login', [LoginController::class, 'login']);
-});
+// Route::middleware('auth:web')->group(function () {
+//     Route::get('/login', [LoginController::class, 'loginpelanggan']);
+// });
 
 

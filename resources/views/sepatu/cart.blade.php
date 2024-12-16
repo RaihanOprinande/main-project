@@ -1,63 +1,119 @@
 @extends('layouts.main')
 @section('content')
 
-<h1>Daftar Sepatu</h1>
+{{-- untuk menampilkan pesan --}}
+@if (session('pesan'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   {{session('pesan')}}
+  {{-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> --}}
+</div>
+@endif
 
-  @if (session('pesan'))
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Hei Tayo</strong> {{session('pesan')}}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  @endif
-<a href="/dashboard-sepatu/create" class="btn btn-primary mb-2">Tambah Sepatu</a>
-
-{{-- <div class="row mb-3 mt-4">
-    <div class="col-md-4">
-        <form class="d-flex" role="search" action="{{ url('/dshbrd-spt') }}" method="GET">
-            <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form>
+{{-- untuk menampilkan jika keranjang kosong --}}
+@if ($carts->count() == 0)
+    <div class="cart-kosong text-center mt-5">
+        <h1>Cart anda masih kosong silahkan belanja<h1>
     </div>
-</div> --}}
-<table class="table table-bordered">
+{{-- menmapilkan jika kerangjang ada --}}
+@else
+    <h1>Cart</h1>
+    <table class="table table-bordered mb-5">
     <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>Harga</th>
+        {{-- <th>No</th> --}}
+        <th>Gambar</th>
+        <th>Produk</th>
         <th>Kategori</th>
         <th>Merek</th>
-        {{-- <th>Sizes</th>
-        <th>Gambar</th> --}}
-        <th>Aksi</th>
+        <th>Size</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Sub harga</th>
+        <th></th>
     </tr>
-    @foreach ($sepatus as $sepatu)
+    @foreach ($carts as $cart)
     <tr>
-        <td>{{ $sepatus->firstItem()+$loop->index }}</td>
-        {{-- <td>{{ $sepatu->id }}</td> --}}
-        <td>{{ $sepatu->nama }}</td>
-        <td>{{ $sepatu->harga }}</td>
-        <td>{{ $sepatu->kategori->nama }}</td>
-        <td>{{ $sepatu->brands->nama_brand }}</td>
-        {{-- <td>{{ $sepatu->size->size }}</td> --}}
-
-        {{-- <td>
-            {{$sepatu->gambar->gambar_sepatu }}
-        </td> --}}
+        {{-- <td>{{ $carts->firstItem() + $loop->index }}</td> --}}
+        <td><img src="{{ asset('storage/' . $cart->sepatus->gambar_sepatu) }}" width="150px" height="auto" alt=""></td>
+        <td>{{ $cart->sepatus->nama }}</td>
+        <td>{{ $cart->sepatus->kategori->nama }}</td>
+        <td>{{ $cart->sepatus->brands->nama_brand }}</td>
+        <td>{{ $cart->sizes->size }}</td>
+        <td>RP. {{ number_format($cart->sepatus->harga, 0, ',', '.') }}</td>
+        <td>{{ $cart->quantity }}</td>
+        <td> RP. {{ number_format($cart->quantity*$cart->sepatus->harga, 0, ',', '.') }}</td>
 
         <td class="text-nowrap">
-            <a href="/dashboard-sepatu/{{$sepatu->id}}" class="btn btn-success btn-sm" title="lihat detail">Detail</a>
-            <a href="/dashboard-sepatu/{{$sepatu->id}}/edit" class="btn btn-warning">Edit</a>
-            <form action="/dashboard-sepatu/{{$sepatu->id}}" method="post" class="d-inline">
+            {{-- <form action="" method="post" class="d-inline">
                 @method('DELETE')
-                @csrf
-                <button class="btn btn-danger btn-sm" onclick="return confirm('yakin akan menghapus data ini?')">hapus</button>
-            </form>
+                @csrf --}}
+                <button class="btn btn-danger btn-sm" >Cancel</button>
+            {{-- </form> --}}
         </td>
     </tr>
+
+
+
     @endforeach
+    <tr>
+        {{-- <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td> --}}
+        <td colspan="7" class="text-end ms-5"><strong>Total</strong></td>
+        <td colspan="2"><strong>Rp. {{ number_format($totalHarga, 0, ',','.') }}</strong></td>
+        {{-- <td></td> --}}
+
+    </tr>
+
 </table>
 
-{{ $sepatus->links() }}
+
+<div class="mb-3">
+    <table class="table table-bordered">
+        @foreach ($carts as $cart)
+
+        <tr>
+            <th>Nama</th>
+            <th>No.HP</th>
+            <th>Alamat</th>
+            <th>Aksi</th>
+        </tr>
+        <tr>
+            <td>{{ $cart->customers->name }}</td>
+            <td>{{ $cart->customers->nohp }}</td>
+            <td>{{ $cart->customers->alamat }}</td>
+            <td><a href="" class="btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
+
+            </td>
+        </tr>
+        @endforeach
+    </table>
+</div>
+
+<div class="form-group">
+    <label for="sepatu">Pilih Pengambilan barang</label>
+    <select name="pengambilan" id="pengambilan" class="form-control" required>
+        <option value="">-- Pilih metode pengambilan --</option>
+        @foreach ($pengambilans as $pengambilan)
+            <option value="{{ $pengambilan->id }}">{{ $pengambilan->metode }}</option>
+        @endforeach
+    </select>
+</div>
+
+
+
+{{-- ini kodingan untuk 2 button di bawah --}}
+<div class="button-konfirmasi mt-4">
+    <a href="/list" class="btn btn-dark">Kembali belanja</a>
+    <a href="/list" class="btn btn-success">Check out</a>
+</div>
+
+{{-- {{ $carts->links() }} --}}
+@endif
+
+
 @endsection
 
 

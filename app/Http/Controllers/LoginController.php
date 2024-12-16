@@ -32,7 +32,7 @@ class LoginController extends Controller
 
     public function logout(Request $request): RedirectResponse
 {
-    Auth::guard('web')->logout(); // Logout dari guard customer
+    Auth::guard('web')->logout(); // Logout dari guard admin
     $request->session()->invalidate();
     $request->session()->regenerateToken();
     return redirect('/login');

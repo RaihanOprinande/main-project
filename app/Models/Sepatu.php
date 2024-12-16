@@ -29,5 +29,8 @@ class Sepatu extends Model
     public function size(){
         return $this->belongsTo(Sepatu_size::class);
     }
+    public function carts(){
+        return $this->belongsToMany(Cart::class,'carts','sepatu_id','sepatu_id')->withPivot('quantity');
+    }
 
 }

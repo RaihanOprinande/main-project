@@ -15,7 +15,7 @@ return [
         ],
 
         // Guard untuk pelanggan
-        'customer' => [
+        'customers' => [
             'driver' => 'session',
             'provider' => 'customers',
         ],

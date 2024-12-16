@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer Example</title>
+    <title>Footer</title>
     <!-- Internal CSS -->
     <style>
 
@@ -22,6 +22,7 @@
             color: #000000;
             padding: 40px 0 0;
             font-family: Arial, sans-serif;
+
         }
 
         .footer-border {

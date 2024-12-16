@@ -25,7 +25,7 @@ class RegisterController extends Controller
         $validated['password'] = Hash::make($validated['password']);
 
         Customer::create($validated);
-        return redirect()->route('loginpelanggan')->with('success', 'Akun berhasil dibuat. Silakan login.');
+        return redirect('/loginpelanggan')->with('pesan', 'Akun berhasil dibuat. Silakan login.');
     }
 
 

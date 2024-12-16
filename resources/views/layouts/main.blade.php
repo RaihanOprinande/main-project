@@ -44,6 +44,9 @@
             background-color: black;
             border-color: black
         }
+        .footer{
+            min-height: 100vh;
+        }
 
 
     </style>

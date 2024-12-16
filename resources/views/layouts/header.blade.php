@@ -16,6 +16,9 @@
             <a class="nav-link active" aria-current="page" href="{{ route('sepatu.kategori', ['kategori' => '1']) }}">Women</a>
           </li>
           <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/cart">Cart</a>
+            </li>
+          <li class="nav-item">
             <a class="nav-link active" href="/aboutus">About Us</a>
           </li>
         </ul>

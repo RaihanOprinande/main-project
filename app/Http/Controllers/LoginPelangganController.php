@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginPelangganController extends Controller
 {
-    public function login()
+    public function loginpelanggan()
     {
         return view('loginpelanggan');
     }
@@ -20,7 +20,7 @@ class LoginPelangganController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('customer')->attempt($credentials)) {
+        if (Auth::guard('customers')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
@@ -33,10 +33,10 @@ class LoginPelangganController extends Controller
 
     public function logout(Request $request): RedirectResponse
 {
-    Auth::guard('customer')->logout(); // Logout dari guard customer
+    Auth::guard('customers')->logout(); // Logout dari guard customer
     $request->session()->invalidate();
     $request->session()->regenerateToken();
-    return redirect('/loginpelanggan');
+    return redirect('/');
 }
 
 }

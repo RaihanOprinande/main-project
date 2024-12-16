@@ -10,6 +10,7 @@ use App\Models\Merek;
 use App\Models\Pemasukan;
 use App\Models\Size;
 use App\Models\Pemesanan;
+use App\Models\Sepatu_size;
 
 class SepatuController extends Controller
 {
@@ -33,8 +34,6 @@ class SepatuController extends Controller
         $aboutus = Sepatu::all(); // Ambil semua data sepatu
         return view('sepatu.aboutus', compact('aboutus'));
     }
-
-
 
 public function filterByKategori($kategori)
 {
