@@ -22,15 +22,16 @@ use App\Http\Controllers\LoginPelangganController;
 use App\Http\Controllers\RegisterController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-Route::get('/', function () {
+Route::get('/h', function () {
     return view('home');
 });
 
-Route::get('/', [SepatuController::class, 'index'])->name('sepatu.home');
+Route::get('/home', [SepatuController::class, 'index'])->name('sepatu.home');
+Route::get('/', [LoginPelangganController::class, 'loginpelanggan']);
 Route::get('/sepatu/{id}', [SepatuController::class, 'show'])->name('sepatu.detail');
 Route::get('/aboutus', [SepatuController::class, 'aboutus']);
 Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/loginpelanggan', [LoginPelangganController::class, 'loginpelanggan']);
+// Route::get('/loginpelanggan', [LoginPelangganController::class, 'loginpelanggan']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::get('list',[ListController::class,'index'])->name('sepatu.list');
 Route::get('/merek/{id}/sepatu', [ListController::class, 'sepatuByMerek']);
