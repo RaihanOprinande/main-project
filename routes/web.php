@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardIncomesController;
 use App\Http\Controllers\DashboardSizesController;
 // use App\Http\Controllers\DashboardIncomesController;
 use App\Http\Controllers\DashboardOrderController;
+use App\Http\Controllers\DashboardPengambilanController;
 use App\Http\Controllers\DashboardSepatuSizeController;
 use App\Http\Controllers\DashboardPengeluaransController;
 use App\Http\Controllers\PaymentController;
@@ -40,7 +41,7 @@ Route::get('dshbrd-spt',[DashboardSepatuController::class,'index'])->middleware(
 Route::get('dshbrd-usr',[DashboardAdminController::class,'index'])->middleware(['auth']);
 Route::get('dshbrd-brd',[DashboardBrandController::class,'index'])->middleware(['auth']);
 Route::get('/cart',[cartController::class, 'index']);
-
+Route::get('/dshbrd-pengambilan',[DashboardPengambilanController::class, 'index'])->middleware(['auth']);
 
 Route::post('/cart/{id}',[cartController::class,'store']);
 
@@ -60,6 +61,7 @@ Route::resource('/dashboard-sizes',DashboardSizesController::class)->middleware(
 Route::resource('/dashboard-color',DashboardColorsController::class)->middleware(['auth']);
 Route::resource('/dashboard-order',DashboardOrderController::class)->middleware(['auth']);
 Route::resource('/dashboard-stock',DashboardSepatuSizeController::class)->middleware(['auth']);
+Route::resource('/dashboard/pengambilan',DashboardPengambilanController::class)->middleware(['auth']);
 Route::resource('/cartedit',cartController::class)->middleware(['auth']);
 Route::post('/pemesanan', [SepatuController::class, 'pemesanan'])->name('pemesanan');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');

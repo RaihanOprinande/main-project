@@ -45,7 +45,7 @@
             border-color: black
         }
         .footer{
-            min-height: 100vh;
+            /* min-height: 10vh; */
         }
 
 
