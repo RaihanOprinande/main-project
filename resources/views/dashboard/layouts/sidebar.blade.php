@@ -86,6 +86,12 @@
                         Pesanan
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="/dshbrd-pengambilan">
+                        <i class="bi bi-cart"></i>
+                        Pengambilan
+                    </a>
+                </li>
 
                 <!-- Dropdown untuk Keuangan -->
                 <li class="nav-item">
