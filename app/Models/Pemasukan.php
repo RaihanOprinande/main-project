@@ -20,6 +20,10 @@ class Pemasukan extends Model
         'size_id',
         'jumlah',
         'total',
+        'tanggal'
+    ];
+    protected $casts = [
+        'tanggal' => 'datetime',  // pastikan kolom tanggal diperlakukan sebagai Carbon instance
     ];
 
     // Relasi dengan model Sepatu

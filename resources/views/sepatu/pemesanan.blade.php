@@ -1,7 +1,11 @@
 @extends('layouts.main')
+
+@if ($errors->any())
+    {{ dd($errors->all()) }}
+@endif
+
 @section('content')
     <style>
-        /* Styling untuk memusatkan konten */
         .detail-container {
             max-width: 600px;
             margin: 50px auto;
@@ -54,56 +58,64 @@
             justify-content: center;
             gap: 20px;
         }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
     </style>
 
     <div class="detail-container">
-        {{-- <tr>
-            <th>No</th>
-            <th>Shoes</th>
-            <th>Harga</th>
-            <th>Kategori</th>
-            <th>Merek</th>
-            <th>Sizes</th>
-            <th>Gambar</th>
-            <th>Aksi</th>
-        </tr> --}}
-
-        {{-- <tr>
-            <th>{{ $sepatu->gambar_sepatu }}</th>
-        </tr> --}}
         <h1>Detail Pemesanan</h1>
         <p>Sepatu: {{ $sepatu->nama }}</p>
         <p>Harga per Unit: Rp {{ number_format($sepatu->harga, 0, ',', '.') }}</p>
         <p>Jumlah: {{ $jumlah }}</p>
-
         <p>Ukuran: {{ $ukuran }}</p>
         <p>Total Harga: Rp {{ number_format($totalHarga, 0, ',', '.') }}</p>
 
         <p>No Rekening Pemilik: <strong>5434 0100 3078 521</strong><br>
-        Atas Nama: <strong>M WAHYU FIKRI</strong></p>
+            Atas Nama: <strong>M WAHYU FIKRI</strong></p>
+
+        {{-- Menampilkan pesan error jika ada --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <form action="{{ route('proses.bayar') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            {{-- Data tersembunyi untuk form --}}
             <input type="hidden" name="id" value="{{ $sepatu->id }}">
             <input type="hidden" name="nama" value="{{ $sepatu->nama }}">
             <input type="hidden" name="harga" value="{{ $sepatu->harga }}">
             <input type="hidden" name="kategori_id" value="{{ $sepatu->kategori_id }}">
             <input type="hidden" name="merek_id" value="{{ $sepatu->brands_id }}">
             <input type="hidden" name="jumlah" value="{{ $jumlah }}">
-
             <input type="hidden" name="ukuran" value="{{ $ukuran }}">
             <input type="hidden" name="totalHarga" value="{{ $totalHarga }}">
 
+            {{-- Input untuk file bukti pembayaran --}}
             <div class="upload-container">
-                <label for="bukti" class="form-label">Upload Bukti :</label>
-                <input type="file" accept="image/*" class="form-control @error('bukti') is-invalid @enderror" id="bukti" name="bukti" required>
+                <label for="bukti" class="form-label">Upload Bukti:</label>
+                <input type="file" accept="image/*"
+                       class="form-control @error('bukti') is-invalid @enderror"
+                       id="bukti" name="bukti" required>
                 @error('bukti')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
 
+            {{-- Tombol aksi --}}
             <div class="action-buttons">
                 <button type="submit" class="btn">Konfirmasi</button>
                 <a href="{{ route('sepatu.detail', ['id' => $sepatu->id]) }}" class="btn">Kembali</a>

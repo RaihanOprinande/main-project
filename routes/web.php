@@ -75,4 +75,9 @@ Route::resource('/dashboard-income',DashboardIncomesController::class)->middlewa
 //     Route::get('/login', [LoginController::class, 'loginpelanggan']);
 // });
 
+// Route untuk cetak PDF
+Route::get('/dashboard-income/cetak-pdf', [DashboardIncomesController::class, 'show'])->name('incomes.cetak-pdf');
+Route::get('/dashboard-pengeluarans/cetak-pdf', [DashboardPengeluaransController::class, 'show']);
+
+
 

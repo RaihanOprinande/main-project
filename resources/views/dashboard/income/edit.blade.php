@@ -99,6 +99,15 @@
            </div>
          @enderror
       </div>
+      <div class="mb-3">
+        <label for="tanggal" class="form-label">Tanggal</label>
+        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" id="tanggal" value="{{ old('tanggal',$incomes->tanggal) }}">
+        @error('tanggal')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+        @enderror
+    </div>
 
 
 
